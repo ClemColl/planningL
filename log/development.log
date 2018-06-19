@@ -1,0 +1,525 @@
+DEPRECATION WARNING: ActiveSupport.halt_callback_chains_on_return_false= is deprecated and will be removed in Rails 5.2. (called from <top (required)> at /Users/zepri/Desktop/agenda/config/initializers/callback_terminator.rb:6)
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "backlogs"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "backlogs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "mfc" varchar, "mac" varchar, "mb" varchar, "ob" varchar, "quart" integer, "week" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "calendars"[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "calendars" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "event_fields"[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "event_fields" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "field_type" varchar, "required" boolean, "event_type_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX "index_event_fields_on_event_type_id" ON "event_fields" ("event_type_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "event_types"[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "event_types" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "events"[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "start" datetime, "end" datetime, "color" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "calendar_id" integer, "team_id" integer, "event_type_id" integer, "properties" text)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX "index_events_on_calendar_id" ON "events" ("calendar_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_events_on_calendar_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_events_on_calendar_id' AND type='index'
+[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX "index_events_on_team_id" ON "events" ("team_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "machines"[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "machines" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "rapports"[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "rapports" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "cas" integer, "pdp" integer, "cta" integer, "dav" integer, "dsa" integer, "machine_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "week" varchar, "quart" integer, "next_cas" integer, "next_pdp" integer)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX "index_rapports_on_machine_id" ON "rapports" ("machine_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "responsables"[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "responsables" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "stocks"[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "stocks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "week" varchar, "smc" varchar, "rmc" varchar, "sma" varchar, "rma" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "quart" integer)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "teams"[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "teams" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "calendar_id" integer)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX "index_teams_on_calendar_id" ON "teams" ("calendar_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "team_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX "index_users_on_team_id" ON "users" ("team_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20180608121427)[0m
+  [1m[35m (1.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20180517073006),
+(20180531090023),
+(20180518081706),
+(20180604083147),
+(20180514073016),
+(20180516132116),
+(20180525080600),
+(20180601085538),
+(20180509065438),
+(20160814032341),
+(20180516132436),
+(20180509064648),
+(20180531125941),
+(20180525082311),
+(20180529085051),
+(20180514073304),
+(20180514074252),
+(20180601135612);
+
+[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-06-19 15:26:01.641641"], ["updated_at", "2018-06-19 15:26:01.641641"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "backlogs"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "backlogs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "mfc" varchar, "mac" varchar, "mb" varchar, "ob" varchar, "quart" integer, "week" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "calendars"[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "calendars" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "event_fields"[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "event_fields" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "field_type" varchar, "required" boolean, "event_type_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX "index_event_fields_on_event_type_id" ON "event_fields" ("event_type_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "event_types"[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "event_types" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "events"[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "start" datetime, "end" datetime, "color" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "calendar_id" integer, "team_id" integer, "event_type_id" integer, "properties" text)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX "index_events_on_calendar_id" ON "events" ("calendar_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_events_on_calendar_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_events_on_calendar_id' AND type='index'
+[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX "index_events_on_team_id" ON "events" ("team_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "machines"[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "machines" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "rapports"[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "rapports" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "cas" integer, "pdp" integer, "cta" integer, "dav" integer, "dsa" integer, "machine_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "week" varchar, "quart" integer, "next_cas" integer, "next_pdp" integer)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX "index_rapports_on_machine_id" ON "rapports" ("machine_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "responsables"[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "responsables" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "stocks"[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "stocks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "week" varchar, "smc" varchar, "rmc" varchar, "sma" varchar, "rma" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "quart" integer)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "teams"[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "teams" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "calendar_id" integer)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX "index_teams_on_calendar_id" ON "teams" ("calendar_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "team_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX "index_users_on_team_id" ON "users" ("team_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20180608121427)[0m
+  [1m[35m (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20180517073006),
+(20180531090023),
+(20180518081706),
+(20180604083147),
+(20180514073016),
+(20180516132116),
+(20180525080600),
+(20180601085538),
+(20180509065438),
+(20160814032341),
+(20180516132436),
+(20180509064648),
+(20180531125941),
+(20180525082311),
+(20180529085051),
+(20180514073304),
+(20180514074252),
+(20180601135612);
+
+[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-06-19 15:26:01.684161"], ["updated_at", "2018-06-19 15:26:01.684161"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = ?, "updated_at" = ? WHERE "ar_internal_metadata"."key" = ?[0m  [["value", "test"], ["updated_at", "2018-06-19 15:26:01.686948"], ["key", "environment"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "calendars" ("id", "title", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["id", 1], ["title", "Vector"], ["created_at", "2018-06-19 15:26:01.702573"], ["updated_at", "2018-06-19 15:26:01.702573"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "teams" ("name", "created_at", "updated_at", "calendar_id") VALUES (?, ?, ?, ?)[0m  [["name", "Îlot 1"], ["created_at", "2018-06-19 15:26:01.714571"], ["updated_at", "2018-06-19 15:26:01.714571"], ["calendar_id", 1]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "teams" ("name", "created_at", "updated_at", "calendar_id") VALUES (?, ?, ?, ?)[0m  [["name", "Îlot 2"], ["created_at", "2018-06-19 15:26:01.716979"], ["updated_at", "2018-06-19 15:26:01.716979"], ["calendar_id", 1]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "teams" ("name", "created_at", "updated_at", "calendar_id") VALUES (?, ?, ?, ?)[0m  [["name", "Îlot 3"], ["created_at", "2018-06-19 15:26:01.719514"], ["updated_at", "2018-06-19 15:26:01.719514"], ["calendar_id", 1]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "teams" ("name", "created_at", "updated_at", "calendar_id") VALUES (?, ?, ?, ?)[0m  [["name", "Îlot 4"], ["created_at", "2018-06-19 15:26:01.722442"], ["updated_at", "2018-06-19 15:26:01.722442"], ["calendar_id", 1]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "teams" ("name", "created_at", "updated_at", "calendar_id") VALUES (?, ?, ?, ?)[0m  [["name", "Îlot 5"], ["created_at", "2018-06-19 15:26:01.724315"], ["updated_at", "2018-06-19 15:26:01.724315"], ["calendar_id", 1]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "team_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Non Assigné"], ["team_id", 1], ["created_at", "2018-06-19 15:26:01.731796"], ["updated_at", "2018-06-19 15:26:01.731796"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "team_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Non Assigné"], ["team_id", 1], ["created_at", "2018-06-19 15:26:01.734217"], ["updated_at", "2018-06-19 15:26:01.734217"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "team_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Non Assigné"], ["team_id", 2], ["created_at", "2018-06-19 15:26:01.736201"], ["updated_at", "2018-06-19 15:26:01.736201"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "team_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Non Assigné"], ["team_id", 2], ["created_at", "2018-06-19 15:26:01.738278"], ["updated_at", "2018-06-19 15:26:01.738278"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "team_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Non Assigné"], ["team_id", 3], ["created_at", "2018-06-19 15:26:01.740323"], ["updated_at", "2018-06-19 15:26:01.740323"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "team_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Non Assigné"], ["team_id", 3], ["created_at", "2018-06-19 15:26:01.742081"], ["updated_at", "2018-06-19 15:26:01.742081"]]
+  [1m[35m (5.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "team_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Non Assigné"], ["team_id", 4], ["created_at", "2018-06-19 15:26:01.748455"], ["updated_at", "2018-06-19 15:26:01.748455"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "team_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Non Assigné"], ["team_id", 4], ["created_at", "2018-06-19 15:26:01.750480"], ["updated_at", "2018-06-19 15:26:01.750480"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "team_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Non Assigné"], ["team_id", 5], ["created_at", "2018-06-19 15:26:01.752488"], ["updated_at", "2018-06-19 15:26:01.752488"]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "team_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Non Assigné"], ["team_id", 5], ["created_at", "2018-06-19 15:26:01.756109"], ["updated_at", "2018-06-19 15:26:01.756109"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_types" ("id", "name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["id", 1], ["name", "Montage Vector Gros Cutter"], ["created_at", "2018-06-19 15:26:01.764160"], ["updated_at", "2018-06-19 15:26:01.764160"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "event_types" ("id", "name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["id", 2], ["name", "Test Vector Gros Cutter"], ["created_at", "2018-06-19 15:26:01.766120"], ["updated_at", "2018-06-19 15:26:01.766120"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "event_types" ("id", "name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["id", 3], ["name", "Montage Vector Petit Cutter"], ["created_at", "2018-06-19 15:26:01.767935"], ["updated_at", "2018-06-19 15:26:01.767935"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_types" ("id", "name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["id", 4], ["name", "Test Vector Petit Cutter"], ["created_at", "2018-06-19 15:26:01.769640"], ["updated_at", "2018-06-19 15:26:01.769640"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_types" ("id", "name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["id", 5], ["name", "Versalis"], ["created_at", "2018-06-19 15:26:01.771363"], ["updated_at", "2018-06-19 15:26:01.771363"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Métier"], ["field_type", "texte"], ["event_type_id", 1], ["created_at", "2018-06-19 15:26:01.783324"], ["updated_at", "2018-06-19 15:26:01.783324"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Gamme"], ["field_type", "gamme"], ["event_type_id", 1], ["created_at", "2018-06-19 15:26:01.785604"], ["updated_at", "2018-06-19 15:26:01.785604"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Largeur chassis"], ["field_type", "largeur_chassis"], ["event_type_id", 1], ["created_at", "2018-06-19 15:26:01.788219"], ["updated_at", "2018-06-19 15:26:01.788219"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "ATO"], ["field_type", "sous_ensemble"], ["event_type_id", 1], ["created_at", "2018-06-19 15:26:01.790591"], ["updated_at", "2018-06-19 15:26:01.790591"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Lattes"], ["field_type", "sous_ensemble"], ["event_type_id", 1], ["created_at", "2018-06-19 15:26:01.792761"], ["updated_at", "2018-06-19 15:26:01.792761"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Turbine"], ["field_type", "sous_ensemble"], ["event_type_id", 1], ["created_at", "2018-06-19 15:26:01.795010"], ["updated_at", "2018-06-19 15:26:01.795010"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "EM"], ["field_type", "sous_ensemble"], ["event_type_id", 1], ["created_at", "2018-06-19 15:26:01.797020"], ["updated_at", "2018-06-19 15:26:01.797020"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "CODA"], ["field_type", "sous_ensemble"], ["event_type_id", 1], ["created_at", "2018-06-19 15:26:01.798912"], ["updated_at", "2018-06-19 15:26:01.798912"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Métier"], ["field_type", "texte"], ["event_type_id", 2], ["created_at", "2018-06-19 15:26:01.800749"], ["updated_at", "2018-06-19 15:26:01.800749"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Gamme"], ["field_type", "gamme"], ["event_type_id", 2], ["created_at", "2018-06-19 15:26:01.802528"], ["updated_at", "2018-06-19 15:26:01.802528"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Largeur chassis"], ["field_type", "largeur_chassis"], ["event_type_id", 2], ["created_at", "2018-06-19 15:26:01.804440"], ["updated_at", "2018-06-19 15:26:01.804440"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Date"], ["field_type", "date"], ["event_type_id", 2], ["created_at", "2018-06-19 15:26:01.806333"], ["updated_at", "2018-06-19 15:26:01.806333"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Pièce"], ["field_type", "texte"], ["event_type_id", 2], ["created_at", "2018-06-19 15:26:01.808241"], ["updated_at", "2018-06-19 15:26:01.808241"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Notes"], ["field_type", "texte"], ["event_type_id", 2], ["created_at", "2018-06-19 15:26:01.810248"], ["updated_at", "2018-06-19 15:26:01.810248"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Métier"], ["field_type", "texte"], ["event_type_id", 3], ["created_at", "2018-06-19 15:26:01.812147"], ["updated_at", "2018-06-19 15:26:01.812147"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Gamme"], ["field_type", "gamme"], ["event_type_id", 3], ["created_at", "2018-06-19 15:26:01.813977"], ["updated_at", "2018-06-19 15:26:01.813977"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Découpeur"], ["field_type", "sous_ensemble"], ["event_type_id", 3], ["created_at", "2018-06-19 15:26:01.815798"], ["updated_at", "2018-06-19 15:26:01.815798"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Lattes"], ["field_type", "sous_ensemble"], ["event_type_id", 3], ["created_at", "2018-06-19 15:26:01.817673"], ["updated_at", "2018-06-19 15:26:01.817673"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Caisson Aspi"], ["field_type", "sous_ensemble"], ["event_type_id", 3], ["created_at", "2018-06-19 15:26:01.819605"], ["updated_at", "2018-06-19 15:26:01.819605"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "EM"], ["field_type", "sous_ensemble"], ["event_type_id", 3], ["created_at", "2018-06-19 15:26:01.821447"], ["updated_at", "2018-06-19 15:26:01.821447"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "CODA"], ["field_type", "sous_ensemble"], ["event_type_id", 3], ["created_at", "2018-06-19 15:26:01.823246"], ["updated_at", "2018-06-19 15:26:01.823246"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Métier"], ["field_type", "texte"], ["event_type_id", 4], ["created_at", "2018-06-19 15:26:01.825009"], ["updated_at", "2018-06-19 15:26:01.825009"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Gamme"], ["field_type", "gamme"], ["event_type_id", 4], ["created_at", "2018-06-19 15:26:01.826937"], ["updated_at", "2018-06-19 15:26:01.826937"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Date"], ["field_type", "date"], ["event_type_id", 4], ["created_at", "2018-06-19 15:26:01.828844"], ["updated_at", "2018-06-19 15:26:01.828844"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Pièce"], ["field_type", "texte"], ["event_type_id", 4], ["created_at", "2018-06-19 15:26:01.830831"], ["updated_at", "2018-06-19 15:26:01.830831"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Notes"], ["field_type", "texte"], ["event_type_id", 4], ["created_at", "2018-06-19 15:26:01.832720"], ["updated_at", "2018-06-19 15:26:01.832720"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Pièce"], ["field_type", "texte"], ["event_type_id", 5], ["created_at", "2018-06-19 15:26:01.834558"], ["updated_at", "2018-06-19 15:26:01.834558"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "event_fields" ("name", "field_type", "event_type_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Notes"], ["field_type", "texte"], ["event_type_id", 5], ["created_at", "2018-06-19 15:26:01.836430"], ["updated_at", "2018-06-19 15:26:01.836430"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "machines" ("id", "name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["id", 1], ["name", "Gros Vector"], ["created_at", "2018-06-19 15:26:01.852194"], ["updated_at", "2018-06-19 15:26:01.852194"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "machines" ("id", "name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["id", 2], ["name", "Petit Vector"], ["created_at", "2018-06-19 15:26:01.854837"], ["updated_at", "2018-06-19 15:26:01.854837"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "machines" ("id", "name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["id", 3], ["name", "Versalis"], ["created_at", "2018-06-19 15:26:01.857173"], ["updated_at", "2018-06-19 15:26:01.857173"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "machines" ("id", "name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["id", 4], ["name", "Focus Quantum"], ["created_at", "2018-06-19 15:26:01.859155"], ["updated_at", "2018-06-19 15:26:01.859155"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "machines" ("id", "name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["id", 5], ["name", "Virga"], ["created_at", "2018-06-19 15:26:01.860924"], ["updated_at", "2018-06-19 15:26:01.860924"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 35], ["pdp", 108], ["cta", 35], ["dav", 73], ["dsa", 10], ["machine_id", 1], ["created_at", "2018-06-19 15:26:01.876437"], ["updated_at", "2018-06-19 15:26:01.876437"], ["week", "13"], ["quart", 1], ["next_cas", 1], ["next_pdp", 108]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 1], ["LIMIT", 1]]
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? AND "rapports"."quart" = ? AND ("rapports"."created_at" BETWEEN ? AND ?)[0m  [["machine_id", 1], ["quart", 3], ["created_at", "2018-02-19"], ["created_at", "2018-06-19"]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 4], ["pdp", 108], ["cta", 39], ["dav", 69], ["dsa", 10], ["machine_id", 1], ["created_at", "2018-06-19 15:26:01.880111"], ["updated_at", "2018-06-19 15:26:01.880111"], ["week", "14"], ["quart", 2], ["next_cas", 1], ["next_pdp", 108]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 7], ["pdp", 108], ["cta", 46], ["dav", 62], ["dsa", 14], ["machine_id", 1], ["created_at", "2018-06-19 15:26:01.882819"], ["updated_at", "2018-06-19 15:26:01.882819"], ["week", "15"], ["quart", 2], ["next_cas", 0], ["next_pdp", 108]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 0], ["pdp", 96], ["cta", 46], ["dav", 50], ["dsa", 13], ["machine_id", 1], ["created_at", "2018-06-19 15:26:01.885355"], ["updated_at", "2018-06-19 15:26:01.885355"], ["week", "16"], ["quart", 2], ["next_cas", 0], ["next_pdp", 108]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 8], ["pdp", 96], ["cta", 54], ["dav", 42], ["dsa", 12], ["machine_id", 1], ["created_at", "2018-06-19 15:26:01.888282"], ["updated_at", "2018-06-19 15:26:01.888282"], ["week", "17"], ["quart", 2], ["next_cas", 6], ["next_pdp", 108]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 1], ["pdp", 96], ["cta", 55], ["dav", 41], ["dsa", 14], ["machine_id", 1], ["created_at", "2018-06-19 15:26:01.890959"], ["updated_at", "2018-06-19 15:26:01.890959"], ["week", "18"], ["quart", 2], ["next_cas", 0], ["next_pdp", 108]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 9], ["pdp", 96], ["cta", 64], ["dav", 32], ["dsa", 7], ["machine_id", 1], ["created_at", "2018-06-19 15:26:01.893447"], ["updated_at", "2018-06-19 15:26:01.893447"], ["week", "19"], ["quart", 2], ["next_cas", 0], ["next_pdp", 108]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 5], ["pdp", 91], ["cta", 69], ["dav", 22], ["dsa", 8], ["machine_id", 1], ["created_at", "2018-06-19 15:26:01.895841"], ["updated_at", "2018-06-19 15:26:01.895841"], ["week", "20"], ["quart", 2], ["next_cas", 4], ["next_pdp", 110]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 22], ["pdp", 43], ["cta", 22], ["dav", 21], ["dsa", 4], ["machine_id", 2], ["created_at", "2018-06-19 15:26:01.898383"], ["updated_at", "2018-06-19 15:26:01.898383"], ["week", "13"], ["quart", 1], ["next_cas", 1], ["next_pdp", 43]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 2], ["LIMIT", 1]]
+  [1m[36mRapport Load (0.0ms)[0m  [1m[34mSELECT "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? AND "rapports"."quart" = ? AND ("rapports"."created_at" BETWEEN ? AND ?)[0m  [["machine_id", 2], ["quart", 3], ["created_at", "2018-02-19"], ["created_at", "2018-06-19"]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 2], ["pdp", 43], ["cta", 24], ["dav", 19], ["dsa", 4], ["machine_id", 2], ["created_at", "2018-06-19 15:26:01.901851"], ["updated_at", "2018-06-19 15:26:01.901851"], ["week", "14"], ["quart", 2], ["next_cas", 1], ["next_pdp", 43]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 2], ["pdp", 43], ["cta", 26], ["dav", 17], ["dsa", 4], ["machine_id", 2], ["created_at", "2018-06-19 15:26:01.904525"], ["updated_at", "2018-06-19 15:26:01.904525"], ["week", "15"], ["quart", 2], ["next_cas", 3], ["next_pdp", 43]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 3], ["pdp", 43], ["cta", 29], ["dav", 14], ["dsa", 3], ["machine_id", 2], ["created_at", "2018-06-19 15:26:01.906868"], ["updated_at", "2018-06-19 15:26:01.906868"], ["week", "16"], ["quart", 2], ["next_cas", 0], ["next_pdp", 43]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 1], ["pdp", 43], ["cta", 30], ["dav", 13], ["dsa", 7], ["machine_id", 2], ["created_at", "2018-06-19 15:26:01.909588"], ["updated_at", "2018-06-19 15:26:01.909588"], ["week", "17"], ["quart", 2], ["next_cas", 5], ["next_pdp", 43]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 2], ["pdp", 43], ["cta", 32], ["dav", 11], ["dsa", 7], ["machine_id", 2], ["created_at", "2018-06-19 15:26:01.911967"], ["updated_at", "2018-06-19 15:26:01.911967"], ["week", "18"], ["quart", 2], ["next_cas", 0], ["next_pdp", 43]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 4], ["pdp", 43], ["cta", 36], ["dav", 7], ["dsa", 2], ["machine_id", 2], ["created_at", "2018-06-19 15:26:01.914589"], ["updated_at", "2018-06-19 15:26:01.914589"], ["week", "19"], ["quart", 2], ["next_cas", 0], ["next_pdp", 43]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 1], ["pdp", 43], ["cta", 37], ["dav", 6], ["dsa", 9], ["machine_id", 2], ["created_at", "2018-06-19 15:26:01.916972"], ["updated_at", "2018-06-19 15:26:01.916972"], ["week", "20"], ["quart", 2], ["next_cas", 1], ["next_pdp", 40]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 5], ["pdp", 16], ["cta", 5], ["dav", 11], ["dsa", 1], ["machine_id", 3], ["created_at", "2018-06-19 15:26:01.919394"], ["updated_at", "2018-06-19 15:26:01.919394"], ["week", "13"], ["quart", 1], ["next_cas", 1], ["next_pdp", 12]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 3], ["LIMIT", 1]]
+  [1m[36mRapport Load (0.0ms)[0m  [1m[34mSELECT "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? AND "rapports"."quart" = ? AND ("rapports"."created_at" BETWEEN ? AND ?)[0m  [["machine_id", 3], ["quart", 3], ["created_at", "2018-02-19"], ["created_at", "2018-06-19"]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 1], ["pdp", 16], ["cta", 6], ["dav", 10], ["dsa", 1], ["machine_id", 3], ["created_at", "2018-06-19 15:26:01.922286"], ["updated_at", "2018-06-19 15:26:01.922286"], ["week", "14"], ["quart", 2], ["next_cas", 1], ["next_pdp", 12]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 1], ["pdp", 16], ["cta", 7], ["dav", 9], ["dsa", 0], ["machine_id", 3], ["created_at", "2018-06-19 15:26:01.924737"], ["updated_at", "2018-06-19 15:26:01.924737"], ["week", "15"], ["quart", 2], ["next_cas", 1], ["next_pdp", 12]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 0], ["pdp", 15], ["cta", 7], ["dav", 8], ["dsa", 0], ["machine_id", 3], ["created_at", "2018-06-19 15:26:01.927193"], ["updated_at", "2018-06-19 15:26:01.927193"], ["week", "16"], ["quart", 2], ["next_cas", 1], ["next_pdp", 12]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.2ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 0], ["pdp", 15], ["cta", 7], ["dav", 8], ["dsa", 0], ["machine_id", 3], ["created_at", "2018-06-19 15:26:01.930442"], ["updated_at", "2018-06-19 15:26:01.930442"], ["week", "17"], ["quart", 2], ["next_cas", 1], ["next_pdp", 12]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 0], ["pdp", 15], ["cta", 7], ["dav", 8], ["dsa", 0], ["machine_id", 3], ["created_at", "2018-06-19 15:26:01.933349"], ["updated_at", "2018-06-19 15:26:01.933349"], ["week", "18"], ["quart", 2], ["next_cas", 1], ["next_pdp", 12]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 0], ["pdp", 15], ["cta", 7], ["dav", 8], ["dsa", 0], ["machine_id", 3], ["created_at", "2018-06-19 15:26:01.935731"], ["updated_at", "2018-06-19 15:26:01.935731"], ["week", "19"], ["quart", 2], ["next_cas", 1], ["next_pdp", 12]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 0], ["pdp", 12], ["cta", 7], ["dav", 5], ["dsa", 0], ["machine_id", 3], ["created_at", "2018-06-19 15:26:01.938106"], ["updated_at", "2018-06-19 15:26:01.938106"], ["week", "20"], ["quart", 2], ["next_cas", 1], ["next_pdp", 12]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 1], ["pdp", 5], ["cta", 1], ["dav", 4], ["dsa", 0], ["machine_id", 4], ["created_at", "2018-06-19 15:26:01.940504"], ["updated_at", "2018-06-19 15:26:01.940504"], ["week", "13"], ["quart", 1], ["next_cas", 0], ["next_pdp", 4]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 4], ["LIMIT", 1]]
+  [1m[36mRapport Load (0.0ms)[0m  [1m[34mSELECT "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? AND "rapports"."quart" = ? AND ("rapports"."created_at" BETWEEN ? AND ?)[0m  [["machine_id", 4], ["quart", 3], ["created_at", "2018-02-19"], ["created_at", "2018-06-19"]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 1], ["pdp", 5], ["cta", 2], ["dav", 3], ["dsa", 0], ["machine_id", 4], ["created_at", "2018-06-19 15:26:01.943501"], ["updated_at", "2018-06-19 15:26:01.943501"], ["week", "14"], ["quart", 2], ["next_cas", 0], ["next_pdp", 4]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 1], ["pdp", 5], ["cta", 3], ["dav", 2], ["dsa", 0], ["machine_id", 4], ["created_at", "2018-06-19 15:26:01.950965"], ["updated_at", "2018-06-19 15:26:01.950965"], ["week", "15"], ["quart", 2], ["next_cas", 0], ["next_pdp", 4]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 0], ["pdp", 5], ["cta", 3], ["dav", 2], ["dsa", 0], ["machine_id", 4], ["created_at", "2018-06-19 15:26:01.953561"], ["updated_at", "2018-06-19 15:26:01.953561"], ["week", "16"], ["quart", 2], ["next_cas", 0], ["next_pdp", 4]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 0], ["pdp", 5], ["cta", 3], ["dav", 2], ["dsa", 0], ["machine_id", 4], ["created_at", "2018-06-19 15:26:01.955904"], ["updated_at", "2018-06-19 15:26:01.955904"], ["week", "17"], ["quart", 2], ["next_cas", 0], ["next_pdp", 4]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 0], ["pdp", 5], ["cta", 3], ["dav", 2], ["dsa", 0], ["machine_id", 4], ["created_at", "2018-06-19 15:26:01.958409"], ["updated_at", "2018-06-19 15:26:01.958409"], ["week", "18"], ["quart", 2], ["next_cas", 0], ["next_pdp", 4]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 0], ["pdp", 4], ["cta", 3], ["dav", 1], ["dsa", 0], ["machine_id", 4], ["created_at", "2018-06-19 15:26:01.961010"], ["updated_at", "2018-06-19 15:26:01.961010"], ["week", "19"], ["quart", 2], ["next_cas", 0], ["next_pdp", 4]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 0], ["pdp", 4], ["cta", 3], ["dav", 1], ["dsa", 0], ["machine_id", 4], ["created_at", "2018-06-19 15:26:01.963417"], ["updated_at", "2018-06-19 15:26:01.963417"], ["week", "20"], ["quart", 2], ["next_cas", 0], ["next_pdp", 4]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 0], ["pdp", 5], ["cta", 0], ["dav", 5], ["dsa", 0], ["machine_id", 5], ["created_at", "2018-06-19 15:26:01.966302"], ["updated_at", "2018-06-19 15:26:01.966302"], ["week", "13"], ["quart", 1], ["next_cas", 0], ["next_pdp", 3]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 5], ["LIMIT", 1]]
+  [1m[36mRapport Load (0.0ms)[0m  [1m[34mSELECT "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? AND "rapports"."quart" = ? AND ("rapports"."created_at" BETWEEN ? AND ?)[0m  [["machine_id", 5], ["quart", 3], ["created_at", "2018-02-19"], ["created_at", "2018-06-19"]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 0], ["pdp", 5], ["cta", 0], ["dav", 5], ["dsa", 0], ["machine_id", 5], ["created_at", "2018-06-19 15:26:01.969595"], ["updated_at", "2018-06-19 15:26:01.969595"], ["week", "14"], ["quart", 2], ["next_cas", 0], ["next_pdp", 3]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 0], ["pdp", 5], ["cta", 0], ["dav", 5], ["dsa", 0], ["machine_id", 5], ["created_at", "2018-06-19 15:26:01.972011"], ["updated_at", "2018-06-19 15:26:01.972011"], ["week", "15"], ["quart", 2], ["next_cas", 0], ["next_pdp", 3]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 0], ["pdp", 5], ["cta", 0], ["dav", 5], ["dsa", 0], ["machine_id", 5], ["created_at", "2018-06-19 15:26:01.974378"], ["updated_at", "2018-06-19 15:26:01.974378"], ["week", "16"], ["quart", 2], ["next_cas", 0], ["next_pdp", 3]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 0], ["pdp", 5], ["cta", 0], ["dav", 5], ["dsa", 0], ["machine_id", 5], ["created_at", "2018-06-19 15:26:01.976775"], ["updated_at", "2018-06-19 15:26:01.976775"], ["week", "17"], ["quart", 2], ["next_cas", 2], ["next_pdp", 3]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 0], ["pdp", 5], ["cta", 0], ["dav", 5], ["dsa", 1], ["machine_id", 5], ["created_at", "2018-06-19 15:26:01.979205"], ["updated_at", "2018-06-19 15:26:01.979205"], ["week", "18"], ["quart", 2], ["next_cas", 0], ["next_pdp", 3]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 0], ["pdp", 5], ["cta", 0], ["dav", 5], ["dsa", 1], ["machine_id", 5], ["created_at", "2018-06-19 15:26:01.981627"], ["updated_at", "2018-06-19 15:26:01.981627"], ["week", "19"], ["quart", 2], ["next_cas", 0], ["next_pdp", 4]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRapport Load (0.1ms)[0m  [1m[34mSELECT  "rapports".* FROM "rapports" WHERE "rapports"."machine_id" = ? ORDER BY "rapports"."id" DESC LIMIT ?[0m  [["machine_id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "rapports" ("cas", "pdp", "cta", "dav", "dsa", "machine_id", "created_at", "updated_at", "week", "quart", "next_cas", "next_pdp") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["cas", 0], ["pdp", 5], ["cta", 0], ["dav", 5], ["dsa", 3], ["machine_id", 5], ["created_at", "2018-06-19 15:26:01.984323"], ["updated_at", "2018-06-19 15:26:01.984323"], ["week", "20"], ["quart", 2], ["next_cas", 0], ["next_pdp", 4]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "stocks" ("week", "smc", "rmc", "sma", "rma", "created_at", "updated_at", "quart") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["week", "13"], ["smc", "26.22"], ["rmc", "2.3"], ["sma", "24.5"], ["rma", "6"], ["created_at", "2018-06-19 15:26:01.995942"], ["updated_at", "2018-06-19 15:26:01.995942"], ["quart", 1]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "stocks" ("week", "smc", "rmc", "sma", "rma", "created_at", "updated_at", "quart") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["week", "14"], ["smc", "26.22"], ["rmc", "2.3"], ["sma", "24.5"], ["rma", "6"], ["created_at", "2018-06-19 15:26:01.998446"], ["updated_at", "2018-06-19 15:26:01.998446"], ["quart", 2]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "stocks" ("week", "smc", "rmc", "sma", "rma", "created_at", "updated_at", "quart") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["week", "15"], ["smc", "26.29"], ["rmc", "3.684"], ["sma", "24.5"], ["rma", "6"], ["created_at", "2018-06-19 15:26:02.000404"], ["updated_at", "2018-06-19 15:26:02.000404"], ["quart", 2]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "stocks" ("week", "smc", "rmc", "sma", "rma", "created_at", "updated_at", "quart") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["week", "16"], ["smc", "26.29"], ["rmc", "3.684"], ["sma", "24.5"], ["rma", "6"], ["created_at", "2018-06-19 15:26:02.002386"], ["updated_at", "2018-06-19 15:26:02.002386"], ["quart", 2]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "stocks" ("week", "smc", "rmc", "sma", "rma", "created_at", "updated_at", "quart") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["week", "17"], ["smc", "25.6"], ["rmc", "6.125"], ["sma", "25"], ["rma", "6"], ["created_at", "2018-06-19 15:26:02.004892"], ["updated_at", "2018-06-19 15:26:02.004892"], ["quart", 2]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "stocks" ("week", "smc", "rmc", "sma", "rma", "created_at", "updated_at", "quart") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["week", "18"], ["smc", "26.4"], ["rmc", "1.3"], ["sma", "25"], ["rma", "5.8"], ["created_at", "2018-06-19 15:26:02.007255"], ["updated_at", "2018-06-19 15:26:02.007255"], ["quart", 2]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "stocks" ("week", "smc", "rmc", "sma", "rma", "created_at", "updated_at", "quart") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["week", "19"], ["smc", "26.9"], ["rmc", "2.45"], ["sma", "25"], ["rma", "5.8"], ["created_at", "2018-06-19 15:26:02.009309"], ["updated_at", "2018-06-19 15:26:02.009309"], ["quart", 2]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "stocks" ("week", "smc", "rmc", "sma", "rma", "created_at", "updated_at", "quart") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["week", "20"], ["smc", "27.4"], ["rmc", "3.8"], ["sma", "25"], ["rma", "5.8"], ["created_at", "2018-06-19 15:26:02.011186"], ["updated_at", "2018-06-19 15:26:02.011186"], ["quart", 2]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "stocks" ("week", "smc", "rmc", "sma", "rma", "created_at", "updated_at", "quart") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["week", "21"], ["smc", "27.2"], ["rmc", "5.3"], ["sma", "25"], ["rma", "6.2"], ["created_at", "2018-06-19 15:26:02.013055"], ["updated_at", "2018-06-19 15:26:02.013055"], ["quart", 2]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "backlogs" ("mfc", "mac", "mb", "ob", "quart", "week", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["mfc", "0.7"], ["mac", "2.2"], ["mb", "172"], ["ob", "80"], ["quart", 1], ["week", "13"], ["created_at", "2018-06-19 15:26:02.024137"], ["updated_at", "2018-06-19 15:26:02.024137"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "backlogs" ("mfc", "mac", "mb", "ob", "quart", "week", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["mfc", "0.7"], ["mac", "2.2"], ["mb", "172"], ["ob", "80"], ["quart", 2], ["week", "14"], ["created_at", "2018-06-19 15:26:02.026149"], ["updated_at", "2018-06-19 15:26:02.026149"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "backlogs" ("mfc", "mac", "mb", "ob", "quart", "week", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["mfc", "1.2"], ["mac", "2.2"], ["mb", "200"], ["ob", "80"], ["quart", 2], ["week", "15"], ["created_at", "2018-06-19 15:26:02.027858"], ["updated_at", "2018-06-19 15:26:02.027858"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "backlogs" ("mfc", "mac", "mb", "ob", "quart", "week", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["mfc", "1.8"], ["mac", "2.2"], ["mb", "96"], ["ob", "80"], ["quart", 2], ["week", "16"], ["created_at", "2018-06-19 15:26:02.029587"], ["updated_at", "2018-06-19 15:26:02.029587"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "backlogs" ("mfc", "mac", "mb", "ob", "quart", "week", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["mfc", "2.3"], ["mac", "2.2"], ["mb", "98"], ["ob", "80"], ["quart", 2], ["week", "17"], ["created_at", "2018-06-19 15:26:02.031491"], ["updated_at", "2018-06-19 15:26:02.031491"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "backlogs" ("mfc", "mac", "mb", "ob", "quart", "week", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["mfc", "0.4"], ["mac", "2"], ["mb", "153"], ["ob", "80"], ["quart", 2], ["week", "18"], ["created_at", "2018-06-19 15:26:02.036871"], ["updated_at", "2018-06-19 15:26:02.036871"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "backlogs" ("mfc", "mac", "mb", "ob", "quart", "week", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["mfc", "0.8"], ["mac", "2"], ["mb", "154"], ["ob", "80"], ["quart", 2], ["week", "19"], ["created_at", "2018-06-19 15:26:02.038609"], ["updated_at", "2018-06-19 15:26:02.038609"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "backlogs" ("mfc", "mac", "mb", "ob", "quart", "week", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["mfc", "1.1"], ["mac", "2"], ["mb", "147"], ["ob", "80"], ["quart", 2], ["week", "20"], ["created_at", "2018-06-19 15:26:02.040307"], ["updated_at", "2018-06-19 15:26:02.040307"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "backlogs" ("mfc", "mac", "mb", "ob", "quart", "week", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["mfc", "1.7"], ["mac", "1.8"], ["mb", "179"], ["ob", "80"], ["quart", 2], ["week", "21"], ["created_at", "2018-06-19 15:26:02.042005"], ["updated_at", "2018-06-19 15:26:02.042005"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "backlogs" ("mfc", "mac", "mb", "ob", "quart", "week", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["mfc", "0.3"], ["mac", "2"], ["mb", "249"], ["ob", "80"], ["quart", 2], ["week", "22"], ["created_at", "2018-06-19 15:26:02.043854"], ["updated_at", "2018-06-19 15:26:02.043854"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
