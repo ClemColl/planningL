@@ -1,0 +1,23 @@
+<div class="modal fade" id="new_event">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Ajouter</h4>
+      </div>
+      <div class="modal-body">
+
+        <%= form_tag "/event/newish", method: :get, remote: true, id: 'new_event_type_link' do %>
+          <%= select_tag :event_type_id, options_from_collection_for_select(EventType.all.order(:name), :id, :name) %>
+          <%= hidden_field_tag :team_id, "", class: 'form-control input-sm team_hidden' %>
+          <%#= text_field_tag :date_range, "", class: "form-control input-sm date-range-picker" %>
+          <%= hidden_field_tag :start, Date.today, class: 'form-control input-sm start_hidden' %>
+          <%#= text_field_tag :end, Date.today, class: 'form-control input-sm end_hidden' %>
+          <%= submit_tag "Sélection carte", name: nil %>
+        <% end %>
+
+
+      </div>
+    </div>
+  </div>
+</div>

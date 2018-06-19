@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mfc: MyString
+  mac: MyString
+  mb: MyString
+  ob: MyString
+  quart: 1
+  week: MyString
+
+two:
+  mfc: MyString
+  mac: MyString
+  mb: MyString
+  ob: MyString
+  quart: 1
+  week: MyString

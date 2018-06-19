@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  smc: 1.5
+  rmc: 1.5
+  sma: 1.5
+  rma: 1.5
+
+two:
+  smc: 1.5
+  rmc: 1.5
+  sma: 1.5
+  rma: 1.5

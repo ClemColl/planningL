@@ -1,0 +1,13 @@
+<h2>Cartes</h2>
+
+  <% @event_types.order(:name).each do |event_type| %>
+  <div class="modal-body">
+    <h4><%= event_type.name %></h4>
+    <%= link_to 'Modifier', edit_event_type_path(event_type), class: 'btn btn-default' %>
+    <%= link_to 'Supprimer', event_type, method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: 'btn btn-danger' %>
+  </div>
+  <% end %>
+
+<br>
+
+<%= link_to 'Nouvelle carte', new_event_type_path %>

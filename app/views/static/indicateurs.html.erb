@@ -1,0 +1,113 @@
+<style>
+th, td {
+    width:150px;
+    text-align:center;
+}
+</style>
+
+<h3>Efficacité</h3>
+<div>
+    <table>
+        <tr>
+            <th>Quantité requise</th>
+            <th>Quantité utilisée</th>
+            <th>Efficacité Fabrication</th>
+        <tr>
+        <tr>
+            <td><%= @efficacite[:requise] %></td>
+            <td><%= @efficacite[:utilisee] %></td>
+            <td><%= @efficacite[:total] %></td>
+        </tr>
+    </table>
+</div>
+
+<h3>Utilisation</h3>
+<div>
+    <table>
+        <tr>
+            <th class="head1" colspan="4">Heures</th>
+            <th class="head1" colspan="2">Heures Corrigés</th>
+        </tr>
+        <tr>
+            <th class="head2">Absences</th>
+            <th class="head2">Indirectes</th>
+            <th class="head2">Non Disponibles</th>
+            <th class="head2">Total</th>
+            <th class="head2">Heures Non Disponibles</th>
+            <th class="head2">Total</th>
+        </tr>
+        <tr><td><%= @utilisation[:abs] %></td>
+            <td><%= @utilisation[:indi] %></td>
+            <td><%= @utilisation[:no_dispo] %></td>
+            <td><%= @utilisation[:abs] + @utilisation[:indi] + @utilisation[:no_dispo] %></td>
+            <td><%= @utilisation[:no_dispo_c] %></td>
+            <td><%= @utilisation[:total_c] %></td>
+        </tr>
+    </table>
+    <hr>
+    <table>
+        <tr>
+            <th class="head1" colspan="5">Heures cédées</th>
+        </tr>
+        <tr>
+            <th class="head2">R&D</th>
+            <th class="head2">R&D Soft</th>
+            <th class="head2">SERVICES</th>
+            <th class="head2">SQF</th>
+            <th class="head2">TOTAL</th>
+        <tr>
+        <tr>
+            <td><%= @utilisation[:cedees][:rd] %></td>
+            <td><%= @utilisation[:cedees][:rds] %></td>
+            <td><%= @utilisation[:cedees][:serv] %></td>
+            <td><%= @utilisation[:cedees][:sqf] %></td>
+            <td><%= @utilisation[:cedees][:total] %></td>
+        </tr>
+    </table>
+    <hr>
+    <table>
+        <tr>
+            <th class="head1">Congés en jours</th>
+        </tr>
+        <tr>
+            <td><%= @utilisation[:conges_j] %></td>
+        </tr>
+    </table>
+    <hr>
+    <table>
+        <tr>
+            <th class="head1">Total congés annuel et RTT</th>
+            <th class="head1">Total congés exceptionnels</th>
+            <th class="head1">Total</th>
+        </tr>
+        <tr>
+            <td><%= @utilisation[:total_conges_annuel_rtt] %></td>
+            <td><%= @utilisation[:total_conges_except] %></td>
+            <td><%= @utilisation[:total_conges_annuel_rtt] + @utilisation[:total_conges_except] %></td>
+        </tr>
+    </table>
+    <hr>
+    <table>
+        <tr>
+            <th class="head1" colspan="2">Total congés</th>
+        </tr>
+        <tr>
+            <th class="head2" style="width:300px;">Personne</th>
+            <th class="head2">Total congé</th>
+        </tr>
+        <% h_emp_total = 0 %>
+        <% @utilisation[:employees].sort.each do |n| %>
+            <tr>
+                <td><%= n[0] %></td>
+                <td><%= (n[1][:nonprod] + n[1][:prod2] + n[1][:recond]).round(2) %></td>
+                <% h_emp_total += (n[1][:nonprod] + n[1][:prod2] + n[1][:recond]) %>
+            </tr>
+        <% end %>
+        <tr>
+            <th>Total</th>
+            <th><%= h_emp_total.round(2) %></th>
+        </tr>
+    </table>
+
+
+</div>

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cas: 1
+  pdp: 1
+  cta: 1
+  dav: 1
+  dsa: 1
+  machine: one
+
+two:
+  cas: 1
+  pdp: 1
+  cta: 1
+  dav: 1
+  dsa: 1
+  machine: two

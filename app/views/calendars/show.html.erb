@@ -1,0 +1,5 @@
+<h1 style="text-align:center;"><%= @calendar.title %></h1>
+    <br>
+<div class="calendar"></div>
+
+<%= link_to 'Ajouter un îlot', new_team_path(calendar_id: @calendar), remote: true %>

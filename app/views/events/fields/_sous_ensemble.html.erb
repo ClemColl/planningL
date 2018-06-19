@@ -1,0 +1,4 @@
+<div style="display:inline-block;margin-right:10px;margin-bottom:20px;width:16%;">
+    <%= f.label field.name, class: 'control-label' %><br>
+    <%= f.select field.name, options_for_select(['X', '/', 'AM', ''], @event.properties[field.name]), class: "form-control string optional" %>
+</div>

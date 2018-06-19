@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Backlogs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Mfc</th>
+      <th>Mac</th>
+      <th>Mb</th>
+      <th>Ob</th>
+      <th>Quart</th>
+      <th>Week</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @backlogs.each do |backlog| %>
+      <tr>
+        <td><%= backlog.mfc %></td>
+        <td><%= backlog.mac %></td>
+        <td><%= backlog.mb %></td>
+        <td><%= backlog.ob %></td>
+        <td><%= backlog.quart %></td>
+        <td><%= backlog.week %></td>
+        <td><%= link_to 'Show', backlog %></td>
+        <td><%= link_to 'Edit', edit_backlog_path(backlog) %></td>
+        <td><%= link_to 'Destroy', backlog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Backlog', new_backlog_path %>

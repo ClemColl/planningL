@@ -1,0 +1,26 @@
+
+<h1 id="machineTitle">Lignes</h1>
+<div id="machine_container">
+  <div id="machines_wrapper">
+    <% count = 1 %>
+    <% row = 1 %>
+    <% @calendars.each do |calendar| %>
+      <div class="machine"
+          style="grid-column: <%= count %> / 2; grid-row: <%= row %>;">
+
+      <%= link_to calendar, class: "machine" do %>
+        <p class="machineTitle"><%= calendar.title %></p>
+      <% end%>
+      <%= link_to '<button>Changer de nom</button>'.html_safe, edit_calendar_path(calendar), class: "machineLink" %>
+      <%= link_to '<button>Suprimer</button>'.html_safe, calendar, method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: "machineLink" %>
+
+
+      </div>
+
+      <% row = row + (count+1)%2 %>
+      <% count = (count%2) + 1 %>
+    <% end %>
+  </div>
+  
+  <%= link_to 'Nouvelle Ligne', new_calendar_path, class: "machineNew" %>
+</div>

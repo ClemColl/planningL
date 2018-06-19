@@ -1,0 +1,6 @@
+<fieldset class="modal-body">
+    <%= f.select :field_type, %w[texte gamme largeur_chassis sous_ensemble date] %>
+    <%= f.text_field :name, placeholder: "Nom du champ" %>
+    <%= f.hidden_field :_destroy %>
+    <%= link_to "Supprimer le champ", '#', class: "remove_fields btn btn-danger" %>
+</fieldset>

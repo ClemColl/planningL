@@ -1,0 +1,13 @@
+<%= simple_form_for(@team, remote: true) do |f| %>
+  <%= f.error_notification %>
+  <div class="form-inputs">
+    
+    <%= f.input :name, label: "Nom" %>
+    <%= f.hidden_field :calendar_id, value: params[:calendar_id] %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Créer" %>
+    <%= button_tag 'Annuler', class: 'btn btn-default', :data => { dismiss: 'modal'} %>
+  </div>
+<% end %>

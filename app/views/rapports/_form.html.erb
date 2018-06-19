@@ -1,0 +1,20 @@
+<%= simple_form_for([@machine, @rapport]) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+  <% if params[:machine_id] %>
+    <%= f.hidden_field :machine_id, value: params[:machine_id] %>
+    <%= f.input :week, label: "Numéro de semaine", input_html: { value: Date.today.cweek-1 } %>
+    <%= f.input :pdp, label: "PDP", input_html: { value: Rapport.where(machine_id: params[:machine_id]).last.pdp } %>
+    <%= f.input :cas, label: "Commandes affectées dans la semaine" %>
+    <%= f.input :dsa, label: "Deals signés en attente d'acompte" %>
+    <%= f.input :next_cas, label: "Commandes totales affectées pour T+1" %>
+    <%= f.input :next_pdp, label: "PDP pour T+1" , input_html: { value: Rapport.where(machine_id: params[:machine_id]).last.pdp }%>
+  <% end %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Enregistrer" %>
+    <%= link_to 'Annuler', suivi_path, class:"btn btn-default" %>
+  </div>
+<% end %>
