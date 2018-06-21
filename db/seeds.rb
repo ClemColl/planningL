@@ -15,11 +15,11 @@ puts "###TEMPLATE Création d'un calendrier"
 
 puts "###TEMPLATE Création des Teams"
     Team.create!([
-        {name: "Îlot 1", calendar_id: 1},
-        {name: "Îlot 2", calendar_id: 1},
-        {name: "Îlot 3", calendar_id: 1},
-        {name: "Îlot 4", calendar_id: 1},
-        {name: "Îlot 5", calendar_id: 1}
+        {id: 1, name: "Îlot 1", calendar_id: 1},
+        {id: 2, name: "Îlot 2", calendar_id: 1},
+        {id: 3, name: "Îlot 3", calendar_id: 1},
+        {id: 4, name: "Îlot 4", calendar_id: 1},
+        {id: 5, name: "Îlot 5", calendar_id: 1}
     ])
 
     User.create!([

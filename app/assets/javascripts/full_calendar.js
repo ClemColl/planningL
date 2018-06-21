@@ -10,7 +10,7 @@ initialize_calendar = function() {
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'customWeek, customWeek2'
+        right: 'customWeek' // customWeek2
       },
 
       buttonText: {
@@ -50,12 +50,12 @@ initialize_calendar = function() {
           type: 'timeline',
           duration: { days: 14 },
           buttonText: '2 semaines'
-        },
-        customWeek2: {
-          type: 'timeline',
-          duration: { days: 21 },
-          buttonText: '3 semaines'
         }
+        // customWeek2: {
+        //   type: 'timeline',
+        //   duration: { days: 21 },
+        //   buttonText: '3 semaines'
+        // }
       },
 
       //CALLBACKS
@@ -149,10 +149,11 @@ initialize_calendar = function() {
       },
 
       // Sélection de plusieurs jours
-      select: function(start, resource) {
+      select: function(start, end, event, view, resource) {
           $.getScript('/events/new', function() {
             // $('#event_date_range').val(moment(start).format("MM/DD/YYYY") + ' - ' + moment(end).format("MM/DD/YYYY"))
             // date_range_picker();
+            console.log(resource.id)
             $('.start_hidden').val(moment(start).format('YYYY-MM-DD HH'));
             $('.team_hidden').val(resource.id);
             // $('.end_hidden').val(moment(end).format('YYYY-MM-DD'));
