@@ -1,6 +1,6 @@
 
 date = event.properties["Date"]
-pièce = event.properties["Pièce"]
+piece = event.properties["Pièce"]
 notes = event.properties["Notes"]
 
 json.id event.id
