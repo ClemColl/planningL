@@ -3998,3 +3998,1229 @@ Processing by EventsController#new as JS
 Completed 200 OK in 77ms (Views: 47.7ms | ActiveRecord: 1.0ms)
 
 
+DEPRECATION WARNING: ActiveSupport.halt_callback_chains_on_return_false= is deprecated and will be removed in Rails 5.2. (called from <top (required)> at /var/www/planning_visuel/planning_lectra/config/initializers/callback_terminator.rb:6)
+Started GET "/calendars/1" for 172.16.9.136 at 2018-06-21 15:12:27 +0200
+Cannot render console from 172.16.9.136! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by CalendarsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering calendars/show.html.erb within layouts/application
+  Rendered calendars/show.html.erb within layouts/application (1.0ms)
+  Rendered layouts/_navigation.html.erb (1.4ms)
+  Rendered layouts/_messages.html.erb (0.5ms)
+Completed 200 OK in 3556ms (Views: 3533.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/teams.json?_=1529586752473" for 172.16.9.136 at 2018-06-21 15:12:31 +0200
+Cannot render console from 172.16.9.136! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TeamsController#index as JSON
+  Parameters: {"_"=>"1529586752473"}
+  Rendering teams/index.json.jbuilder
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."calendar_id" = ?[0m  [["calendar_id", 1]]
+Started GET "/events.json?start=2018-06-18T00%3A00%3A00&end=2018-07-01T00%3A00%3A00&_=1529586752474" for 172.16.9.136 at 2018-06-21 15:12:31 +0200
+Cannot render console from 172.16.9.136! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 1]]
+  Rendered teams/_team.json.jbuilder (37.6ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 2]]
+  Rendered teams/_team.json.jbuilder (2.0ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 3]]
+  Rendered teams/_team.json.jbuilder (1.2ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 4]]
+  Rendered teams/_team.json.jbuilder (1.3ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 5]]
+  Rendered teams/_team.json.jbuilder (1.3ms)
+  Rendered teams/index.json.jbuilder (51.7ms)
+Completed 200 OK in 60ms (Views: 52.3ms | ActiveRecord: 1.5ms)
+
+
+Processing by EventsController#index as JSON
+  Parameters: {"start"=>"2018-06-18T00:00:00", "end"=>"2018-07-01T00:00:00", "_"=>"1529586752474"}
+  Rendering events/index.json.jbuilder
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."calendar_id" = ? AND ("events"."start" BETWEEN ? AND ?)[0m  [["calendar_id", 1], ["start", "2018-06-15"], ["start", "2018-07-01"]]
+  Rendered events/index.json.jbuilder (1.5ms)
+Completed 200 OK in 9ms (Views: 3.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/events/new?_=1529586752475" for 172.16.9.136 at 2018-06-21 15:12:35 +0200
+Cannot render console from 172.16.9.136! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#new as JS
+  Parameters: {"_"=>"1529586752475"}
+  Rendering events/new.js.erb
+  [1m[36mEventType Load (0.2ms)[0m  [1m[34mSELECT "event_types".* FROM "event_types" ORDER BY "event_types"."name" ASC[0m
+  Rendered events/_new.html.erb (6.9ms)
+  Rendered events/new.js.erb (10.0ms)
+Completed 200 OK in 23ms (Views: 12.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/event/newish?utf8=%E2%9C%93&event_type_id=1&team_id=1&start=2018-06-22+00" for 172.16.9.136 at 2018-06-21 15:12:45 +0200
+Cannot render console from 172.16.9.136! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#newish as JS
+  Parameters: {"utf8"=>"✓", "event_type_id"=>"1", "team_id"=>"1", "start"=>"2018-06-22 00"}
+  Rendering events/newish.js.erb
+  [1m[36mEventType Load (0.2ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mEventField Load (0.1ms)[0m  [1m[34mSELECT "event_fields".* FROM "event_fields" WHERE "event_fields"."event_type_id" = ?[0m  [["event_type_id", 1]]
+  Rendered events/fields/_texte.html.erb (1.0ms)
+  Rendered events/fields/_gamme.html.erb (1.3ms)
+  Rendered events/fields/_largeur_chassis.html.erb (0.8ms)
+  Rendered events/fields/_sous_ensemble.html.erb (0.7ms)
+  Rendered events/fields/_sous_ensemble.html.erb (0.4ms)
+  Rendered events/fields/_sous_ensemble.html.erb (0.5ms)
+  Rendered events/fields/_sous_ensemble.html.erb (0.4ms)
+  Rendered events/fields/_sous_ensemble.html.erb (0.4ms)
+  Rendered events/_form.html.erb (52.5ms)
+  Rendered events/newish.js.erb (53.8ms)
+Completed 200 OK in 57ms (Views: 54.6ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/events" for 172.16.9.136 at 2018-06-21 15:12:51 +0200
+Cannot render console from 172.16.9.136! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#create as JS
+  Parameters: {"utf8"=>"✓", "event"=>{"calendar_id"=>"1", "team_id"=>"1", "start"=>"2018-06-22 00", "title"=>"3241", "event_type_id"=>"1", "properties"=>{"Métier"=>"FA", "Gamme"=>"IQ50", "Largeur chassis"=>"71", "ATO"=>"X", "Lattes"=>"X", "Turbine"=>"X", "EM"=>"X", "CODA"=>"X"}}, "commit"=>"Ajouter"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTeam Load (0.1ms)[0m  [1m[34mSELECT  "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mEventType Load (0.0ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE EventType Load (0.0ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "events" ("title", "start", "end", "color", "created_at", "updated_at", "calendar_id", "team_id", "event_type_id", "properties") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["title", "3241"], ["start", "2018-06-22 00:00:00"], ["end", "2018-06-24 12:00:00"], ["color", "#ffd200"], ["created_at", "2018-06-21 13:12:51.045507"], ["updated_at", "2018-06-21 13:12:51.045507"], ["calendar_id", 1], ["team_id", 1], ["event_type_id", 1], ["properties", "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nMétier: FA\nGamme: IQ50\nLargeur chassis: '71'\nATO: X\nLattes: X\nTurbine: X\nEM: X\nCODA: X\n"]]
+  [1m[35m (4.3ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://172.16.9.121:3000/calendars/1
+Completed 200 OK in 17ms (ActiveRecord: 5.7ms)
+
+
+Started GET "/calendars/1" for 172.16.9.136 at 2018-06-21 15:12:51 +0200
+Cannot render console from 172.16.9.136! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CalendarsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering calendars/show.html.erb within layouts/application
+  Rendered calendars/show.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_navigation.html.erb (1.1ms)
+  Rendered layouts/_messages.html.erb (0.4ms)
+Completed 200 OK in 151ms (Views: 149.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/teams.json?_=1529586752476" for 172.16.9.136 at 2018-06-21 15:12:51 +0200
+Cannot render console from 172.16.9.136! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TeamsController#index as JSON
+  Parameters: {"_"=>"1529586752476"}
+  Rendering teams/index.json.jbuilder
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."calendar_id" = ?[0m  [["calendar_id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 1]]
+  Rendered teams/_team.json.jbuilder (2.0ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 2]]
+  Rendered teams/_team.json.jbuilder (1.2ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 3]]
+Started GET "/events.json?start=2018-06-18T00%3A00%3A00&end=2018-07-01T00%3A00%3A00&_=1529586752477" for 172.16.9.136 at 2018-06-21 15:12:51 +0200
+Cannot render console from 172.16.9.136! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#index as JSON
+  Parameters: {"start"=>"2018-06-18T00:00:00", "end"=>"2018-07-01T00:00:00", "_"=>"1529586752477"}
+  Rendering events/index.json.jbuilder
+  Rendered teams/_team.json.jbuilder (5.6ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 4]]
+  Rendered teams/_team.json.jbuilder (1.5ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 5]]
+  [1m[36mEvent Load (0.1ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."calendar_id" = ? AND ("events"."start" BETWEEN ? AND ?)[0m  [["calendar_id", 1], ["start", "2018-06-15"], ["start", "2018-07-01"]]
+  Rendered events/index.json.jbuilder (6.2ms)
+Completed 200 OK in 9ms (Views: 7.8ms | ActiveRecord: 0.4ms)
+
+
+  Rendered teams/_team.json.jbuilder (1.1ms)
+  Rendered teams/index.json.jbuilder (19.0ms)
+Completed 200 OK in 22ms (Views: 19.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/events/1/edit?_=1529586752478" for 172.16.9.136 at 2018-06-21 15:12:52 +0200
+Cannot render console from 172.16.9.136! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#edit as JS
+  Parameters: {"_"=>"1529586752478", "id"=>"1"}
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering events/edit.js.erb
+  [1m[36mEventType Load (0.2ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE EventType Load (0.0ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mEventField Load (0.2ms)[0m  [1m[34mSELECT "event_fields".* FROM "event_fields" WHERE "event_fields"."event_type_id" = ?[0m  [["event_type_id", 1]]
+  Rendered events/fields/_texte.html.erb (0.8ms)
+  Rendered events/fields/_gamme.html.erb (0.8ms)
+  Rendered events/fields/_largeur_chassis.html.erb (0.7ms)
+  Rendered events/fields/_sous_ensemble.html.erb (0.7ms)
+  Rendered events/fields/_sous_ensemble.html.erb (0.4ms)
+  Rendered events/fields/_sous_ensemble.html.erb (0.4ms)
+  Rendered events/fields/_sous_ensemble.html.erb (0.4ms)
+  Rendered events/fields/_sous_ensemble.html.erb (0.4ms)
+  Rendered events/_form.html.erb (45.2ms)
+  Rendered events/_edit.html.erb (49.1ms)
+  Rendered events/edit.js.erb (52.7ms)
+Completed 200 OK in 61ms (Views: 55.9ms | ActiveRecord: 0.5ms)
+
+
+Started PATCH "/events/1?method=patch" for 172.16.9.136 at 2018-06-21 15:12:58 +0200
+Cannot render console from 172.16.9.136! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#update as */*
+  Parameters: {"event"=>{"id"=>"1", "start"=>"2018-06-21T00:00:00", "end"=>"2018-06-23T12:00:00", "team_id"=>"1"}, "method"=>"patch", "id"=>"1"}
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Unpermitted parameter: :id
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTeam Load (0.0ms)[0m  [1m[34mSELECT  "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mEventType Load (0.0ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[33mUPDATE "events" SET "start" = ?, "end" = ?, "updated_at" = ? WHERE "events"."id" = ?[0m  [["start", "2018-06-21 00:00:00"], ["end", "2018-06-23 12:00:00"], ["updated_at", "2018-06-21 13:12:58.100606"], ["id", 1]]
+  [1m[35m (4.3ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://172.16.9.121:3000/calendars/1
+Completed 200 OK in 13ms (ActiveRecord: 5.4ms)
+
+
+Started GET "/calendars/1" for 172.16.9.136 at 2018-06-21 15:12:58 +0200
+Cannot render console from 172.16.9.136! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CalendarsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering calendars/show.html.erb within layouts/application
+  Rendered calendars/show.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_navigation.html.erb (1.1ms)
+  Rendered layouts/_messages.html.erb (0.4ms)
+Completed 200 OK in 153ms (Views: 151.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/teams.json?_=1529586752479" for 172.16.9.136 at 2018-06-21 15:12:58 +0200
+Cannot render console from 172.16.9.136! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TeamsController#index as JSON
+  Parameters: {"_"=>"1529586752479"}
+  Rendering teams/index.json.jbuilder
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."calendar_id" = ?[0m  [["calendar_id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 1]]
+  Rendered teams/_team.json.jbuilder (1.9ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 2]]
+  Rendered teams/_team.json.jbuilder (1.2ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 3]]
+  Rendered teams/_team.json.jbuilder (1.1ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 4]]
+  Rendered teams/_team.json.jbuilder (1.1ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 5]]
+  Rendered teams/_team.json.jbuilder (1.3ms)
+Started GET "/events.json?start=2018-06-18T00%3A00%3A00&end=2018-07-01T00%3A00%3A00&_=1529586752480" for 172.16.9.136 at 2018-06-21 15:12:58 +0200
+  Rendered teams/index.json.jbuilder (11.1ms)
+Cannot render console from 172.16.9.136! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Completed 200 OK in 14ms (Views: 12.6ms | ActiveRecord: 0.5ms)
+
+
+Processing by EventsController#index as JSON
+  Parameters: {"start"=>"2018-06-18T00:00:00", "end"=>"2018-07-01T00:00:00", "_"=>"1529586752480"}
+  Rendering events/index.json.jbuilder
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."calendar_id" = ? AND ("events"."start" BETWEEN ? AND ?)[0m  [["calendar_id", 1], ["start", "2018-06-15"], ["start", "2018-07-01"]]
+  Rendered events/index.json.jbuilder (1.9ms)
+Completed 200 OK in 4ms (Views: 3.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/events/1/edit?_=1529586752481" for 172.16.9.136 at 2018-06-21 15:12:59 +0200
+Cannot render console from 172.16.9.136! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#edit as JS
+  Parameters: {"_"=>"1529586752481", "id"=>"1"}
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering events/edit.js.erb
+  [1m[36mEventType Load (0.1ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE EventType Load (0.0ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mEventField Load (0.1ms)[0m  [1m[34mSELECT "event_fields".* FROM "event_fields" WHERE "event_fields"."event_type_id" = ?[0m  [["event_type_id", 1]]
+  Rendered events/fields/_texte.html.erb (0.7ms)
+  Rendered events/fields/_gamme.html.erb (0.9ms)
+  Rendered events/fields/_largeur_chassis.html.erb (0.7ms)
+  Rendered events/fields/_sous_ensemble.html.erb (0.7ms)
+  Rendered events/fields/_sous_ensemble.html.erb (0.5ms)
+  Rendered events/fields/_sous_ensemble.html.erb (0.4ms)
+  Rendered events/fields/_sous_ensemble.html.erb (0.4ms)
+  Rendered events/fields/_sous_ensemble.html.erb (0.4ms)
+  Rendered events/_form.html.erb (35.5ms)
+  Rendered events/_edit.html.erb (39.0ms)
+  Rendered events/edit.js.erb (42.2ms)
+Completed 200 OK in 50ms (Views: 45.6ms | ActiveRecord: 0.4ms)
+
+
+Started DELETE "/events/1" for 172.16.9.136 at 2018-06-21 15:13:03 +0200
+Cannot render console from 172.16.9.136! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#destroy as JS
+  Parameters: {"id"=>"1"}
+  [1m[36mEvent Load (0.1ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[31mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 1]]
+  [1m[35m (3.0ms)[0m  [1m[36mcommit transaction[0m
+  Rendering events/destroy.js.erb
+  Rendered events/destroy.js.erb (0.4ms)
+Completed 200 OK in 14ms (Views: 3.9ms | ActiveRecord: 3.9ms)
+
+
+DEPRECATION WARNING: ActiveSupport.halt_callback_chains_on_return_false= is deprecated and will be removed in Rails 5.2. (called from <top (required)> at /var/www/planning_visuel/planning_lectra/config/initializers/callback_terminator.rb:6)
+Started GET "/events/new?_=1529586752482" for 172.16.9.136 at 2018-06-21 15:14:23 +0200
+Cannot render console from 172.16.9.136! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by EventsController#new as JS
+  Parameters: {"_"=>"1529586752482"}
+  Rendering events/new.js.erb
+  [1m[36mEventType Load (0.1ms)[0m  [1m[34mSELECT "event_types".* FROM "event_types" ORDER BY "event_types"."name" ASC[0m
+  Rendered events/_new.html.erb (7.8ms)
+  Rendered events/new.js.erb (11.2ms)
+Completed 200 OK in 48ms (Views: 15.1ms | ActiveRecord: 1.0ms)
+
+
+DEPRECATION WARNING: ActiveSupport.halt_callback_chains_on_return_false= is deprecated and will be removed in Rails 5.2. (called from <top (required)> at /var/www/planning_visuel/planning_lectra/config/initializers/callback_terminator.rb:6)
+DEPRECATION WARNING: ActiveSupport.halt_callback_chains_on_return_false= is deprecated and will be removed in Rails 5.2. (called from <top (required)> at /var/www/planning_visuel/planning_lectra/config/initializers/callback_terminator.rb:6)
+Started GET "/" for 172.16.1.19 at 2018-06-25 09:42:56 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by CalendarsController#index as HTML
+  Rendering calendars/index.html.erb within layouts/application
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT "calendars".* FROM "calendars"[0m
+  Rendered calendars/index.html.erb within layouts/application (5.9ms)
+  Rendered layouts/_navigation.html.erb (1.2ms)
+  Rendered layouts/_messages.html.erb (0.4ms)
+Completed 200 OK in 469ms (Views: 450.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 172.16.1.19 at 2018-06-25 09:45:03 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CalendarsController#index as HTML
+  Rendering calendars/index.html.erb within layouts/application
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT "calendars".* FROM "calendars"[0m
+  Rendered calendars/index.html.erb within layouts/application (2.4ms)
+  Rendered layouts/_navigation.html.erb (1.0ms)
+  Rendered layouts/_messages.html.erb (0.4ms)
+Completed 200 OK in 152ms (Views: 151.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 172.16.1.19 at 2018-06-25 09:46:33 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CalendarsController#index as HTML
+  Rendering calendars/index.html.erb within layouts/application
+  [1m[36mCalendar Load (0.2ms)[0m  [1m[34mSELECT "calendars".* FROM "calendars"[0m
+  Rendered calendars/index.html.erb within layouts/application (1.9ms)
+  Rendered layouts/_navigation.html.erb (1.1ms)
+  Rendered layouts/_messages.html.erb (0.4ms)
+Completed 200 OK in 178ms (Views: 176.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/calendars/1" for 172.16.1.19 at 2018-06-25 09:46:40 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CalendarsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCalendar Load (0.2ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering calendars/show.html.erb within layouts/application
+  Rendered calendars/show.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_navigation.html.erb (1.0ms)
+  Rendered layouts/_messages.html.erb (0.3ms)
+Completed 200 OK in 154ms (Views: 150.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/teams.json?_=1529912795026" for 172.16.1.19 at 2018-06-25 09:46:40 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TeamsController#index as JSON
+  Parameters: {"_"=>"1529912795026"}
+  Rendering teams/index.json.jbuilder
+  [1m[36mTeam Load (0.1ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."calendar_id" = ?[0m  [["calendar_id", 1]]
+Started GET "/events.json?start=2018-06-25T00%3A00%3A00&end=2018-07-08T00%3A00%3A00&_=1529912795027" for 172.16.1.19 at 2018-06-25 09:46:40 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 1]]
+  Rendered teams/_team.json.jbuilder (19.0ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 2]]
+  Rendered teams/_team.json.jbuilder (1.7ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 3]]
+  Rendered teams/_team.json.jbuilder (1.1ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 4]]
+  Rendered teams/_team.json.jbuilder (1.0ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 5]]
+  Rendered teams/_team.json.jbuilder (1.0ms)
+  Rendered teams/index.json.jbuilder (31.4ms)
+Completed 200 OK in 39ms (Views: 31.8ms | ActiveRecord: 1.5ms)
+
+
+Processing by EventsController#index as JSON
+  Parameters: {"start"=>"2018-06-25T00:00:00", "end"=>"2018-07-08T00:00:00", "_"=>"1529912795027"}
+  Rendering events/index.json.jbuilder
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."calendar_id" = ? AND ("events"."start" BETWEEN ? AND ?)[0m  [["calendar_id", 1], ["start", "2018-06-22"], ["start", "2018-07-08"]]
+  Rendered events/index.json.jbuilder (1.2ms)
+Completed 200 OK in 8ms (Views: 2.6ms | ActiveRecord: 0.4ms)
+
+
+Started PUT "/users/1" for 172.16.1.19 at 2018-06-25 09:46:51 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#update as JSON
+  Parameters: {"user"=>{"name"=>""}, "authenticity_token"=>"svfCJgmthUatCczy2H285Qk83aylgwhQuILUYeZAyJ+7PqGEapyPOfVZdzZh9B21O3ipEjDA6+YFLLupAIwt4Q==", "id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTeam Load (0.1ms)[0m  [1m[34mSELECT  "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[33mUPDATE "users" SET "name" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["name", ""], ["updated_at", "2018-06-25 07:46:51.823660"], ["id", 1]]
+  [1m[35m (2.0ms)[0m  [1m[36mcommit transaction[0m
+Completed 204 No Content in 8ms (ActiveRecord: 3.3ms)
+
+
+Started GET "/events/new?_=1529912795028" for 172.16.1.19 at 2018-06-25 09:46:55 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#new as JS
+  Parameters: {"_"=>"1529912795028"}
+  Rendering events/new.js.erb
+  [1m[36mEventType Load (0.2ms)[0m  [1m[34mSELECT "event_types".* FROM "event_types" ORDER BY "event_types"."name" ASC[0m
+  Rendered events/_new.html.erb (5.7ms)
+  Rendered events/new.js.erb (8.5ms)
+Completed 200 OK in 20ms (Views: 11.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/event/newish?utf8=%E2%9C%93&event_type_id=3&team_id=1&start=2018-06-26+00" for 172.16.1.19 at 2018-06-25 09:47:04 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#newish as JS
+  Parameters: {"utf8"=>"✓", "event_type_id"=>"3", "team_id"=>"1", "start"=>"2018-06-26 00"}
+  Rendering events/newish.js.erb
+  [1m[36mEventType Load (0.2ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mEventField Load (0.2ms)[0m  [1m[34mSELECT "event_fields".* FROM "event_fields" WHERE "event_fields"."event_type_id" = ?[0m  [["event_type_id", 3]]
+  Rendered events/fields/_texte.html.erb (1.1ms)
+  Rendered events/fields/_gamme.html.erb (1.2ms)
+  Rendered events/fields/_sous_ensemble.html.erb (0.7ms)
+  Rendered events/fields/_sous_ensemble.html.erb (0.4ms)
+  Rendered events/fields/_sous_ensemble.html.erb (0.4ms)
+  Rendered events/fields/_sous_ensemble.html.erb (0.4ms)
+  Rendered events/fields/_sous_ensemble.html.erb (0.4ms)
+  Rendered events/_form.html.erb (47.0ms)
+  Rendered events/newish.js.erb (48.1ms)
+Completed 200 OK in 51ms (Views: 48.7ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/events" for 172.16.1.19 at 2018-06-25 09:47:41 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#create as JS
+  Parameters: {"utf8"=>"✓", "event"=>{"calendar_id"=>"1", "team_id"=>"1", "start"=>"2018-06-26 00", "title"=>"2135", "event_type_id"=>"3", "properties"=>{"Métier"=>"FU", "Gamme"=>"IX", "Découpeur"=>"/", "Lattes"=>"", "Caisson Aspi"=>"", "EM"=>"/", "CODA"=>"X"}}, "commit"=>"Ajouter"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTeam Load (0.1ms)[0m  [1m[34mSELECT  "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mEventType Load (0.1ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE EventType Load (0.0ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "events" ("title", "start", "end", "color", "created_at", "updated_at", "calendar_id", "team_id", "event_type_id", "properties") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["title", "2135"], ["start", "2018-06-26 00:00:00"], ["end", "2018-06-28 00:00:00"], ["color", "#1565c0"], ["created_at", "2018-06-25 07:47:41.648627"], ["updated_at", "2018-06-25 07:47:41.648627"], ["calendar_id", 1], ["team_id", 1], ["event_type_id", 3], ["properties", "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nMétier: FU\nGamme: IX\nDécoupeur: \"/\"\nLattes: ''\nCaisson Aspi: ''\nEM: \"/\"\nCODA: X\n"]]
+  [1m[35m (2.4ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://172.16.9.121:3000/calendars/1
+Completed 200 OK in 15ms (ActiveRecord: 3.7ms)
+
+
+Started GET "/calendars/1" for 172.16.1.19 at 2018-06-25 09:47:41 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CalendarsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCalendar Load (0.2ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering calendars/show.html.erb within layouts/application
+  Rendered calendars/show.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_navigation.html.erb (1.1ms)
+  Rendered layouts/_messages.html.erb (0.4ms)
+Completed 200 OK in 170ms (Views: 168.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/teams.json?_=1529912795029" for 172.16.1.19 at 2018-06-25 09:47:42 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TeamsController#index as JSON
+  Parameters: {"_"=>"1529912795029"}
+  Rendering teams/index.json.jbuilder
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."calendar_id" = ?[0m  [["calendar_id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 1]]
+  Rendered teams/_team.json.jbuilder (1.8ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 2]]
+  Rendered teams/_team.json.jbuilder (1.0ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 3]]
+  Rendered teams/_team.json.jbuilder (1.0ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 4]]
+  Rendered teams/_team.json.jbuilder (1.0ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 5]]
+  Rendered teams/_team.json.jbuilder (0.9ms)
+  Rendered teams/index.json.jbuilder (8.5ms)
+Completed 200 OK in 11ms (Views: 9.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/events.json?start=2018-06-25T00%3A00%3A00&end=2018-07-08T00%3A00%3A00&_=1529912795030" for 172.16.1.19 at 2018-06-25 09:47:42 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#index as JSON
+  Parameters: {"start"=>"2018-06-25T00:00:00", "end"=>"2018-07-08T00:00:00", "_"=>"1529912795030"}
+  Rendering events/index.json.jbuilder
+  [1m[36mEvent Load (0.1ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."calendar_id" = ? AND ("events"."start" BETWEEN ? AND ?)[0m  [["calendar_id", 1], ["start", "2018-06-22"], ["start", "2018-07-08"]]
+  Rendered events/index.json.jbuilder (1.9ms)
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 0.1ms)
+
+
+Started PATCH "/events/2?method=patch" for 172.16.1.19 at 2018-06-25 09:47:51 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#update as */*
+  Parameters: {"event"=>{"id"=>"2", "start"=>"2018-06-26T00:00:00", "end"=>"2018-06-29T00:00:00"}, "method"=>"patch", "id"=>"2"}
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+Unpermitted parameter: :id
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTeam Load (0.0ms)[0m  [1m[34mSELECT  "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mEventType Load (0.0ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[33mUPDATE "events" SET "end" = ?, "updated_at" = ? WHERE "events"."id" = ?[0m  [["end", "2018-06-29 00:00:00"], ["updated_at", "2018-06-25 07:47:51.990878"], ["id", 2]]
+  [1m[35m (1.9ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://172.16.9.121:3000/calendars/1
+Completed 200 OK in 9ms (ActiveRecord: 2.9ms)
+
+
+Started GET "/calendars/1" for 172.16.1.19 at 2018-06-25 09:47:52 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CalendarsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering calendars/show.html.erb within layouts/application
+  Rendered calendars/show.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_navigation.html.erb (1.0ms)
+  Rendered layouts/_messages.html.erb (0.4ms)
+Completed 200 OK in 160ms (Views: 159.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/teams.json?_=1529912795031" for 172.16.1.19 at 2018-06-25 09:47:52 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TeamsController#index as JSON
+  Parameters: {"_"=>"1529912795031"}
+  Rendering teams/index.json.jbuilder
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."calendar_id" = ?[0m  [["calendar_id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 1]]
+  Rendered teams/_team.json.jbuilder (1.6ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 2]]
+  Rendered teams/_team.json.jbuilder (1.0ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 3]]
+Started GET "/events.json?start=2018-06-25T00%3A00%3A00&end=2018-07-08T00%3A00%3A00&_=1529912795032" for 172.16.1.19 at 2018-06-25 09:47:52 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#index as JSON
+  Parameters: {"start"=>"2018-06-25T00:00:00", "end"=>"2018-07-08T00:00:00", "_"=>"1529912795032"}
+  Rendering events/index.json.jbuilder
+  [1m[36mEvent Load (0.1ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."calendar_id" = ? AND ("events"."start" BETWEEN ? AND ?)[0m  [["calendar_id", 1], ["start", "2018-06-22"], ["start", "2018-07-08"]]
+  Rendered teams/_team.json.jbuilder (6.0ms)
+  Rendered events/index.json.jbuilder (2.2ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 4]]
+Completed 200 OK in 5ms (Views: 4.2ms | ActiveRecord: 0.1ms)
+
+
+  Rendered teams/_team.json.jbuilder (1.5ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 5]]
+  Rendered teams/_team.json.jbuilder (1.0ms)
+  Rendered teams/index.json.jbuilder (15.2ms)
+Completed 200 OK in 17ms (Views: 16.0ms | ActiveRecord: 0.5ms)
+
+
+Started PATCH "/events/2?method=patch" for 172.16.1.19 at 2018-06-25 09:47:57 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#update as */*
+  Parameters: {"event"=>{"id"=>"2", "start"=>"2018-06-27T00:00:00", "end"=>"2018-06-30T00:00:00", "team_id"=>"3"}, "method"=>"patch", "id"=>"2"}
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+Unpermitted parameter: :id
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTeam Load (0.0ms)[0m  [1m[34mSELECT  "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mEventType Load (0.0ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[33mUPDATE "events" SET "start" = ?, "end" = ?, "team_id" = ?, "updated_at" = ? WHERE "events"."id" = ?[0m  [["start", "2018-06-27 00:00:00"], ["end", "2018-06-30 00:00:00"], ["team_id", 3], ["updated_at", "2018-06-25 07:47:57.597274"], ["id", 2]]
+  [1m[35m (2.1ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://172.16.9.121:3000/calendars/1
+Completed 200 OK in 10ms (ActiveRecord: 3.5ms)
+
+
+Started GET "/calendars/1" for 172.16.1.19 at 2018-06-25 09:47:57 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CalendarsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering calendars/show.html.erb within layouts/application
+  Rendered calendars/show.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_navigation.html.erb (1.0ms)
+  Rendered layouts/_messages.html.erb (0.4ms)
+Completed 200 OK in 169ms (Views: 166.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/teams.json?_=1529912795033" for 172.16.1.19 at 2018-06-25 09:47:58 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TeamsController#index as JSON
+  Parameters: {"_"=>"1529912795033"}
+  Rendering teams/index.json.jbuilder
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."calendar_id" = ?[0m  [["calendar_id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 1]]
+  Rendered teams/_team.json.jbuilder (1.6ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 2]]
+  Rendered teams/_team.json.jbuilder (1.1ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 3]]
+  Rendered teams/_team.json.jbuilder (1.0ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 4]]
+Started GET "/events.json?start=2018-06-25T00%3A00%3A00&end=2018-07-08T00%3A00%3A00&_=1529912795034" for 172.16.1.19 at 2018-06-25 09:47:58 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#index as JSON
+  Rendered teams/_team.json.jbuilder (1.0ms)
+  Parameters: {"start"=>"2018-06-25T00:00:00", "end"=>"2018-07-08T00:00:00", "_"=>"1529912795034"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 5]]
+  Rendered teams/_team.json.jbuilder (2.2ms)
+  Rendered teams/index.json.jbuilder (14.9ms)
+Completed 200 OK in 17ms (Views: 15.6ms | ActiveRecord: 0.5ms)
+
+
+  Rendering events/index.json.jbuilder
+  [1m[36mEvent Load (0.1ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."calendar_id" = ? AND ("events"."start" BETWEEN ? AND ?)[0m  [["calendar_id", 1], ["start", "2018-06-22"], ["start", "2018-07-08"]]
+  Rendered events/index.json.jbuilder (2.1ms)
+Completed 200 OK in 6ms (Views: 3.2ms | ActiveRecord: 0.1ms)
+
+
+Started PATCH "/events/2?method=patch" for 172.16.1.19 at 2018-06-25 09:48:05 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#update as */*
+  Parameters: {"event"=>{"id"=>"2", "start"=>"2018-06-27T00:00:00", "end"=>"2018-07-02T12:00:00"}, "method"=>"patch", "id"=>"2"}
+  [1m[36mEvent Load (0.1ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+Unpermitted parameter: :id
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTeam Load (0.1ms)[0m  [1m[34mSELECT  "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mEventType Load (0.0ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[33mUPDATE "events" SET "end" = ?, "updated_at" = ? WHERE "events"."id" = ?[0m  [["end", "2018-07-02 12:00:00"], ["updated_at", "2018-06-25 07:48:05.645737"], ["id", 2]]
+  [1m[35m (2.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://172.16.9.121:3000/calendars/1
+Completed 200 OK in 10ms (ActiveRecord: 3.1ms)
+
+
+Started GET "/calendars/1" for 172.16.1.19 at 2018-06-25 09:48:05 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CalendarsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering calendars/show.html.erb within layouts/application
+  Rendered calendars/show.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_navigation.html.erb (1.0ms)
+  Rendered layouts/_messages.html.erb (0.3ms)
+Completed 200 OK in 161ms (Views: 160.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/teams.json?_=1529912795035" for 172.16.1.19 at 2018-06-25 09:48:06 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TeamsController#index as JSON
+  Parameters: {"_"=>"1529912795035"}
+  Rendering teams/index.json.jbuilder
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."calendar_id" = ?[0m  [["calendar_id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 1]]
+  Rendered teams/_team.json.jbuilder (1.7ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 2]]
+  Rendered teams/_team.json.jbuilder (1.1ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 3]]
+Started GET "/events.json?start=2018-06-25T00%3A00%3A00&end=2018-07-08T00%3A00%3A00&_=1529912795036" for 172.16.1.19 at 2018-06-25 09:48:06 +0200
+  Rendered teams/_team.json.jbuilder (1.8ms)
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#index as JSON
+  Parameters: {"start"=>"2018-06-25T00:00:00", "end"=>"2018-07-08T00:00:00", "_"=>"1529912795036"}
+  Rendering events/index.json.jbuilder
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."calendar_id" = ? AND ("events"."start" BETWEEN ? AND ?)[0m  [["calendar_id", 1], ["start", "2018-06-22"], ["start", "2018-07-08"]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 4]]
+  Rendered events/index.json.jbuilder (2.8ms)
+  Rendered teams/_team.json.jbuilder (2.4ms)
+Completed 200 OK in 6ms (Views: 4.6ms | ActiveRecord: 0.2ms)
+
+
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 5]]
+  Rendered teams/_team.json.jbuilder (1.5ms)
+  Rendered teams/index.json.jbuilder (17.8ms)
+Completed 200 OK in 20ms (Views: 18.6ms | ActiveRecord: 0.6ms)
+
+
+Started PUT "/users/2" for 172.16.1.19 at 2018-06-25 09:48:23 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#update as JSON
+  Parameters: {"user"=>{"name"=>"Jean Delaria"}, "authenticity_token"=>"YIxArnvqaOsu7oKRajfpmmdlc3SX+1mOp9iDuAMRnBdpRSMMGNtilHa+OVXTvkjKVSEHygK4ujgaduxw5d15aQ==", "id"=>"2"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTeam Load (0.1ms)[0m  [1m[34mSELECT  "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[33mUPDATE "users" SET "name" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["name", "Jean Delaria"], ["updated_at", "2018-06-25 07:48:23.025706"], ["id", 2]]
+  [1m[35m (2.8ms)[0m  [1m[36mcommit transaction[0m
+Completed 204 No Content in 7ms (ActiveRecord: 3.7ms)
+
+
+Started GET "/calendars/1" for 172.16.1.19 at 2018-06-25 09:48:27 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CalendarsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering calendars/show.html.erb within layouts/application
+  Rendered calendars/show.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_navigation.html.erb (1.2ms)
+  Rendered layouts/_messages.html.erb (0.3ms)
+Completed 200 OK in 225ms (Views: 223.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/teams.json?_=1529912908025" for 172.16.1.19 at 2018-06-25 09:48:29 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TeamsController#index as JSON
+  Parameters: {"_"=>"1529912908025"}
+  Rendering teams/index.json.jbuilder
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."calendar_id" = ?[0m  [["calendar_id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 1]]
+  Rendered teams/_team.json.jbuilder (1.8ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 2]]
+  Rendered teams/_team.json.jbuilder (1.1ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 3]]
+  Rendered teams/_team.json.jbuilder (1.0ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 4]]
+  Rendered teams/_team.json.jbuilder (1.0ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 5]]
+  Rendered teams/_team.json.jbuilder (1.0ms)
+  Rendered teams/index.json.jbuilder (9.0ms)
+Completed 200 OK in 11ms (Views: 9.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/events.json?start=2018-06-25T00%3A00%3A00&end=2018-07-08T00%3A00%3A00&_=1529912908026" for 172.16.1.19 at 2018-06-25 09:48:29 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#index as JSON
+  Parameters: {"start"=>"2018-06-25T00:00:00", "end"=>"2018-07-08T00:00:00", "_"=>"1529912908026"}
+  Rendering events/index.json.jbuilder
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."calendar_id" = ? AND ("events"."start" BETWEEN ? AND ?)[0m  [["calendar_id", 1], ["start", "2018-06-22"], ["start", "2018-07-08"]]
+  Rendered events/index.json.jbuilder (2.3ms)
+Completed 200 OK in 5ms (Views: 3.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/calendars/1" for 172.16.1.19 at 2018-06-25 09:48:48 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CalendarsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering calendars/show.html.erb within layouts/application
+  Rendered calendars/show.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_navigation.html.erb (1.0ms)
+  Rendered layouts/_messages.html.erb (0.4ms)
+Completed 200 OK in 166ms (Views: 164.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/teams.json?_=1529912929200" for 172.16.1.19 at 2018-06-25 09:48:49 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TeamsController#index as JSON
+  Parameters: {"_"=>"1529912929200"}
+  Rendering teams/index.json.jbuilder
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."calendar_id" = ?[0m  [["calendar_id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 1]]
+  Rendered teams/_team.json.jbuilder (2.0ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 2]]
+  Rendered teams/_team.json.jbuilder (1.2ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 3]]
+  Rendered teams/_team.json.jbuilder (1.0ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 4]]
+  Rendered teams/_team.json.jbuilder (1.0ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 5]]
+  Rendered teams/_team.json.jbuilder (1.0ms)
+  Rendered teams/index.json.jbuilder (9.5ms)
+Completed 200 OK in 13ms (Views: 10.6ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/events.json?start=2018-06-25T00%3A00%3A00&end=2018-07-08T00%3A00%3A00&_=1529912929201" for 172.16.1.19 at 2018-06-25 09:48:49 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#index as JSON
+  Parameters: {"start"=>"2018-06-25T00:00:00", "end"=>"2018-07-08T00:00:00", "_"=>"1529912929201"}
+  Rendering events/index.json.jbuilder
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."calendar_id" = ? AND ("events"."start" BETWEEN ? AND ?)[0m  [["calendar_id", 1], ["start", "2018-06-22"], ["start", "2018-07-08"]]
+  Rendered events/index.json.jbuilder (2.4ms)
+Completed 200 OK in 5ms (Views: 3.5ms | ActiveRecord: 0.2ms)
+
+
+DEPRECATION WARNING: ActiveSupport.halt_callback_chains_on_return_false= is deprecated and will be removed in Rails 5.2. (called from <top (required)> at /var/www/planning_visuel/planning_lectra/config/initializers/callback_terminator.rb:6)
+  [1m[36mTeam Load (0.1ms)[0m  [1m[34mSELECT  "teams".* FROM "teams" ORDER BY "teams"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."team_id" = ? LIMIT ?[0m  [["team_id", 1], ["LIMIT", 11]]
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT  "teams".* FROM "teams" ORDER BY "teams"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."team_id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["team_id", 1], ["LIMIT", 1]]
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT  "teams".* FROM "teams" ORDER BY "teams"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."team_id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["team_id", 1], ["LIMIT", 1]]
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT  "teams".* FROM "teams" ORDER BY "teams"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."team_id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["team_id", 1], ["LIMIT", 1]]
+DEPRECATION WARNING: ActiveSupport.halt_callback_chains_on_return_false= is deprecated and will be removed in Rails 5.2. (called from <top (required)> at /var/www/planning_visuel/planning_lectra/config/initializers/callback_terminator.rb:6)
+Started GET "/calendars/1" for 172.16.1.19 at 2018-06-25 09:50:53 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by CalendarsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering calendars/show.html.erb within layouts/application
+  Rendered calendars/show.html.erb within layouts/application (1.0ms)
+  Rendered layouts/_navigation.html.erb (1.6ms)
+  Rendered layouts/_messages.html.erb (0.5ms)
+Completed 200 OK in 595ms (Views: 571.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/teams.json?_=1529913054784" for 172.16.1.19 at 2018-06-25 09:50:55 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TeamsController#index as JSON
+  Parameters: {"_"=>"1529913054784"}
+  Rendering teams/index.json.jbuilder
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."calendar_id" = ?[0m  [["calendar_id", 1]]
+Started GET "/events.json?start=2018-06-25T00%3A00%3A00&end=2018-07-08T00%3A00%3A00&_=1529913054785" for 172.16.1.19 at 2018-06-25 09:50:55 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#index as JSON
+  Parameters: {"start"=>"2018-06-25T00:00:00", "end"=>"2018-07-08T00:00:00", "_"=>"1529913054785"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 1]]
+  Rendering events/index.json.jbuilder
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."calendar_id" = ? AND ("events"."start" BETWEEN ? AND ?)[0m  [["calendar_id", 1], ["start", "2018-06-22"], ["start", "2018-07-08"]]
+  Rendered teams/_team.json.jbuilder (42.5ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 2]]
+  Rendered events/index.json.jbuilder (14.2ms)
+Completed 200 OK in 30ms (Views: 19.3ms | ActiveRecord: 0.9ms)
+
+
+  Rendered teams/_team.json.jbuilder (2.9ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 3]]
+  Rendered teams/_team.json.jbuilder (1.3ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 4]]
+  Rendered teams/_team.json.jbuilder (1.1ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 5]]
+  Rendered teams/_team.json.jbuilder (1.1ms)
+  Rendered teams/index.json.jbuilder (56.7ms)
+Completed 200 OK in 65ms (Views: 57.1ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/" for 172.16.1.19 at 2018-06-25 09:51:13 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CalendarsController#index as HTML
+  Rendering calendars/index.html.erb within layouts/application
+  [1m[36mCalendar Load (0.3ms)[0m  [1m[34mSELECT "calendars".* FROM "calendars"[0m
+  Rendered calendars/index.html.erb within layouts/application (2.2ms)
+  Rendered layouts/_navigation.html.erb (1.3ms)
+  Rendered layouts/_messages.html.erb (0.3ms)
+Completed 200 OK in 177ms (Views: 175.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/calendars/new" for 172.16.1.19 at 2018-06-25 09:51:19 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CalendarsController#new as HTML
+  Rendering calendars/new.html.erb within layouts/application
+  Rendered calendars/_form.html.erb (26.3ms)
+  Rendered calendars/new.html.erb within layouts/application (27.2ms)
+  Rendered layouts/_navigation.html.erb (1.4ms)
+  Rendered layouts/_messages.html.erb (0.4ms)
+Completed 200 OK in 220ms (Views: 217.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/calendars" for 172.16.1.19 at 2018-06-25 09:51:25 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CalendarsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"sm00dGl2jhPimBgG839t6suXDMarYq/cQaZVIdL9Dh/HlI37jOtWGqDEJZeUgU8izibRROs9s1uEqrODkmvzvg==", "calendar"=>{"title"=>"Versalis"}, "commit"=>"Enregistrer"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (8.0ms)[0m  [1m[32mINSERT INTO "calendars" ("title", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["title", "Versalis"], ["created_at", "2018-06-25 07:51:25.774833"], ["updated_at", "2018-06-25 07:51:25.774833"]]
+  [1m[35m (2.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://172.16.9.121:3000/calendars/2
+Completed 302 Found in 14ms (ActiveRecord: 10.0ms)
+
+
+Started GET "/calendars/2" for 172.16.1.19 at 2018-06-25 09:51:25 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CalendarsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mCalendar Load (0.2ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering calendars/show.html.erb within layouts/application
+  Rendered calendars/show.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_navigation.html.erb (1.3ms)
+  Rendered layouts/_messages.html.erb (0.4ms)
+Completed 200 OK in 182ms (Views: 180.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/teams.json?_=1529913086448" for 172.16.1.19 at 2018-06-25 09:51:26 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TeamsController#index as JSON
+  Parameters: {"_"=>"1529913086448"}
+  Rendering teams/index.json.jbuilder
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."calendar_id" = ?[0m  [["calendar_id", 2]]
+  Rendered teams/index.json.jbuilder (1.0ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/events.json?start=2018-06-25T00%3A00%3A00&end=2018-07-08T00%3A00%3A00&_=1529913086449" for 172.16.1.19 at 2018-06-25 09:51:26 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#index as JSON
+  Parameters: {"start"=>"2018-06-25T00:00:00", "end"=>"2018-07-08T00:00:00", "_"=>"1529913086449"}
+  Rendering events/index.json.jbuilder
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."calendar_id" = ? AND ("events"."start" BETWEEN ? AND ?)[0m  [["calendar_id", 2], ["start", "2018-06-22"], ["start", "2018-07-08"]]
+  Rendered events/index.json.jbuilder (1.1ms)
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/events.json?start=2018-07-02T00%3A00%3A00&end=2018-07-15T00%3A00%3A00&_=1529913086450" for 172.16.1.19 at 2018-06-25 09:51:31 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#index as JSON
+  Parameters: {"start"=>"2018-07-02T00:00:00", "end"=>"2018-07-15T00:00:00", "_"=>"1529913086450"}
+  Rendering events/index.json.jbuilder
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."calendar_id" = ? AND ("events"."start" BETWEEN ? AND ?)[0m  [["calendar_id", 2], ["start", "2018-06-29"], ["start", "2018-07-15"]]
+  Rendered events/index.json.jbuilder (1.2ms)
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/events.json?start=2018-06-25T00%3A00%3A00&end=2018-07-08T00%3A00%3A00&_=1529913086451" for 172.16.1.19 at 2018-06-25 09:51:32 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#index as JSON
+  Parameters: {"start"=>"2018-06-25T00:00:00", "end"=>"2018-07-08T00:00:00", "_"=>"1529913086451"}
+  Rendering events/index.json.jbuilder
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."calendar_id" = ? AND ("events"."start" BETWEEN ? AND ?)[0m  [["calendar_id", 2], ["start", "2018-06-22"], ["start", "2018-07-08"]]
+  Rendered events/index.json.jbuilder (1.2ms)
+Completed 200 OK in 4ms (Views: 2.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/teams/new?calendar_id=2" for 172.16.1.19 at 2018-06-25 09:51:33 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TeamsController#new as JS
+  Parameters: {"calendar_id"=>"2"}
+  Rendering teams/new.js.erb
+  Rendered teams/_form.html.erb (3.8ms)
+  Rendered teams/_new.js.erb (7.2ms)
+  Rendered teams/new.js.erb (10.8ms)
+Completed 200 OK in 18ms (Views: 14.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teams" for 172.16.1.19 at 2018-06-25 09:51:41 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TeamsController#create as JS
+  Parameters: {"utf8"=>"✓", "team"=>{"name"=>"Equipe 1", "calendar_id"=>"2"}, "commit"=>"Créer"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCalendar Load (0.2ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (2.0ms)[0m  [1m[32mINSERT INTO "teams" ("name", "created_at", "updated_at", "calendar_id") VALUES (?, ?, ?, ?)[0m  [["name", "Equipe 1"], ["created_at", "2018-06-25 07:51:41.095099"], ["updated_at", "2018-06-25 07:51:41.095099"], ["calendar_id", 2]]
+  [1m[35m (2.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "users" ("name", "team_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Non assigné"], ["team_id", 6], ["created_at", "2018-06-25 07:51:41.102433"], ["updated_at", "2018-06-25 07:51:41.102433"]]
+  [1m[35m (4.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "team_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Non assigné"], ["team_id", 6], ["created_at", "2018-06-25 07:51:41.109714"], ["updated_at", "2018-06-25 07:51:41.109714"]]
+  [1m[35m (3.8ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://172.16.9.121:3000/calendars/2
+Completed 200 OK in 26ms (ActiveRecord: 15.0ms)
+
+
+Started GET "/calendars/2" for 172.16.1.19 at 2018-06-25 09:51:41 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CalendarsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering calendars/show.html.erb within layouts/application
+  Rendered calendars/show.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_navigation.html.erb (1.2ms)
+  Rendered layouts/_messages.html.erb (0.3ms)
+Completed 200 OK in 180ms (Views: 178.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/teams.json?_=1529913086452" for 172.16.1.19 at 2018-06-25 09:51:41 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TeamsController#index as JSON
+  Parameters: {"_"=>"1529913086452"}
+  Rendering teams/index.json.jbuilder
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."calendar_id" = ?[0m  [["calendar_id", 2]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 6]]
+  Rendered teams/_team.json.jbuilder (1.8ms)
+  Rendered teams/index.json.jbuilder (3.5ms)
+Completed 200 OK in 6ms (Views: 4.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/events.json?start=2018-06-25T00%3A00%3A00&end=2018-07-08T00%3A00%3A00&_=1529913086453" for 172.16.1.19 at 2018-06-25 09:51:41 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#index as JSON
+  Parameters: {"start"=>"2018-06-25T00:00:00", "end"=>"2018-07-08T00:00:00", "_"=>"1529913086453"}
+  Rendering events/index.json.jbuilder
+  [1m[36mEvent Load (0.1ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."calendar_id" = ? AND ("events"."start" BETWEEN ? AND ?)[0m  [["calendar_id", 2], ["start", "2018-06-22"], ["start", "2018-07-08"]]
+  Rendered events/index.json.jbuilder (1.2ms)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/events/new?_=1529913086454" for 172.16.1.19 at 2018-06-25 09:51:47 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#new as JS
+  Parameters: {"_"=>"1529913086454"}
+  Rendering events/new.js.erb
+  [1m[36mEventType Load (0.2ms)[0m  [1m[34mSELECT "event_types".* FROM "event_types" ORDER BY "event_types"."name" ASC[0m
+  Rendered events/_new.html.erb (6.3ms)
+  Rendered events/new.js.erb (9.2ms)
+Completed 200 OK in 16ms (Views: 11.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/event/newish?utf8=%E2%9C%93&event_type_id=5&team_id=6&start=2018-06-26+00" for 172.16.1.19 at 2018-06-25 09:51:51 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#newish as JS
+  Parameters: {"utf8"=>"✓", "event_type_id"=>"5", "team_id"=>"6", "start"=>"2018-06-26 00"}
+  Rendering events/newish.js.erb
+  [1m[36mEventType Load (0.2ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mEventField Load (0.2ms)[0m  [1m[34mSELECT "event_fields".* FROM "event_fields" WHERE "event_fields"."event_type_id" = ?[0m  [["event_type_id", 5]]
+  Rendered events/fields/_texte.html.erb (1.5ms)
+  Rendered events/fields/_texte.html.erb (0.6ms)
+  Rendered events/_form.html.erb (29.9ms)
+  Rendered events/newish.js.erb (31.2ms)
+Completed 200 OK in 34ms (Views: 32.1ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/events" for 172.16.1.19 at 2018-06-25 09:52:06 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#create as JS
+  Parameters: {"utf8"=>"✓", "event"=>{"calendar_id"=>"2", "team_id"=>"6", "start"=>"2018-06-26 00", "title"=>"2315", "event_type_id"=>"5", "properties"=>{"Pièce"=>"Convoyeur", "Notes"=>""}}, "commit"=>"Ajouter"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTeam Load (0.1ms)[0m  [1m[34mSELECT  "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mEventType Load (0.1ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE EventType Load (0.0ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (1.8ms)[0m  [1m[32mINSERT INTO "events" ("title", "start", "end", "created_at", "updated_at", "calendar_id", "team_id", "event_type_id", "properties") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["title", "2315"], ["start", "2018-06-26 00:00:00"], ["end", "2018-06-28 00:00:00"], ["created_at", "2018-06-25 07:52:06.470732"], ["updated_at", "2018-06-25 07:52:06.470732"], ["calendar_id", 2], ["team_id", 6], ["event_type_id", 5], ["properties", "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nPièce: Convoyeur\nNotes: ''\n"]]
+  [1m[35m (3.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://172.16.9.121:3000/calendars/2
+Completed 200 OK in 15ms (ActiveRecord: 5.3ms)
+
+
+Started GET "/calendars/2" for 172.16.1.19 at 2018-06-25 09:52:06 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CalendarsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering calendars/show.html.erb within layouts/application
+  Rendered calendars/show.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_navigation.html.erb (1.4ms)
+  Rendered layouts/_messages.html.erb (0.4ms)
+Completed 200 OK in 190ms (Views: 188.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/teams.json?_=1529913086455" for 172.16.1.19 at 2018-06-25 09:52:06 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TeamsController#index as JSON
+  Parameters: {"_"=>"1529913086455"}
+  Rendering teams/index.json.jbuilder
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."calendar_id" = ?[0m  [["calendar_id", 2]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 6]]
+  Rendered teams/_team.json.jbuilder (1.8ms)
+  Rendered teams/index.json.jbuilder (3.3ms)
+Completed 200 OK in 5ms (Views: 4.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/events.json?start=2018-06-25T00%3A00%3A00&end=2018-07-08T00%3A00%3A00&_=1529913086456" for 172.16.1.19 at 2018-06-25 09:52:06 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#index as JSON
+  Parameters: {"start"=>"2018-06-25T00:00:00", "end"=>"2018-07-08T00:00:00", "_"=>"1529913086456"}
+  Rendering events/index.json.jbuilder
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."calendar_id" = ? AND ("events"."start" BETWEEN ? AND ?)[0m  [["calendar_id", 2], ["start", "2018-06-22"], ["start", "2018-07-08"]]
+  Rendered events/index.json.jbuilder (1.8ms)
+Completed 200 OK in 4ms (Views: 2.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/events/3/edit?_=1529913086457" for 172.16.1.19 at 2018-06-25 09:52:08 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#edit as JS
+  Parameters: {"_"=>"1529913086457", "id"=>"3"}
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering events/edit.js.erb
+  [1m[36mEventType Load (0.2ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE EventType Load (0.0ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mEventField Load (0.2ms)[0m  [1m[34mSELECT "event_fields".* FROM "event_fields" WHERE "event_fields"."event_type_id" = ?[0m  [["event_type_id", 5]]
+  Rendered events/fields/_texte.html.erb (1.0ms)
+  Rendered events/fields/_texte.html.erb (0.5ms)
+  Rendered events/_form.html.erb (15.4ms)
+  Rendered events/_edit.html.erb (18.7ms)
+  Rendered events/edit.js.erb (21.7ms)
+Completed 200 OK in 29ms (Views: 24.7ms | ActiveRecord: 0.5ms)
+
+
+Started PATCH "/events/3" for 172.16.1.19 at 2018-06-25 09:52:24 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#update as JS
+  Parameters: {"utf8"=>"✓", "event"=>{"calendar_id"=>"2", "team_id"=>"6", "start"=>"2018-06-26 00:00:00 UTC", "title"=>"2315", "event_type_id"=>"5", "properties"=>{"Pièce"=>"Convoyeur", "Notes"=>"Pb montage"}}, "commit"=>"Modifier", "id"=>"3"}
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTeam Load (0.1ms)[0m  [1m[34mSELECT  "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mEventType Load (0.0ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (1.6ms)[0m  [1m[33mUPDATE "events" SET "properties" = ?, "updated_at" = ? WHERE "events"."id" = ?[0m  [["properties", "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nPièce: Convoyeur\nNotes: Pb montage\n"], ["updated_at", "2018-06-25 07:52:24.417887"], ["id", 3]]
+  [1m[35m (2.8ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://172.16.9.121:3000/calendars/2
+Completed 200 OK in 11ms (ActiveRecord: 4.9ms)
+
+
+Started GET "/calendars/2" for 172.16.1.19 at 2018-06-25 09:52:24 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CalendarsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering calendars/show.html.erb within layouts/application
+  Rendered calendars/show.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_navigation.html.erb (1.3ms)
+  Rendered layouts/_messages.html.erb (0.3ms)
+Completed 200 OK in 191ms (Views: 189.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/teams.json?_=1529913086458" for 172.16.1.19 at 2018-06-25 09:52:24 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TeamsController#index as JSON
+  Parameters: {"_"=>"1529913086458"}
+  Rendering teams/index.json.jbuilder
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."calendar_id" = ?[0m  [["calendar_id", 2]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 6]]
+  Rendered teams/_team.json.jbuilder (1.8ms)
+  Rendered teams/index.json.jbuilder (3.2ms)
+Completed 200 OK in 5ms (Views: 4.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/events.json?start=2018-06-25T00%3A00%3A00&end=2018-07-08T00%3A00%3A00&_=1529913086459" for 172.16.1.19 at 2018-06-25 09:52:24 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#index as JSON
+  Parameters: {"start"=>"2018-06-25T00:00:00", "end"=>"2018-07-08T00:00:00", "_"=>"1529913086459"}
+  Rendering events/index.json.jbuilder
+  [1m[36mEvent Load (0.1ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."calendar_id" = ? AND ("events"."start" BETWEEN ? AND ?)[0m  [["calendar_id", 2], ["start", "2018-06-22"], ["start", "2018-07-08"]]
+  Rendered events/index.json.jbuilder (1.7ms)
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/events/3/edit?_=1529913086460" for 172.16.1.19 at 2018-06-25 09:52:26 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#edit as JS
+  Parameters: {"_"=>"1529913086460", "id"=>"3"}
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering events/edit.js.erb
+  [1m[36mEventType Load (0.1ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE EventType Load (0.0ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mEventField Load (0.2ms)[0m  [1m[34mSELECT "event_fields".* FROM "event_fields" WHERE "event_fields"."event_type_id" = ?[0m  [["event_type_id", 5]]
+  Rendered events/fields/_texte.html.erb (0.8ms)
+  Rendered events/fields/_texte.html.erb (0.4ms)
+  Rendered events/_form.html.erb (14.1ms)
+  Rendered events/_edit.html.erb (17.5ms)
+  Rendered events/edit.js.erb (20.5ms)
+Completed 200 OK in 27ms (Views: 23.4ms | ActiveRecord: 0.5ms)
+
+
+Started PATCH "/events/3" for 172.16.1.19 at 2018-06-25 09:52:47 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#update as JS
+  Parameters: {"utf8"=>"✓", "event"=>{"calendar_id"=>"2", "team_id"=>"6", "start"=>"2018-06-26 00:00:00 UTC", "title"=>"2315", "event_type_id"=>"5", "properties"=>{"Pièce"=>"Convoyeur", "Notes"=>"Test ok"}}, "commit"=>"Modifier", "id"=>"3"}
+  [1m[36mEvent Load (0.1ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTeam Load (0.1ms)[0m  [1m[34mSELECT  "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mEventType Load (0.1ms)[0m  [1m[34mSELECT  "event_types".* FROM "event_types" WHERE "event_types"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (1.8ms)[0m  [1m[33mUPDATE "events" SET "properties" = ?, "updated_at" = ? WHERE "events"."id" = ?[0m  [["properties", "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nPièce: Convoyeur\nNotes: Test ok\n"], ["updated_at", "2018-06-25 07:52:47.845888"], ["id", 3]]
+  [1m[35m (2.8ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://172.16.9.121:3000/calendars/2
+Completed 200 OK in 12ms (ActiveRecord: 5.0ms)
+
+
+Started GET "/calendars/2" for 172.16.1.19 at 2018-06-25 09:52:47 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CalendarsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering calendars/show.html.erb within layouts/application
+  Rendered calendars/show.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_navigation.html.erb (1.4ms)
+  Rendered layouts/_messages.html.erb (0.4ms)
+Completed 200 OK in 192ms (Views: 190.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/teams.json?_=1529913086461" for 172.16.1.19 at 2018-06-25 09:52:48 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TeamsController#index as JSON
+  Parameters: {"_"=>"1529913086461"}
+  Rendering teams/index.json.jbuilder
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."calendar_id" = ?[0m  [["calendar_id", 2]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 6]]
+  Rendered teams/_team.json.jbuilder (1.8ms)
+  Rendered teams/index.json.jbuilder (3.4ms)
+Completed 200 OK in 6ms (Views: 4.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/events.json?start=2018-06-25T00%3A00%3A00&end=2018-07-08T00%3A00%3A00&_=1529913086462" for 172.16.1.19 at 2018-06-25 09:52:48 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#index as JSON
+  Parameters: {"start"=>"2018-06-25T00:00:00", "end"=>"2018-07-08T00:00:00", "_"=>"1529913086462"}
+  Rendering events/index.json.jbuilder
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."calendar_id" = ? AND ("events"."start" BETWEEN ? AND ?)[0m  [["calendar_id", 2], ["start", "2018-06-22"], ["start", "2018-07-08"]]
+  Rendered events/index.json.jbuilder (1.9ms)
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/calendars/2" for 172.16.1.19 at 2018-06-25 09:52:50 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CalendarsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering calendars/show.html.erb within layouts/application
+  Rendered calendars/show.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_navigation.html.erb (1.3ms)
+  Rendered layouts/_messages.html.erb (0.4ms)
+Completed 200 OK in 190ms (Views: 188.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/teams.json?_=1529913086463" for 172.16.1.19 at 2018-06-25 09:52:50 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TeamsController#index as JSON
+  Parameters: {"_"=>"1529913086463"}
+  Rendering teams/index.json.jbuilder
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."calendar_id" = ?[0m  [["calendar_id", 2]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 6]]
+  Rendered teams/_team.json.jbuilder (1.6ms)
+  Rendered teams/index.json.jbuilder (3.1ms)
+Completed 200 OK in 6ms (Views: 4.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/events.json?start=2018-06-25T00%3A00%3A00&end=2018-07-08T00%3A00%3A00&_=1529913086464" for 172.16.1.19 at 2018-06-25 09:52:50 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#index as JSON
+  Parameters: {"start"=>"2018-06-25T00:00:00", "end"=>"2018-07-08T00:00:00", "_"=>"1529913086464"}
+  Rendering events/index.json.jbuilder
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."calendar_id" = ? AND ("events"."start" BETWEEN ? AND ?)[0m  [["calendar_id", 2], ["start", "2018-06-22"], ["start", "2018-07-08"]]
+  Rendered events/index.json.jbuilder (2.0ms)
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/calendars/2" for 172.16.1.19 at 2018-06-25 09:52:52 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CalendarsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering calendars/show.html.erb within layouts/application
+  Rendered calendars/show.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_navigation.html.erb (2.4ms)
+  Rendered layouts/_messages.html.erb (0.3ms)
+Completed 200 OK in 233ms (Views: 231.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/teams.json?_=1529913086465" for 172.16.1.19 at 2018-06-25 09:52:52 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TeamsController#index as JSON
+  Parameters: {"_"=>"1529913086465"}
+Started GET "/events.json?start=2018-06-25T00%3A00%3A00&end=2018-07-08T00%3A00%3A00&_=1529913086466" for 172.16.1.19 at 2018-06-25 09:52:52 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#index as JSON
+  Rendering teams/index.json.jbuilder
+  Parameters: {"start"=>"2018-06-25T00:00:00", "end"=>"2018-07-08T00:00:00", "_"=>"1529913086466"}
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."calendar_id" = ?[0m  [["calendar_id", 2]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 6]]
+  Rendered teams/_team.json.jbuilder (2.9ms)
+  Rendered teams/index.json.jbuilder (7.1ms)
+Completed 200 OK in 18ms (Views: 15.8ms | ActiveRecord: 0.3ms)
+
+
+  Rendering events/index.json.jbuilder
+  [1m[36mEvent Load (0.6ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."calendar_id" = ? AND ("events"."start" BETWEEN ? AND ?)[0m  [["calendar_id", 2], ["start", "2018-06-22"], ["start", "2018-07-08"]]
+  Rendered events/index.json.jbuilder (3.3ms)
+Completed 200 OK in 12ms (Views: 5.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/calendars/1" for 172.16.1.19 at 2018-06-25 09:52:58 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CalendarsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCalendar Load (0.1ms)[0m  [1m[34mSELECT  "calendars".* FROM "calendars" WHERE "calendars"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering calendars/show.html.erb within layouts/application
+  Rendered calendars/show.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_navigation.html.erb (1.3ms)
+  Rendered layouts/_messages.html.erb (0.4ms)
+Completed 200 OK in 206ms (Views: 204.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/teams.json?_=1529913179541" for 172.16.1.19 at 2018-06-25 09:52:59 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TeamsController#index as JSON
+  Parameters: {"_"=>"1529913179541"}
+  Rendering teams/index.json.jbuilder
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."calendar_id" = ?[0m  [["calendar_id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 1]]
+  Rendered teams/_team.json.jbuilder (1.7ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 2]]
+  Rendered teams/_team.json.jbuilder (1.0ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 3]]
+  Rendered teams/_team.json.jbuilder (1.0ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 4]]
+  Rendered teams/_team.json.jbuilder (1.0ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."team_id" = ?[0m  [["team_id", 5]]
+  Rendered teams/_team.json.jbuilder (1.0ms)
+  Rendered teams/index.json.jbuilder (8.4ms)
+Completed 200 OK in 11ms (Views: 9.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/events.json?start=2018-06-25T00%3A00%3A00&end=2018-07-08T00%3A00%3A00&_=1529913179542" for 172.16.1.19 at 2018-06-25 09:52:59 +0200
+Cannot render console from 172.16.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventsController#index as JSON
+  Parameters: {"start"=>"2018-06-25T00:00:00", "end"=>"2018-07-08T00:00:00", "_"=>"1529913179542"}
+  Rendering events/index.json.jbuilder
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."calendar_id" = ? AND ("events"."start" BETWEEN ? AND ?)[0m  [["calendar_id", 1], ["start", "2018-06-22"], ["start", "2018-07-08"]]
+  Rendered events/index.json.jbuilder (2.1ms)
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.2ms)
+
+
