@@ -12,6 +12,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+/tmp
 
 # Ignore Byebug command history file.
 .byebug_history
@@ -19,3 +20,5 @@
 # Ignore application configuration
 /config/application.yml
 /public/system/*
+/db/development.sqlite3
+

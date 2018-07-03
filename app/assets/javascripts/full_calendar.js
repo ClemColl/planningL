@@ -22,7 +22,7 @@ initialize_calendar = function() {
       locale: 'fr',
       schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
       defaultView: 'customWeek',
-      hiddenDays: [0], // 0 = Dimanche, 1 = Lundi ...
+      hiddenDays: [0, 6], // 0 = Dimanche, 1 = Lundi ...
       editable: true,
       resourceAreaWidth: "20%",
       selectable: true,
@@ -46,16 +46,16 @@ initialize_calendar = function() {
         }
       ],
       views: {
+        // customWeek: {
+        //   type: 'timeline',
+        //   duration: { days: 14 },
+        //   buttonText: '2 semaines'
+        // }
         customWeek: {
           type: 'timeline',
-          duration: { days: 14 },
-          buttonText: '2 semaines'
+          duration: { days: 21 },
+          buttonText: '3 semaines'
         }
-        // customWeek2: {
-        //   type: 'timeline',
-        //   duration: { days: 21 },
-        //   buttonText: '3 semaines'
-        // }
       },
 
       //CALLBACKS
@@ -71,6 +71,7 @@ initialize_calendar = function() {
           if (cellDate < today) {
             cell[0].className += " before-date";
           }
+          // cell[0].style.border = '2px solid black';
       },
 
       eventRender: function(event, element) { 

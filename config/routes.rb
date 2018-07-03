@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
   
+  get 'indicateurs/all'
+
+  get 'indicateurs/production'
+
+  get 'indicateurs/suivi'
+
+  resources :analyses
+  resources :objectifs
   resources :responsables
   resources :backlogs
   resources :stocks
@@ -19,6 +27,7 @@ Rails.application.routes.draw do
   resources :calendars
   resources :events
     get "event/newish" => "events#newish"
-
+    get '/fichiers' => 'static#fichiers'
+    match '/eff_util' => "static#eff_util", :via => :post
   root 'calendars#index'
 end

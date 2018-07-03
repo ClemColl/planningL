@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  equipe: one
+  type: 
+  efficacite: 1.5
+  utilisation: 1.5
+
+two:
+  equipe: two
+  type: 
+  efficacite: 1.5
+  utilisation: 1.5

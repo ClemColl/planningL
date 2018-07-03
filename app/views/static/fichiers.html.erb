@@ -1,0 +1,9 @@
+<%= form_tag eff_util_path, { :multipart => true } do %>
+    <%= label_tag :efficacite, "Fichier d'efficacite" %>
+    <%= file_field_tag :efficacite %>
+
+    <%= label_tag :utilisation, "Fichier d'utilisation" %>
+    <%= file_field_tag :utilisation %>
+    
+    <%= submit_tag 'Traiter' %>
+<% end %>
