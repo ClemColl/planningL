@@ -10,7 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180608121427) do
+ActiveRecord::Schema.define(version: 20180703075413) do
+
+  create_table "analyses", force: :cascade do |t|
+    t.string "type"
+    t.float "efficacite"
+    t.float "utilisation"
+    t.integer "equipe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["equipe_id"], name: "index_analyses_on_equipe_id"
+  end
+
+  create_table "analyzes", force: :cascade do |t|
+    t.integer "equipe_id"
+    t.string "duree"
+    t.float "efficacite"
+    t.float "utilisation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["equipe_id"], name: "index_analyzes_on_equipe_id"
+  end
 
   create_table "backlogs", force: :cascade do |t|
     t.string "mfc"
@@ -25,6 +45,12 @@ ActiveRecord::Schema.define(version: 20180608121427) do
 
   create_table "calendars", force: :cascade do |t|
     t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "equipes", force: :cascade do |t|
+    t.string "re"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -64,6 +90,21 @@ ActiveRecord::Schema.define(version: 20180608121427) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "objectifs", force: :cascade do |t|
+    t.string "name"
+    t.float "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "personnes", force: :cascade do |t|
+    t.string "name"
+    t.integer "equipe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["equipe_id"], name: "index_personnes_on_equipe_id"
   end
 
   create_table "rapports", force: :cascade do |t|
