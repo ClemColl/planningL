@@ -10,6 +10,6 @@ class Machine < ApplicationRecord
     end
 
     def rapports_quarter
-        self.rapports.where(quart: (Date.today.month/3.0).ceil, created_at: (Date.today-4.months)..(Date.today+1.week))
+        self.rapports.where(quart: ((Date.today-1.week).month/3.0).ceil, created_at: (Date.today-4.months)..(Date.today+1.week))
     end
 end

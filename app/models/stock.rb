@@ -8,9 +8,9 @@ class Stock < ApplicationRecord
     end
 
     def setup_commas
-        self.smc.to_s.gsub!(',', '.')
-        self.rmc.to_s.gsub!(',', '.')
-        self.sma.to_s.gsub!(',', '.')
-        self.rma.to_s.gsub!(',', '.')
+        self.smc = self.smc.to_s.gsub(',', '.')
+        self.rmc = self.rmc.to_s.gsub(',', '.')
+        self.sma = self.sma.to_s.gsub(',', '.')
+        self.rma = self.rma.to_s.gsub(',', '.')
     end
 end

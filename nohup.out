@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 => Booting Puma
 => Rails 5.1.6 application starting in development 
 => Run `rails server -h` for more startup options
@@ -32051,3 +32052,5 @@ Processing by CalendarsController#index as HTML
 Completed 200 OK in 269ms (Views: 267.1ms | ActiveRecord: 0.2ms)
 
 
+=======
+>>>>>>> 640062544cc1f6ca7d3f9f15b268fbbc3484c222

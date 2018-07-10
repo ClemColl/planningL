@@ -3,8 +3,12 @@
 
   <div class="form-inputs">
     <%= f.input :week, label: "Numéro de semaine", input_html: { value: Date.today.cweek-1 } %>
+    
+    <%= f.input :mac, label: "Montant attendu à fin de mois courant" %>
     <%= f.input :mfc, label: "Montant facturation courante" %>
-    <%= f.input :mac, label: "Montant attendu à la fin de mois courant" %>
+    <%= f.input :mfcl, label: "Montant facturation courante - année précédente" %>
+    <%= f.input :ytd, label: "YTD année N" %>
+    <%= f.input :ytdl, label: "YTD année N-1" %>
     <%= f.input :mb, label: "Montant backlog en K€" %>
     <%= f.input :ob, label: "Objectif backlog en K€" %>
   </div>

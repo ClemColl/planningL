@@ -1,41 +1,102 @@
 json.array! @events do |event|
-  date_format = event.all_day_event? ? '%Y-%m-%d' : '%Y-%m-%dT%H:%M:%S'
+  fullcalendar_format = '%Y-%m-%dT%H:%M:%S'
+  date_format = '<b>%d</b>/<b>%m</b>'
   
-  date = event.properties["Date"]
-  piece = event.properties["Pièce"]
-  notes = event.properties["Notes"]
-
-
   json.id event.id
   json.title event.title
-  json.start event.start.strftime(date_format)
-  json.end event.end.strftime(date_format)
+  json.start event.start.strftime(fullcalendar_format)
+  json.end event.end.strftime(fullcalendar_format)
   json.color event.color unless event.color.blank?
 
   json.calendar_id event.calendar_id
   json.resourceId event.team_id
   json.event_type_id event.event_type_id
 
-  json.job event.properties["Métier"]
-  json.gamme event.properties["Gamme"]
-  json.size event.properties["Largeur chassis"]
+  if event.properties["Texte"].length > 10
+    json.texte "<b>#{event.properties["Texte"][0..9]}...</b>"
+  elsif event.properties["Texte"] != ""
+    json.texte "<b>#{event.properties["Texte"]}&#10240;</b>"
+  else
+    json.texte "&#10240;"
+  end
 
-  json.ato event.properties["ATO"]
-  json.lattes event.properties["Lattes"]
-  json.turbine event.properties["Turbine"]
-  json.em event.properties["EM"]
-  json.coda event.properties["CODA"]
-  json.caisson_aspi event.properties["Caisson Aspi"]
-  json.decoupeur event.properties["Découpeur"]
+  if event.event_type_id == 1
+    # Montage Vector Gros Cutter
+    json.gamme "#{event.properties["Métier"]}-#{event.properties["Gamme"]}-#{event.properties["Largeur chassis"]}"
 
-  # Si on a "X", "/", "AM" ou "" => On donne la valeur
-  # Sinon on formatte la date
-  # Si c'est vide, on annule tout
-  json.date date.to_date.strftime('%d/%m/%Y') unless date.blank?
-  json.piece piece
-  json.notes notes
+    json.pieces [
+      "ATO <b>#{event.properties["ATO"]}</b>",
+      "LAT <b>#{event.properties["Lattes"]}</b>",
+      "TURB <b>#{event.properties["Turbine"]}</b>",
+      "EM <b>#{event.properties["EM"]}</b>",
+      "CODA <b>#{event.properties["CODA"]}</b>"
+    ]
 
-  json.allDay event.all_day_event? ? true : false
+  elsif event.event_type_id == 2
+    # Test Vector Gros Cutter
+
+    json.gamme "#{event.properties["Métier"]}-#{event.properties["Gamme"]}-#{event.properties["Largeur chassis"]}-#{event.properties["ANT"]}"
+
+    json.pieces [
+      "CONV #{event.properties["Convoyeur"]&.to_date&.strftime(date_format)}",
+      "TÊTE #{event.properties["Tête"]&.to_date&.strftime(date_format)}",
+      "&#10240;",
+      "&#10240;",
+      "EXPE #{event.properties["Expe"]&.to_date&.strftime(date_format)}"
+    ]
+
+  elsif event.event_type_id == 3
+    # Montage Vector Petit Cutter
+
+    json.gamme "#{event.properties["Métier"]}-#{event.properties["Gamme"]}-#{event.properties["Largeur chassis"]}"
+
+    json.pieces [
+      "DEC <b>#{event.properties["Découpeur"]}</b>",
+      "LAT <b>#{event.properties["Lattes"]}</b>",
+      "ASPI <b>#{event.properties["Caisson Aspi"]}</b>",
+      "EM <b>#{event.properties["EM"]}</b>",
+      "CODA <b>#{event.properties["CODA"]}</b>"
+    ]
+
+  elsif event.event_type_id == 4
+    # Test Vector Petit Cutter
+
+    json.gamme "#{event.properties["Métier"]}-#{event.properties["Gamme"]}-#{event.properties["Largeur chassis"]}-#{event.properties["ANT"]}"
+
+    json.pieces [
+      "CONV #{event.properties["Convoyeur"]&.to_date&.strftime(date_format)}",
+      "TÊTE #{event.properties["Tête"]&.to_date&.strftime(date_format)}",
+      "ATO <b>#{event.properties["ATO"]}</b>",
+      "&#10240;",
+      "EXPE #{event.properties["Expe"]&.to_date&.strftime(date_format)}"
+    ]
+
+  elsif event.event_type_id == 5
+    # Versalis
+    json.gamme event.properties["Pièce"]
+
+    json.pieces [
+      "&#10240;",
+      "&#10240;",
+      "&#10240;",
+      "&#10240;",
+      "&#10240;"
+    ]
+
+  elsif event.event_type_id == 6
+    # Carte Classique
+    json.gamme ""
+
+    json.pieces [
+      "&#10240;",
+      "&#10240;",
+      "&#10240;",
+      "&#10240;",
+      "&#10240;"
+    ]
+    
+  end
+
   json.update_url event_path(event, method: :patch)
   json.edit_url edit_event_path(event)
 end

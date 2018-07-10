@@ -1,0 +1,4 @@
+<div style="margin-top:10px;">
+    <%= f.label 'Largeur chassis', class: 'control-label' %><br>
+    <%= f.select 'Largeur chassis', options_for_select(['71', '86', ''], @event.properties["Largeur chassis"]), class: "form-control string optional" %>
+</div>

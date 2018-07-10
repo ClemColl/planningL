@@ -19,7 +19,7 @@ class BacklogsController < ApplicationController
     @backlog = Backlog.new(backlog_params)
 
     if @backlog.save
-      redirect_to suivi_path, notice: 'Rapport enregistré avec succès.'
+      redirect_to suivi_path, notice: 'Rapport enregistré avec succés'
     else
       render :new
     end
@@ -44,6 +44,6 @@ class BacklogsController < ApplicationController
     end
 
     def backlog_params
-      params.require(:backlog).permit(:mfc, :mac, :mb, :ob, :quart, :week)
+      params.require(:backlog).permit(:mac, :mfc, :mfcl, :ytd, :ytdl, :mb, :ob, :quart, :week)
     end
 end

@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20180703075413) do
+=======
+ActiveRecord::Schema.define(version: 20180710123834) do
+>>>>>>> 640062544cc1f6ca7d3f9f15b268fbbc3484c222
 
   create_table "analyzes", force: :cascade do |t|
     t.integer "equipe_id"
@@ -31,6 +35,9 @@ ActiveRecord::Schema.define(version: 20180703075413) do
     t.string "week"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "mfcl"
+    t.string "ytd"
+    t.string "ytdl"
   end
 
   create_table "calendars", force: :cascade do |t|
@@ -59,6 +66,7 @@ ActiveRecord::Schema.define(version: 20180703075413) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "duree"
   end
 
   create_table "events", force: :cascade do |t|
@@ -72,6 +80,7 @@ ActiveRecord::Schema.define(version: 20180703075413) do
     t.integer "team_id"
     t.integer "event_type_id"
     t.text "properties"
+    t.float "duration"
     t.index ["calendar_id"], name: "index_events_on_calendar_id"
     t.index ["team_id"], name: "index_events_on_team_id"
   end
@@ -135,6 +144,7 @@ ActiveRecord::Schema.define(version: 20180703075413) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "calendar_id"
+    t.integer "user_count"
     t.index ["calendar_id"], name: "index_teams_on_calendar_id"
   end
 

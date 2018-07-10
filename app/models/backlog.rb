@@ -4,10 +4,15 @@ class Backlog < ApplicationRecord
     private
 
     def setup_commas
-        self.mfc.to_s.gsub!(',', '.')
-        self.mac.to_s.gsub!(',', '.')
-        self.mb.to_s.gsub!(',', '.')
-        self.ob.to_s.gsub!(',', '.')
+        self.mfc = self.mfc.to_s.gsub(',', '.')
+        self.mfcl = self.mfcl.to_s.gsub(',', '.')
+        self.mac = self.mac.to_s.gsub(',', '.')
+
+        self.ytd = self.ytd.to_s.gsub(',', '.')
+        self.ytdl = self.ytdl.to_s.gsub(',', '.')
+
+        self.mb = self.mb.to_s.gsub(',', '.')
+        self.ob = self.ob.to_s.gsub(',', '.')
     end
 
     def set_quart

@@ -24,7 +24,7 @@ class StocksController < ApplicationController
     @stock = Stock.new(stock_params)
 
     if @stock.save
-      redirect_to suivi_path, notice: 'Stock was successfully created.'
+      redirect_to suivi_path, notice: 'Rapport enregistré avec succés.'
     else
       render :new
     end
