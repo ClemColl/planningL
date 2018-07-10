@@ -12,16 +12,6 @@
 
 ActiveRecord::Schema.define(version: 20180703075413) do
 
-  create_table "analyses", force: :cascade do |t|
-    t.string "type"
-    t.float "efficacite"
-    t.float "utilisation"
-    t.integer "equipe_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["equipe_id"], name: "index_analyses_on_equipe_id"
-  end
-
   create_table "analyzes", force: :cascade do |t|
     t.integer "equipe_id"
     t.string "duree"
