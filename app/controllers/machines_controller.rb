@@ -42,7 +42,7 @@ class MachinesController < ApplicationController
   # DELETE /machines/1
   def destroy
     @machine.destroy
-    redirect_to machines_url, notice: 'Machine was successfully destroyed.'
+    redirect_to suivi_path, notice: 'Machine supprimée avec succés'
   end
 
   private

@@ -4,6 +4,6 @@ class Objectif < ApplicationRecord
     private
 
     def setup_commas
-        self.value.to_s.gsub!(',', '.')
+        self.value = self.value.to_s.gsub(',', '.')
     end
 end

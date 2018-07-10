@@ -9,17 +9,29 @@ module ApplicationHelper
     link_to(name, '#', class: " add_fields btn btn-default", data: {id: id, fields: fields.gsub("\n", "")})
   end
 
-  def backlog_chart(isHidden, nb_semaine)
-    backlog = Backlog.where(quart: (Date.today.month / 3.0).ceil, created_at: (Date.today-4.months)..(Date.today+1.week))
-    backlog_mfc = []
+  def backlog_charts(isHidden, nb_semaine)
+    backlog = Backlog.where(quart: ((Date.today-1.week).month / 3.0).ceil, created_at: (Date.today-4.months)..(Date.today+1.week))
     backlog_mac = []
+    backlog_mfc = []
+    backlog_mfcl = []
+
+    backlog_ytd = []
+    backlog_ytdl = []
+    backlog_ratio =[]
+
     backlog_mb = []
     backlog_ob = []
     
     nb_semaine.times do |x|
       if backlog[x]
-        backlog_mfc << backlog[x].mfc
         backlog_mac << backlog[x].mac
+        backlog_mfc << backlog[x].mfc
+        backlog_mfcl << backlog[x].mfcl
+
+        backlog_ytd << backlog[x].ytd
+        backlog_ytdl << backlog[x].ytdl
+        backlog_ratio << ((backlog[x].ytd.to_f - backlog[x].ytdl.to_f) / backlog[x].ytdl.to_f)
+
         backlog_mb << backlog[x].mb
         backlog_ob << backlog[x].ob
       end
@@ -30,46 +42,54 @@ module ApplicationHelper
     else
       visible = ""
     end
-
+    #Backlog
     "<script>
     var ctx = document.getElementById('backlog').getContext('2d');
     var backlog = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: [#{@range}],
-        datasets: [{
-            label: 'Montant facturation courante',
-            yAxisID: 'A',
-            data: [#{backlog_mfc.join(", ")}],
-            borderColor: '#EB7D3C',
-            backgroundColor: '#EB7D3C'
+        datasets: [
+        {
+          label: 'Montant attendu à fin de mois courant',
+          yAxisID: 'A',
+          type: 'line',
+          data: [#{backlog_mac.join(", ")}],
+          borderColor: '#4674C1',
+          backgroundColor: '#4674C1',
+          fill: false
         },
         {
-            label: 'Montant attendu à la fin de mois courant',
-            yAxisID: 'A',
-            type: 'line',
-            data: [#{backlog_mac.join(", ")}],
-            borderColor: '#4674C1',
-            backgroundColor: '#4674C1',
-            fill: false
+          label: 'Montant facturation courante',
+          yAxisID: 'A',
+          data: [#{backlog_mfc.join(", ")}],
+          borderColor: '#EB7D3C',
+          backgroundColor: '#EB7D3C'
         },
         {
-            label: 'Montant backlog en K€',
-            yAxisID: 'B',
-            type: 'line',
-            data: [#{backlog_mb.join(", ")}],
-            borderColor: 'black',
-            backgroundColor: 'black',
-            fill: false        
+          label: 'Montant facturation courante - année précédente',
+          yAxisID: 'A',
+          data: [#{backlog_mfcl.join(", ")}],
+          borderColor: '#FDBF2D',
+          backgroundColor: '#FDBF2D'
         },
         {
-            label: 'Objectif backlog en K€',
-            yAxisID: 'B',
-            type: 'line',
-            data: [#{backlog_ob.join(", ")}],
-            borderColor: '#A5A5A5',
-            backgroundColor: '#A5A5A5',
-            fill: false
+          label: 'Montant backlog en K€',
+          yAxisID: 'B',
+          type: 'line',
+          data: [#{backlog_mb.join(", ")}],
+          borderColor: 'black',
+          backgroundColor: 'black',
+          fill: false        
+        },
+        {
+          label: 'Objectif backlog en K€',
+          yAxisID: 'B',
+          type: 'line',
+          data: [#{backlog_ob.join(", ")}],
+          borderColor: '#A5A5A5',
+          backgroundColor: '#A5A5A5',
+          fill: false
         }]
     },
     options: {
@@ -98,13 +118,79 @@ module ApplicationHelper
             xAxes: [{ barThickness: 5, gridLines: { offsetGridLines: true, display: false }}],
             },
         elements: { line: { tension: 0 }, point: { radius: 0 }},
-        title: { display: true, text: 'PDet + Conso', fontSize: 30 }}});
+        title: { display: true, text: 'Consommables et pièces', fontSize: 30 }}});
     #{visible}
     </script>".html_safe
+    
+
+    #YTD
+    "<script>
+    var htx = document.getElementById('ytd').getContext('2d');
+    var ytd = new Chart(htx, {
+    type: 'line',
+    data: {
+        labels: [#{@range}],
+        datasets: [{
+            label: 'Year-to-date N',
+            yAxisID: 'A',
+            data: [#{backlog_ytd.join(", ")}],
+            borderColor: '#EB7D3C',
+            backgroundColor: '#EB7D3C',
+            fill: false
+        },
+        {
+            label: 'Year-to-date N-1',
+            yAxisID: 'A',
+            data: [#{backlog_ytdl.join(", ")}],
+            borderColor: '#4674C1',
+            backgroundColor: '#4674C1',
+            fill: false
+        },
+        {
+            label: 'Rapport (%)',
+            yAxisID: 'B',
+            data: [#{backlog_mb.join(", ")}],
+            borderColor: 'black',
+            backgroundColor: 'black',
+            fill: false        
+        }]
+    },
+    options: {
+        scaleShowVerticalLines: false,
+        spanGaps: true,
+        animation: { duration: 0 },
+        responsive: false,
+        maintainAspectRatio: false,
+        onAnimationComplete: setTimeout( function() {
+            var dataURL = ytd.toBase64Image();
+            $('#ytd_base64').val(dataURL);
+            },1000),
+        scales: {
+            yAxes: [{
+                id: 'A',
+                type: 'linear',
+                position: 'left',
+                scaleLabel: { display: true, labelString: 'Facturation' },
+                ticks: { min: 0 }
+                },
+                {
+                id: 'B',
+                type: 'linear',
+                position: 'right',
+                scaleLabel: { display: true, labelString: 'Backlog' },
+                ticks: { beginAtZero: true, stepSize: 10, max: 100, min: 0}
+                }],
+             xAxes: [{ barThickness: 5, gridLines: { offsetGridLines: true, display: false }}],
+            },
+        elements: { line: { tension: 0 }, point: { radius: 0 }},
+        title: { display: true, text: 'Year-To-Date', fontSize: 30 }}});
+    #{visible}
+    </script>".html_safe
+
   end
 
   def stock_chart(isHidden, nb_semaine)
-    stock = Stock.where(quart: (Date.today.month / 3.0).ceil, created_at: (Date.today-4.months)..(Date.today+1.week))
+    stock = Stock.where(quart: ((Date.today-1.week).month / 3.0).ceil, created_at: (Date.today-4.months)..(Date.today+1.week))
     stock_smc = []
     stock_rmc = []
     stock_sma = []

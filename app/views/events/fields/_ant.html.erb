@@ -1,0 +1,4 @@
+<div style="display:inline-block;margin-right:10px;margin-bottom:20px;width:20%;">
+    <%= f.label field.name, label: 'Type de besoin', class: 'control-label' %><br>
+    <%= f.select field.name, options_for_select(['ATO', 'ANT', 'GNX', 'RESA', 'CDE', ''], @event.properties[field.name] ), class: "form-control string optional" %>
+</div>

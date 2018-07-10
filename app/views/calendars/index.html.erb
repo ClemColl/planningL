@@ -22,5 +22,9 @@
     <% end %>
   </div>
   
-  <%= link_to 'Nouvelle Ligne', new_calendar_path, class: "machineNew" %>
+  <div>
+    <%= link_to 'Nouvelle Ligne', new_calendar_path, class: "btn btn-default machineNew" %>
+    <br>
+    <%= link_to 'Modifier le temps des cartes', event_types_path, class: "btn btn-default machineNew" %>
+  </div>
 </div>

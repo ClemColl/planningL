@@ -1,0 +1,8 @@
+<div class="form-row" style="margin-top:10px;">
+    <%= f.label 'Gamme' %>
+    <br>
+    <div class="col-7">
+    
+    <%= f.select 'Gamme', grouped_options_for_select([['Vector Gros Cutter', ['iQ50', 'iQ80', 'iX6', 'iX9', '']]], @event.properties["Gamme"]), value: 'IX9', class: "form-control" %>
+    </div>
+</div>

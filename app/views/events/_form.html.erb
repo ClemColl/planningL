@@ -1,45 +1,52 @@
 
 <%= simple_form_for(@event, remote: true) do |f| %>
-          <div class="form-inputs">
+  <div class="form-inputs">
 
-            <%= f.hidden_field :calendar_id, value: $calendar_id %>
-            <% if params[:team_id] %>
-                <%= f.hidden_field :team_id, value: params[:team_id] %>
-            <% else %>
-                <%= f.hidden_field :team_id %>
-            <% end %>
-            
-            <% if params[:start] %>
-                <%= f.hidden_field :start, value: params[:start] %>
-            <% else %>
-                <%= f.hidden_field :start %>
-            <% end %>
-            <%= f.input :title, label: 'N° Machine' %>
-          </div>
-          
-          <div class="special-forms">
-            <%= f.input_field :event_type_id, as: :hidden %>
-            <%= f.fields_for :properties, OpenStruct.new(@event.properties) do |builder| %>
-                <% @event.event_type.fields.each do |field| %>
-                  <%= render "events/fields/#{field.field_type}", field: field, f: builder %>
-                <% end %>
-            <% end %>
-          </div>
+    <%= f.hidden_field :calendar_id, value: $calendar_id %>
+    <% if params[:team_id] %>
+        <%= f.hidden_field :team_id, value: params[:team_id] %>
+    <% else %>
+        <%= f.hidden_field :team_id %>
+    <% end %>
+    
+    <% if params[:start] %>
+        <%= f.hidden_field :start, value: params[:start] %>
+    <% else %>
+        <%= f.hidden_field :start %>
+    <% end %>
 
-        
-          <div class="form-actions">
-              <% if action_name == 'newish' %>
-                <%= f.button :submit, "Ajouter" %>
-              <% elsif action_name == 'edit' %>
-                <%= f.button :submit, "Modifier" %>
-              <% end %>
-          
-            <%= link_to 'Supprimer', 
-                      event, 
-                      method: :delete, 
-                      class: 'btn btn-danger', 
-                      data: { confirm: 'Êtes vous sûr?' }, 
-                      remote: true unless @event.new_record? %>
-            </div>
-          <%#= f.input :color, label: 'Etat', as: :select, collection: [['Vert','#4caf50'], ['Orange','#F05408'], ['Rouge','#f44336']] %><%# ['Congé','#999'] %>
+    <% if params.key?(:event_type_id) && params[:event_type_id].to_i < 6 || @event.event_type_id < 6 %>
+      <% label = "N° Machine" %>
+    <% else %>
+      <% label = "Titre" %>
+    <% end %>
+
+    <%= f.input :title, label: label %>
+
+  </div>
+  
+  <div class="special-forms">
+    <%= f.input_field :event_type_id, as: :hidden %>
+    <%= f.fields_for :properties, OpenStruct.new(@event.properties) do |builder| %>
+        <% @event.event_type.fields.each do |field| %>
+          <%= render "events/fields/#{field.field_type}", field: field, f: builder %>
+        <% end %>
+    <% end %>
+  </div>
+
+
+  <div class="form-actions">
+      <% if action_name == 'newish' %>
+        <%= f.button :submit, "Ajouter" %>
+      <% elsif action_name == 'edit' %>
+        <%= f.button :submit, "Modifier" %>
       <% end %>
+  
+    <%= link_to 'Supprimer', 
+              event, 
+              method: :delete, 
+              class: 'btn btn-danger', 
+              data: { confirm: 'Êtes vous sûr?' }, 
+              remote: true unless @event.new_record? %>
+    </div>
+<% end %>

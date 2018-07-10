@@ -28,7 +28,6 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.save
-          @team.users.create([{name: 'Non assigné'}, {name: 'Non assigné'}])
         format.html { redirect_to calendar_path($calendar_id) }
         format.json { render :show, status: :created, location: @team }
       else
@@ -47,7 +46,7 @@ class TeamsController < ApplicationController
         format.json { respond_with_bip(@team) }
       else
         format.html { render :edit }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
+        format.json { respond_with_bip(@team) }
       end
     end
   end
@@ -57,7 +56,7 @@ class TeamsController < ApplicationController
   def destroy
     @team.destroy
     respond_to do |format|
-      format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
+      format.html { redirect_to calendar_path($calendar_id) }
       format.json { head :no_content }
     end
   end
@@ -70,6 +69,6 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:user_id, :name, :event_id, :calendar_id, :user_ids)
+      params.require(:team).permit(:user_id, :name, :event_id, :user_count, :calendar_id, :user_ids)
     end
 end

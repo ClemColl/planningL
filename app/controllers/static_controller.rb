@@ -1,5 +1,5 @@
 class StaticController < ApplicationController
-  def home
+  def dashboard
   end
 
   def suivi
@@ -33,6 +33,7 @@ class StaticController < ApplicationController
         
         @stock = params["stock_base64".to_sym]
         @backlog = params["backlog_base64".to_sym]
+        @ytd = params["ytd_base64".to_sym]
 
         render :pdf => "suivi_activité", :layout => 'pdf.html'
       }

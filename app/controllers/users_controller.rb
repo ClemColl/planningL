@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       respond_with_bip(@user)
     else
-      render json: @user.errors, status: :unprocessable_entity
+      respond_with_bip(@user)
     end
   end
 

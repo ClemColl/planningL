@@ -5,9 +5,15 @@
 <div class="row" style="margin-top:50px;">
     <div class="col-md-4">
         <% @machines.each do |m| %>
-            <%= link_to "#{m.name} - #{m.last_week}", new_machine_rapport_path(m.id), class:"col-4 btn btn-default btn-block" %>
+            <div class="btn-group", style="width:100%;">
+                <%= link_to "#{m.name} - #{m.last_week}", new_machine_rapport_path(m.id), class:"btn btn-default", style: "width:90%;" %>
+                <%#= link_to "Edit", machine_path(m), class:"btn btn-default", method: :delete, confirm: "Êtes vous sûr?", style:"width:10%;"%>
+                <%= link_to "X", machine_path(m), class:"btn btn-danger", method: :delete, confirm: "Êtes vous sûr?", style:"width:10%;"%>
+            </div>
         <% end %>
+            
             <%= link_to "Nouvelle machine", new_machine_path, class:"col-4 btn btn-info btn-block" %>
+            
     </div>
 
     <div class="col-md-4">
@@ -15,7 +21,7 @@
     </div>
 
     <div class="col-md-4">
-        <%= link_to "PDet + Conso - #{@backlog_last_week}", new_backlog_path, class:"btn btn-default btn-block" %>
+        <%= link_to "Consommables et pièces - #{@backlog_last_week}", new_backlog_path, class:"btn btn-default btn-block" %>
     </div>
 
 </div>
@@ -33,8 +39,10 @@
 
     <canvas id="stock"></canvas>
     <canvas id='backlog'></canvas>
+    <canvas id='ytd'></canvas>
     <%= hidden_field_tag "stock_base64".to_sym %>
     <%= hidden_field_tag "backlog_base64".to_sym %>
+    <%= hidden_field_tag "ytd_base64".to_sym %>
 
     <% @machines.each do |m| %>
         <canvas id="<%= m.underscore_id %>"></canvas>
@@ -163,12 +171,13 @@
         <% end %>
 
     <% end %>
+    
 <% end %>
 
 
 <%= stock_chart true, @nb_semaine %>
 
-<%= backlog_chart true, @nb_semaine %>
+<%= backlog_charts true, @nb_semaine %>
 
 <script>
     setTimeout(() => {

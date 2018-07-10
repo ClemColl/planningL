@@ -2,7 +2,10 @@ class Event < ApplicationRecord
   belongs_to :calendar
   belongs_to :team
   belongs_to :event_type
-  before_save :setup_time, if: :new_record?
+
+  before_save :setup_end, if: :new_record?
+  before_save :update_time
+
   before_save :set_color
 
   serialize :properties, Hash
@@ -10,53 +13,92 @@ class Event < ApplicationRecord
   attr_accessor :date_range
 
   def all_day_event?
-    # self.start == self.start.midnight && self.end == self.end.midnight ? true : false
-  end
-
-  def is_conge?
-    # Si le title ressemble à congé, event.color = gris
-    if self.title == "Congé" || self.title == "Conge" || self.title == "congé" || self.title == "conge" || self.title == "Absent" || self.title == "absent"
-      self.color = "#999"
-    end
   end
 
   private
+  
+  # ON NEW RECORD
+  def setup_end
+    self.end = self.start + self.event_type.duree.gsub(',', '.').to_f.days - 1.minute
 
-  def setup_time
-    nombre_jour = {#"Carte Classique" => 2,
-            "Montage Vector Gros Cutter" => 2.5,
-            "Test Vector Gros Cutter" => 4,
-            "Montage Vector Petit Cutter" => 2,
-            "Test Vector Petit Cutter" => 2,
-            "Versalis" => 2}
+    if self.properties['Gamme'] == "iXEML"
+      self.end = self.end + 2.days
+    end
+  end
+  
+  def update_time
+    days_off = check_for_weekends
+    self.duration = (self.end - self.start) / 1.day - days_off.days
 
-    name = EventType.find(self.event_type_id).name
+    self.end = self.start.to_date + self.duration.days + days_off.days
+  end
 
-    self.end = self.start + (nombre_jour[name]).days
+  def check_for_weekends
+    jours = self.start.to_date..self.end.to_date
+    weekend_days = 0
+
+    jours.each do |j|
+      if j.saturday? && j.sunday?
+        weekend_days += 2
+      elsif j.saturday?
+        weekend_days += 2
+      else
+        weekend_days = 0
+      end
+    end
+    
+    return weekend_days
   end
 
   def set_color
-    colors = {'IQ50-71' => '#ffd200',     # Jaune
-              'IQ80-71' => '#ffd200',    
-              'IQ50-86' => '#fc4a1a',     # Orange
-              'IQ80-86' => '#fc4a1a',     
-              'IX6-71' => '#f953c6',      # Rose
-              'IX9-71' => '#f953c6',      
-              'IX6-86' => '#56ab2f',      # Vert
-              'IX9-86' => '#56ab2f',    
-              'Q25' => '#1565c0',         # Bleu
-              'IX' => '#1565c0' }         
-    gamme = self.properties["Gamme"]
-
-    actual_color = "#{gamme}"
-
-    if self.properties["Largeur chassis"] && self.properties["Largeur chassis"] != ''
+    colors = {
+      jaune: '#ffd200',
+      orange: '#fc4a1a',
+      rose: '#f953c6',
+      vert: '#56ab2f',
+      bleu: '#1565c0',
+      bleu_clair: '#00bfff',
+      gris: '#a9a9a9'
+    }
+    if self.properties["Gamme"] && self.properties["Largeur chassis"]
+      gamme = self.properties["Gamme"]
       largeur = self.properties["Largeur chassis"]
-      actual_color = "#{gamme}-#{largeur}"
-    end
-    
 
-    self.color = colors[actual_color]
+      if largeur == "71"
+
+          if gamme == "iQ50" || gamme == "iQ80"
+            self.color = colors[:jaune]
+          elsif gamme == "iX6" || gamme == "iX9"
+            self.color = colors[:rose]
+          else
+            self.color = colors[:gris]
+          end
+
+      elsif largeur == "86"
+
+          if gamme == "iQ50" || gamme == "iQ80"
+            self.color = colors[:orange]
+          elsif gamme == "iX6" || gamme == "iX9"
+            self.color = colors[:vert]
+          end
+
+      elsif gamme == "Q25" || gamme == "iX"
+
+          self.color = colors[:bleu]
+
+      elsif gamme == "iXEML"
+
+          self.color = colors[:bleu_clair]
+
+      else
+
+          self.color = colors[:gris]
+
+      end
+    else
+      self.color = colors[:gris]
+    end
+
   end
 
 end

@@ -15,6 +15,7 @@
 /tmp
 
 # Ignore Byebug command history file.
+.nohup.out
 .byebug_history
 
 # Ignore application configuration

@@ -34,7 +34,7 @@ b {
 }
 
 .fc-event {
-    height:50px;
+    height:55px;
 }
 
 .before-date {
@@ -58,13 +58,13 @@ b {
 
 .card-se {
     width: 40%;
-    padding-left: 5%;
+    padding-left: 5px;
 	display: inline-block;
-
 }
 
 .card-se2 {
-	width: 40%;
+    width: 40%;
+    margin-left:5px;
 	display: inline-block;
 }
 

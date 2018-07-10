@@ -20,7 +20,7 @@ class RapportsController < ApplicationController
     @rapport = Rapport.new(rapport_params)
 
     if @rapport.save
-      redirect_to suivi_path, notice: 'Rapport enregistré avec succés.'
+      redirect_to suivi_path, notice: 'Rapport enregistré avec succés'
     else
       render :new
     end
