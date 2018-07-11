@@ -12,10 +12,14 @@ json.array! @events do |event|
   json.resourceId event.team_id
   json.event_type_id event.event_type_id
 
-  if event.properties["Texte"].length > 10
-    json.texte "<b>#{event.properties["Texte"][0..9]}...</b>"
-  elsif event.properties["Texte"] != ""
-    json.texte "<b>#{event.properties["Texte"]}&#10240;</b>"
+  if event.properties["Texte"]
+    if event.properties["Texte"].length > 10
+      json.texte "<b>#{event.properties["Texte"][0..9]}...</b>"
+    elsif event.properties["Texte"] != ""
+      json.texte "<b>#{event.properties["Texte"]}&#10240;</b>"
+    else
+      json.texte "&#10240;"
+    end
   else
     json.texte "&#10240;"
   end

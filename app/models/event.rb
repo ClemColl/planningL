@@ -4,7 +4,7 @@ class Event < ApplicationRecord
   belongs_to :event_type
 
   before_save :setup_end, if: :new_record?
-  before_save :update_time
+  #before_save :update_time
 
   before_save :set_color
 

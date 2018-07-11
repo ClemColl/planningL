@@ -30,7 +30,7 @@ module ApplicationHelper
 
         backlog_ytd << backlog[x].ytd
         backlog_ytdl << backlog[x].ytdl
-        backlog_ratio << ((backlog[x].ytd.to_f - backlog[x].ytdl.to_f) / backlog[x].ytdl.to_f)
+        backlog_ratio << ((backlog[x].ytd.to_f - backlog[x].ytdl.to_f) / backlog[x].ytdl.to_f) * 100
 
         backlog_mb << backlog[x].mb
         backlog_ob << backlog[x].ob
@@ -46,85 +46,84 @@ module ApplicationHelper
     "<script>
     var ctx = document.getElementById('backlog').getContext('2d');
     var backlog = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: [#{@range}],
-        datasets: [
-        {
-          label: 'Montant attendu à fin de mois courant',
-          yAxisID: 'A',
-          type: 'line',
-          data: [#{backlog_mac.join(", ")}],
-          borderColor: '#4674C1',
-          backgroundColor: '#4674C1',
-          fill: false
-        },
-        {
-          label: 'Montant facturation courante',
-          yAxisID: 'A',
-          data: [#{backlog_mfc.join(", ")}],
-          borderColor: '#EB7D3C',
-          backgroundColor: '#EB7D3C'
-        },
-        {
-          label: 'Montant facturation courante - année précédente',
-          yAxisID: 'A',
-          data: [#{backlog_mfcl.join(", ")}],
-          borderColor: '#FDBF2D',
-          backgroundColor: '#FDBF2D'
-        },
-        {
-          label: 'Montant backlog en K€',
-          yAxisID: 'B',
-          type: 'line',
-          data: [#{backlog_mb.join(", ")}],
-          borderColor: 'black',
-          backgroundColor: 'black',
-          fill: false        
-        },
-        {
-          label: 'Objectif backlog en K€',
-          yAxisID: 'B',
-          type: 'line',
-          data: [#{backlog_ob.join(", ")}],
-          borderColor: '#A5A5A5',
-          backgroundColor: '#A5A5A5',
-          fill: false
-        }]
-    },
-    options: {
-        scaleShowVerticalLines: false,
-        spanGaps: true,
-        animation: { duration: 0 },
-        responsive: false,
-        maintainAspectRatio: false,
-        onAnimationComplete: setTimeout( function() {
-            var dataURL = backlog.toBase64Image();
-            $('#backlog_base64').val(dataURL);
-            },1000),
-        scales: {
-            yAxes: [{
-                id: 'A',
-                type: 'linear',
-                position: 'left',
-                scaleLabel: { display: true, labelString: 'Facturation' },
-                ticks: { max: 5, min: 0 }
-            }, {
-                id: 'B',
-                type: 'linear',
-                position: 'right',
-                scaleLabel: { display: true, labelString: 'Backlog' },
-                ticks: { beginAtZero: true, stepSize: 25}}],
-            xAxes: [{ barThickness: 5, gridLines: { offsetGridLines: true, display: false }}],
+        type: 'bar',
+        data: {
+            labels: [#{@range}],
+            datasets: [
+            {
+            label: 'Montant attendu à fin de mois courant',
+            yAxisID: 'A',
+            type: 'line',
+            data: [#{backlog_mac.join(", ")}],
+            borderColor: '#4674C1',
+            backgroundColor: '#4674C1',
+            fill: false
             },
-        elements: { line: { tension: 0 }, point: { radius: 0 }},
-        title: { display: true, text: 'Consommables et pièces', fontSize: 30 }}});
+            {
+            label: 'Montant facturation courante',
+            yAxisID: 'A',
+            data: [#{backlog_mfc.join(", ")}],
+            borderColor: '#EB7D3C',
+            backgroundColor: '#EB7D3C'
+            },
+            {
+            label: 'Montant facturation courante - année précédente',
+            yAxisID: 'A',
+            data: [#{backlog_mfcl.join(", ")}],
+            borderColor: '#FDBF2D',
+            backgroundColor: '#FDBF2D'
+            },
+            {
+            label: 'Montant backlog en K€',
+            yAxisID: 'B',
+            type: 'line',
+            data: [#{backlog_mb.join(", ")}],
+            borderColor: 'black',
+            backgroundColor: 'black',
+            fill: false        
+            },
+            {
+            label: 'Objectif backlog en K€',
+            yAxisID: 'B',
+            type: 'line',
+            data: [#{backlog_ob.join(", ")}],
+            borderColor: '#A5A5A5',
+            backgroundColor: '#A5A5A5',
+            fill: false
+            }]
+        },
+        options: {
+            scaleShowVerticalLines: false,
+            spanGaps: true,
+            animation: { duration: 0 },
+            responsive: false,
+            maintainAspectRatio: false,
+            onAnimationComplete: setTimeout( function() {
+                var dataURL = backlog.toBase64Image();
+                $('#backlog_base64').val(dataURL);
+                },1000),
+            scales: {
+                yAxes: [{
+                    id: 'A',
+                    type: 'linear',
+                    position: 'left',
+                    scaleLabel: { display: true, labelString: 'Facturation' },
+                    ticks: { max: 5, min: 0 }
+                }, {
+                    id: 'B',
+                    type: 'linear',
+                    position: 'right',
+                    scaleLabel: { display: true, labelString: 'Backlog' },
+                    ticks: { beginAtZero: true, stepSize: 20}}],
+                xAxes: [{ barThickness: 5, gridLines: { offsetGridLines: true, display: false }}],
+                },
+            elements: { line: { tension: 0 }, point: { radius: 0 }},
+            title: { display: true, text: 'Consommables et pièces', fontSize: 30 }
+            }
+        });
     #{visible}
-    </script>".html_safe
-    
-
-    #YTD
-    "<script>
+    </script>
+    <script>
     var htx = document.getElementById('ytd').getContext('2d');
     var ytd = new Chart(htx, {
     type: 'line',
@@ -147,11 +146,14 @@ module ApplicationHelper
             fill: false
         },
         {
-            label: 'Rapport (%)',
+            label: 'Tendance (%)',
             yAxisID: 'B',
-            data: [#{backlog_mb.join(", ")}],
+            data: [#{backlog_ratio.join(", ")}],
             borderColor: 'black',
             backgroundColor: 'black',
+            datalabels: {
+                display: true
+            },
             fill: false        
         }]
     },
@@ -171,14 +173,14 @@ module ApplicationHelper
                 type: 'linear',
                 position: 'left',
                 scaleLabel: { display: true, labelString: 'Facturation' },
-                ticks: { min: 0 }
+                ticks: { stepSize: 2 }
                 },
                 {
                 id: 'B',
                 type: 'linear',
                 position: 'right',
-                scaleLabel: { display: true, labelString: 'Backlog' },
-                ticks: { beginAtZero: true, stepSize: 10, max: 100, min: 0}
+                scaleLabel: { display: false, labelString: 'Backlog' },
+                ticks: {stepSize: 5}
                 }],
              xAxes: [{ barThickness: 5, gridLines: { offsetGridLines: true, display: false }}],
             },
