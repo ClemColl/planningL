@@ -7,94 +7,244 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
+---
+event_fields:
+  columns:
+  - id
+  - name
+  - field_type
+  - required
+  - event_type_id
+  - created_at
+  - updated_at
+  records: 
+  - - 1
+    - Métier
+    - texte
+    - false
+    - 1
+    - '2018-06-21 12:30:03.863226'
+    - '2018-06-21 12:30:03.863226'
+  - - 2
+    - Gamme
+    - gamme
+    - false
+    - 1
+    - '2018-06-21 12:30:03.865443'
+    - '2018-06-21 12:30:03.865443'
+  - - 3
+    - Largeur chassis
+    - largeur_chassis
+    - false
+    - 1
+    - '2018-06-21 12:30:03.867317'
+    - '2018-06-21 12:30:03.867317'
+  - - 4
+    - ATO
+    - sous_ensemble
+    - false
+    - 1
+    - '2018-06-21 12:30:03.869159'
+    - '2018-06-21 12:30:03.869159'
+  - - 5
+    - Lattes
+    - sous_ensemble
+    - false
+    - 1
+    - '2018-06-21 12:30:03.871104'
+    - '2018-06-21 12:30:03.871104'
+  - - 6
+    - Turbine
+    - sous_ensemble
+    - false
+    - 1
+    - '2018-06-21 12:30:03.873050'
+    - '2018-06-21 12:30:03.873050'
+  - - 7
+    - EM
+    - sous_ensemble
+    - false
+    - 1
+    - '2018-06-21 12:30:03.875524'
+    - '2018-06-21 12:30:03.875524'
+  - - 8
+    - CODA
+    - sous_ensemble
+    - false
+    - 1
+    - '2018-06-21 12:30:03.877502'
+    - '2018-06-21 12:30:03.877502'
+  - - 9
+    - Métier
+    - texte
+    - false
+    - 2
+    - '2018-06-21 12:30:03.879369'
+    - '2018-06-21 12:30:03.879369'
+  - - 10
+    - Gamme
+    - gamme
+    - false
+    - 2
+    - '2018-06-21 12:30:03.881181'
+    - '2018-06-21 12:30:03.881181'
+  - - 11
+    - Largeur chassis
+    - largeur_chassis
+    - false
+    - 2
+    - '2018-06-21 12:30:03.883006'
+    - '2018-06-21 12:30:03.883006'
+  - - 12
+    - Date
+    - date
+    - false
+    - 2
+    - '2018-06-21 12:30:03.884800'
+    - '2018-06-21 12:30:03.884800'
+  - - 13
+    - Pièce
+    - texte
+    - false
+    - 2
+    - '2018-06-21 12:30:03.886725'
+    - '2018-06-21 12:30:03.886725'
+  - - 14
+    - Notes
+    - texte
+    - false
+    - 2
+    - '2018-06-21 12:30:03.888543'
+    - '2018-06-21 12:30:03.888543'
+  - - 15
+    - Métier
+    - texte
+    - false
+    - 3
+    - '2018-06-21 12:30:03.890630'
+    - '2018-06-21 12:30:03.890630'
+  - - 16
+    - Gamme
+    - gamme
+    - false
+    - 3
+    - '2018-06-21 12:30:03.898112'
+    - '2018-06-21 12:30:03.898112'
+  - - 17
+    - Découpeur
+    - sous_ensemble
+    - false
+    - 3
+    - '2018-06-21 12:30:03.900569'
+    - '2018-06-21 12:30:03.900569'
+  - - 18
+    - Lattes
+    - sous_ensemble
+    - false
+    - 3
+    - '2018-06-21 12:30:03.902394'
+    - '2018-06-21 12:30:03.902394'
+  - - 19
+    - Caisson Aspi
+    - sous_ensemble
+    - false
+    - 3
+    - '2018-06-21 12:30:03.904181'
+    - '2018-06-21 12:30:03.904181'
+  - - 20
+    - EM
+    - sous_ensemble
+    - false
+    - 3
+    - '2018-06-21 12:30:03.905988'
+    - '2018-06-21 12:30:03.905988'
+  - - 21
+    - CODA
+    - sous_ensemble
+    - false
+    - 3
+    - '2018-06-21 12:30:03.907948'
+    - '2018-06-21 12:30:03.907948'
+  - - 22
+    - Métier
+    - texte
+    - false
+    - 4
+    - '2018-06-21 12:30:03.909756'
+    - '2018-06-21 12:30:03.909756'
+  - - 23
+    - Gamme
+    - gamme
+    - false
+    - 4
+    - '2018-06-21 12:30:03.911656'
+    - '2018-06-21 12:30:03.911656'
+  - - 24
+    - Date
+    - date
+    - false
+    - 4
+    - '2018-06-21 12:30:03.913614'
+    - '2018-06-21 12:30:03.913614'
+  - - 25
+    - Pièce
+    - texte
+    - false
+    - 4
+    - '2018-06-21 12:30:03.915491'
+    - '2018-06-21 12:30:03.915491'
+  - - 26
+    - Notes
+    - texte
+    - false
+    - 4
+    - '2018-06-21 12:30:03.917336'
+    - '2018-06-21 12:30:03.917336'
+  - - 27
+    - Pièce
+    - texte
+    - false
+    - 5
+    - '2018-06-21 12:30:03.919249'
+    - '2018-06-21 12:30:03.919249'
+  - - 28
+    - Notes
+    - texte
+    - false
+    - 5
+    - '2018-06-21 12:30:03.921869'
+    - '2018-06-21 12:30:03.921869'
 
-### PLANNING ###
-
-# puts "###TEMPLATE Création d'un calendrier"
-#     Calendar.create!(id: 1, title: "Vector")
-
-# puts "###TEMPLATE Création des Teams"
-#     Team.create!([
-#         {id: 1, name: "Îlot 1", calendar_id: 1},
-#         {id: 2, name: "Îlot 2", calendar_id: 1},
-#         {id: 3, name: "Îlot 3", calendar_id: 1},
-#         {id: 4, name: "Îlot 4", calendar_id: 1},
-#         {id: 5, name: "Îlot 5", calendar_id: 1}
-#     ])
-
-#     User.create!([
-#         {name: "Non Assigné", team_id: 1},
-#         {name: "Non Assigné", team_id: 1},
-#         {name: "Non Assigné", team_id: 2},
-#         {name: "Non Assigné", team_id: 2},
-#         {name: "Non Assigné", team_id: 3},
-#         {name: "Non Assigné", team_id: 3},
-#         {name: "Non Assigné", team_id: 4},
-#         {name: "Non Assigné", team_id: 4},
-#         {name: "Non Assigné", team_id: 5},
-#         {name: "Non Assigné", team_id: 5}
-#     ])
-
-# puts "###DATA Création de cartes type"
-#     EventType.create!([
-#         {id: 1, name: "Montage Vector Gros Cutter"},
-#         {id: 2, name: "Test Vector Gros Cutter"},
-#         {id: 3, name: "Montage Vector Petit Cutter"},
-#         {id: 4, name: "Test Vector Petit Cutter"},
-#         {id: 5, name: "Versalis"}
-#     ])
-
-#     EventField.create!([
-#         {name: "Métier", field_type: "texte", event_type_id: 1},
-#         {name: "Gamme", field_type: "gamme", event_type_id: 1},
-#         {name: "Largeur chassis", field_type: "largeur_chassis", event_type_id: 1},
-#         {name: "ATO", field_type: "sous_ensemble", event_type_id: 1},
-#         {name: "Lattes", field_type: "sous_ensemble", event_type_id: 1},
-#         {name: "Turbine", field_type: "sous_ensemble", event_type_id: 1},
-#         {name: "EM", field_type: "sous_ensemble", event_type_id: 1},
-#         {name: "CODA", field_type: "sous_ensemble", event_type_id: 1},
-
-#         {name: "Métier", field_type: "texte", event_type_id: 2},
-#         {name: "Gamme", field_type: "gamme", event_type_id: 2},
-#         {name: "Largeur chassis", field_type: "largeur_chassis", event_type_id: 2},
-#         {name: "Date", field_type: "date", event_type_id: 2},
-#         {name: "Pièce", field_type: "texte", event_type_id: 2},
-#         {name: "Notes", field_type: "texte", event_type_id: 2},
-
-#         {name: "Métier", field_type: "texte", event_type_id: 3},
-#         {name: "Gamme", field_type: "gamme", event_type_id: 3},
-#         {name: "Découpeur", field_type: "sous_ensemble", event_type_id: 3},
-#         {name: "Lattes", field_type: "sous_ensemble", event_type_id: 3},
-#         {name: "Caisson Aspi", field_type: "sous_ensemble", event_type_id: 3},
-#         {name: "EM", field_type: "sous_ensemble", event_type_id: 3},
-#         {name: "CODA", field_type: "sous_ensemble", event_type_id: 3},
-
-#         {name: "Métier", field_type: "texte", event_type_id: 4},
-#         {name: "Gamme", field_type: "gamme", event_type_id: 4},
-#         {name: "Date", field_type: "date", event_type_id: 4},
-#         {name: "Pièce", field_type: "texte", event_type_id: 4},
-#         {name: "Notes", field_type: "texte", event_type_id: 4},
-
-#         {name: "Pièce", field_type: "texte", event_type_id: 5},
-#         {name: "Notes", field_type: "texte", event_type_id: 5}
-#     ])
-
-# ### SUIVI D'ACTIVITÉ ###
-
-# puts "###DATA Création des machines pour suivi"
-#     Machine.create!([
-#         {id: 1, name: "Gros Vector"},
-#         {id: 2, name: "Petit Vector"},
-#         {id: 3, name: "Versalis"},
-#         {id: 4, name: "Focus Quantum"},
-#         {id: 5, name: "Virga"}
-#     ])
-
-Equipe.create!([
-    {id: 1, re: "J. Allain"},
-    {id: 2, re: "L. Arlot"},
-    {id: 3, re: "S. Bourreau"},
-    {id: 4, re: "N. Doriguzzi"},
-    {id: 5, re: "L. Dubois"},
-    {id: 6, re: "Production"}
-])
+---
+EventTypes.create!(
+    {
+     id: 1,
+     name: "Montage Vector Gros Cutter",
+     duree: 2
+    },
+    {
+     id: 2,
+     name: "Test Vector Gros Cutter",
+     duree: 2.5
+    },
+    {
+     id: 3,
+     name: "Montage Vector Petit Cutter",
+     duree: 2
+    },
+    {
+     id: 4,
+     name: "Test Vector Petit Cutter",
+     duree: 4
+    },
+    {
+     id: 5,
+     name: "Versalis",
+     duree: 2
+    },
+    {
+     id: 6,
+     name: "Carte Classique",
+     duree: 2
+    }
+)
