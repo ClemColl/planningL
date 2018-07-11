@@ -42,8 +42,8 @@ json.array! @events do |event|
     json.gamme "#{event.properties["Métier"]}-#{event.properties["Gamme"]}-#{event.properties["Largeur chassis"]}-#{event.properties["ANT"]}"
 
     json.pieces [
-      "CONV #{event.properties["Convoyeur"]&.to_date&.strftime(date_format)}",
-      "TÊTE #{event.properties["Tête"]&.to_date&.strftime(date_format)}",
+      "CONV <b>#{event.properties["Convoyeur"]}</b>",
+      "TÊTE <b>#{event.properties["Tête"]}</b>",
       "&#10240;",
       "&#10240;",
       "EXPE #{event.properties["Expe"]&.to_date&.strftime(date_format)}"
@@ -68,8 +68,8 @@ json.array! @events do |event|
     json.gamme "#{event.properties["Métier"]}-#{event.properties["Gamme"]}-#{event.properties["Largeur chassis"]}-#{event.properties["ANT"]}"
 
     json.pieces [
-      "CONV #{event.properties["Convoyeur"]&.to_date&.strftime(date_format)}",
-      "TÊTE #{event.properties["Tête"]&.to_date&.strftime(date_format)}",
+      "CONV <b>#{event.properties["Convoyeur"]}</b>",
+      "TÊTE <b>#{event.properties["Tête"]}</b>",
       "ATO <b>#{event.properties["ATO"]}</b>",
       "&#10240;",
       "EXPE #{event.properties["Expe"]&.to_date&.strftime(date_format)}"
@@ -80,7 +80,7 @@ json.array! @events do |event|
     json.gamme event.properties["Pièce"]
 
     json.pieces [
-      "#{event.properties["Description"]}",
+      "<b>#{event.properties["Description"]}</b>",
       "&#10240;",
       "&#10240;",
       "&#10240;",
@@ -92,7 +92,7 @@ json.array! @events do |event|
     json.gamme ""
 
     json.pieces [
-      "#{event.properties["Description"]}",
+      "<b>#{event.properties["Description"]}</b>",
       "&#10240;",
       "&#10240;",
       "&#10240;",

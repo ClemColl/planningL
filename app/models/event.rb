@@ -3,8 +3,7 @@ class Event < ApplicationRecord
   belongs_to :team
   belongs_to :event_type
 
-  before_save :setup_end, if: :new_record?
-  #before_save :update_time
+  before_save :first_setup, if: :new_record?
 
   before_save :set_color
 
@@ -18,32 +17,26 @@ class Event < ApplicationRecord
   private
   
   # ON NEW RECORD
-  def setup_end
-    self.end = self.start + self.event_type.duree.gsub(',', '.').to_f.days - 1.minute
+  def first_setup
+    self.end = self.start + self.event_type.duree.gsub(',', '.').to_f.days - 1.second
 
     if self.properties['Gamme'] == "iXEML"
       self.end = self.end + 2.days
     end
-  end
-  
-  def update_time
+
     days_off = check_for_weekends
-    self.duration = (self.end - self.start) / 1.day - days_off.days
 
-    self.end = self.start.to_date + self.duration.days + days_off.days
+    self.end = self.end + days_off.days
   end
 
+  # ANNEXE  
   def check_for_weekends
     jours = self.start.to_date..self.end.to_date
     weekend_days = 0
 
     jours.each do |j|
-      if j.saturday? && j.sunday?
+      if j.saturday?
         weekend_days += 2
-      elsif j.saturday?
-        weekend_days += 2
-      else
-        weekend_days = 0
       end
     end
     
