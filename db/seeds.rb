@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 
-EventType.create!(
+EventType.create!([
     {
      id: 1,
      name: "Montage Vector Gros Cutter",
@@ -36,4 +36,4 @@ EventType.create!(
      name: "Carte Classique",
      duree: 2
     }
-)
+])
