@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20180703075413) do
-=======
 ActiveRecord::Schema.define(version: 20180710123834) do
->>>>>>> 640062544cc1f6ca7d3f9f15b268fbbc3484c222
 
   create_table "analyzes", force: :cascade do |t|
     t.integer "equipe_id"
