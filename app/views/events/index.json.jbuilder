@@ -80,7 +80,7 @@ json.array! @events do |event|
     json.gamme event.properties["Pièce"]
 
     json.pieces [
-      "&#10240;",
+      "#{event.properties["Description"]}",
       "&#10240;",
       "&#10240;",
       "&#10240;",
@@ -92,7 +92,7 @@ json.array! @events do |event|
     json.gamme ""
 
     json.pieces [
-      "&#10240;",
+      "#{event.properties["Description"]}",
       "&#10240;",
       "&#10240;",
       "&#10240;",
