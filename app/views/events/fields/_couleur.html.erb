@@ -1,0 +1,4 @@
+<div>
+    <%= f.label field.name, class: 'control-label' %><br>
+    <%= f.select field.name, options_for_select([['Gris', "#A9A9A9"], ['Jaune', "#eae020"], ['Rouge', "#ff0000"], ['Violet', "#e100e1"]], @event.properties["Couleur"]), value: 'IX9', class: "form-control" %>
+</div>

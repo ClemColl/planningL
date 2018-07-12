@@ -1,5 +1,5 @@
 <fieldset class="modal-body">
-    <%= f.select :field_type, %w[texte duree gamme_GC gamme_PC largeur_chassis_GC largeur_chassis_PC sous_ensemble date ant] %>
+    <%= f.select :field_type, %w[texte duree gamme_GC gamme_PC largeur_chassis_GC largeur_chassis_PC couleur sous_ensemble date ant] %>
     <%= f.text_field :name, placeholder: "Nom du champ" %>
     <%= f.hidden_field :_destroy %>
     <%= link_to "Supprimer le champ", '#', class: "remove_fields btn btn-danger" %>

@@ -3,6 +3,6 @@
     <br>
     <div class="col-7">
     
-    <%= f.select 'Gamme', grouped_options_for_select([['Vector Petit Cutter', ['iX', 'Q25', 'iXEML', '']]], @event.properties["Gamme"]), value: 'IX9', class: "form-control" %>
+    <%= f.select 'Gamme', grouped_options_for_select([['Vector Petit Cutter', ['iX', 'Q25', 'iXEML', '']]], @event.properties[field.name]), value: 'IX9', class: "form-control" %>
     </div>
 </div>

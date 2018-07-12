@@ -44,52 +44,56 @@ class Event < ApplicationRecord
   end
 
   def set_color
-    colors = {
-      jaune: '#ffd200',
-      orange: '#fc4a1a',
-      rose: '#f953c6',
-      vert: '#56ab2f',
-      bleu: '#1565c0',
-      bleu_clair: '#00bfff',
-      gris: '#a9a9a9'
-    }
-    if self.properties["Gamme"] && self.properties["Largeur chassis"]
-      gamme = self.properties["Gamme"]
-      largeur = self.properties["Largeur chassis"]
+    if !self.properties["Couleur"]
+      colors = {
+        jaune: '#ffd200',
+        orange: '#fc4a1a',
+        rose: '#f953c6',
+        vert: '#56ab2f',
+        bleu: '#1565c0',
+        bleu_clair: '#00bfff',
+        gris: '#a9a9a9'
+      }
+      if self.properties["Gamme"] && self.properties["Largeur chassis"]
+        gamme = self.properties["Gamme"]
+        largeur = self.properties["Largeur chassis"]
 
-      if largeur == "71"
+        if largeur == "71"
 
-          if gamme == "iQ50" || gamme == "iQ80"
-            self.color = colors[:jaune]
-          elsif gamme == "iX6" || gamme == "iX9"
-            self.color = colors[:rose]
-          else
+            if gamme == "iQ50" || gamme == "iQ80"
+              self.color = colors[:jaune]
+            elsif gamme == "iX6" || gamme == "iX9"
+              self.color = colors[:rose]
+            else
+              self.color = colors[:gris]
+            end
+
+        elsif largeur == "86"
+
+            if gamme == "iQ50" || gamme == "iQ80"
+              self.color = colors[:orange]
+            elsif gamme == "iX6" || gamme == "iX9"
+              self.color = colors[:vert]
+            end
+
+        elsif gamme == "Q25" || gamme == "iX"
+
+            self.color = colors[:bleu]
+
+        elsif gamme == "iXEML"
+
+            self.color = colors[:bleu_clair]
+
+        else
+
             self.color = colors[:gris]
-          end
 
-      elsif largeur == "86"
-
-          if gamme == "iQ50" || gamme == "iQ80"
-            self.color = colors[:orange]
-          elsif gamme == "iX6" || gamme == "iX9"
-            self.color = colors[:vert]
-          end
-
-      elsif gamme == "Q25" || gamme == "iX"
-
-          self.color = colors[:bleu]
-
-      elsif gamme == "iXEML"
-
-          self.color = colors[:bleu_clair]
-
+        end
       else
-
-          self.color = colors[:gris]
-
+        self.color = colors[:gris]
       end
     else
-      self.color = colors[:gris]
+      self.color = self.properties["Couleur"]
     end
 
   end
