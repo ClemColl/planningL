@@ -37,10 +37,14 @@ module ApplicationHelper
       end
     end
 
+    visible = []
+    
     if isHidden == true
-      visible = "$('#backlog').css('visibility', 'hidden');"
+      visible[0] = "$('#backlog').css('visibility', 'hidden');"
+      visible[1] = "$('#ytd').css('visibility', 'hidden');"
     else
-      visible = ""
+      visible[0] = ""
+      visible[1] = ""
     end
     #Backlog
     "<script>
@@ -78,8 +82,8 @@ module ApplicationHelper
             yAxisID: 'B',
             type: 'line',
             data: [#{backlog_mb.join(", ")}],
-            borderColor: 'black',
-            backgroundColor: 'black',
+            borderColor: '#000000',
+            backgroundColor: '#000000',
             fill: false        
             },
             {
@@ -121,7 +125,7 @@ module ApplicationHelper
             title: { display: true, text: 'Consommables et pièces', fontSize: 30 }
             }
         });
-    #{visible}
+    #{visible[0]}
     </script>
     <script>
     var htx = document.getElementById('ytd').getContext('2d');
@@ -149,8 +153,8 @@ module ApplicationHelper
             label: 'Tendance (%)',
             yAxisID: 'B',
             data: [#{backlog_ratio.join(", ")}],
-            borderColor: 'black',
-            backgroundColor: 'black',
+            borderColor: '#000000',
+            backgroundColor: '#000000',
             datalabels: {
                 display: true
             },
@@ -186,7 +190,7 @@ module ApplicationHelper
             },
         elements: { line: { tension: 0 }, point: { radius: 0 }},
         title: { display: true, text: 'Year-To-Date', fontSize: 30 }}});
-    #{visible}
+    #{visible[1]}
     </script>".html_safe
 
   end
@@ -235,8 +239,8 @@ module ApplicationHelper
           label: 'Stock: Montant attendu',
           type: 'line',
           data: [#{stock_sma.join(", ")}],
-          borderColor: 'black',
-          backgroundColor: 'black',
+          borderColor: '#000000',
+          backgroundColor: '#000000',
           fill: false
         },
         {
