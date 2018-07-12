@@ -35,7 +35,7 @@ class StaticController < ApplicationController
         @backlog = params["backlog_base64".to_sym]
         @ytd = params["ytd_base64".to_sym]
 
-        render :pdf => "suivi_activité", :layout => 'pdf.html'
+        render :pdf => "Suivi_activité", :layout => 'pdf.html', disposition: "attachment"
       }
     end
   end
