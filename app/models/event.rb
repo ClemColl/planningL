@@ -50,7 +50,7 @@ class Event < ApplicationRecord
         orange: '#fc4a1a',
         rose: '#f953c6',
         vert: '#56ab2f',
-        bleu: '#1565c0',
+        bleu: '#197ae8',
         bleu_clair: '#00bfff',
         gris: '#a9a9a9'
       }

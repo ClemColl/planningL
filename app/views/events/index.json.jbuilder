@@ -46,7 +46,7 @@ json.array! @events do |event|
       "TÊTE <b>#{event.properties["Tête"]}</b>",
       "&#10240;",
       "&#10240;",
-      "EXPE #{event.properties["Expe"]&.to_date&.strftime(date_format)}"
+      "EXPE <b>#{event.properties["Expe"]}</b>"
     ]
 
   elsif event.event_type_id == 3
@@ -72,7 +72,7 @@ json.array! @events do |event|
       "TÊTE <b>#{event.properties["Tête"]}</b>",
       "ATO <b>#{event.properties["ATO"]}</b>",
       "&#10240;",
-      "EXPE #{event.properties["Expe"]&.to_date&.strftime(date_format)}"
+      "EXPE <b>#{event.properties["Expe"]}</b>"
     ]
 
   elsif event.event_type_id == 5
