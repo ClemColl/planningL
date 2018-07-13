@@ -121,7 +121,7 @@ module ApplicationHelper
                     ticks: { beginAtZero: true, stepSize: 20}}],
                 xAxes: [{ barThickness: 5, gridLines: { offsetGridLines: true, display: false }}],
                 },
-            elements: { line: { tension: 0 }, point: { radius: 0 }},
+            elements: { line: { tension: 0 }, point: { radius: 3 }},
             title: { display: true, text: 'Consommables et pièces', fontSize: 30 }
             }
         });
@@ -188,7 +188,7 @@ module ApplicationHelper
                 }],
              xAxes: [{ barThickness: 5, gridLines: { offsetGridLines: true, display: false }}],
             },
-        elements: { line: { tension: 0 }, point: { radius: 0 }},
+        elements: { line: { tension: 0 }, point: { radius: 3 }},
         title: { display: true, text: 'Year-To-Date', fontSize: 30 }}});
     #{visible[1]}
     </script>".html_safe
