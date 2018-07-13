@@ -19,6 +19,10 @@ class RapportsController < ApplicationController
   def create
     @rapport = Rapport.new(rapport_params)
 
+    if !Rapport.where(machine_id: @rapport.machine_id, week: @rapport.week).blank?
+      Rapport.where(machine_id: @rapport.machine_id, week: @rapport.week, created_at: (Date.today-6.months)..Date.today.end_of_day).take.delete
+    end
+
     if @rapport.save
       redirect_to suivi_path, notice: 'Rapport enregistré avec succés'
     else

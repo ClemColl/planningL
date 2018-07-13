@@ -1,35 +1,38 @@
 Rails.application.routes.draw do
-  
+  #Planning
 
-  get 'indicateurs/all'
+  get "event/newish" => "events#newish"
 
-  get 'indicateurs/production'
+  resources :calendars
+  resources :events, :event_types
+  resources :teams
+  resources :users
 
-  get 'indicateurs/suivi'
+  #Suivi d'activité
 
-  resources :analyses
-  resources :objectifs
-  resources :responsables
-  resources :backlogs
-  resources :stocks
+  get '/suivi' => "static#suivi"
+  match "/suivi" => "static#suivi", :via => :post, :defaults => { :format => 'pdf' }
+
   resources :machines do
     resources :rapports
   end
+  resources :backlogs
+  resources :stocks
 
-  get '/suivi' => "static#suivi"
+  #Indicateurs
 
-  get '/indicateurs' => 'static#indicateurs'
-  match "/suivi" => "static#suivi", :via => :post, :defaults => { :format => 'pdf' }
+  get 'indicateurs' => 'indicateurs#all'
 
-  resources :event_types
-  resources :teams
-  resources :users
-  resources :calendars
-  resources :events
+  get 'indicateurs/production/new' => 'indicateurs#fichiers'
+  match 'indicateurs/production/results' => "indicateurs#prod_results", :via => :post
+  
+  resources :equipes, :personnes
+    resources :responsables
 
-  get "event/newish" => "events#newish"
-  get '/fichiers' => 'static#fichiers'
-  match '/eff_util' => "static#eff_util", :via => :post
+  resources :analyses
+  resources :objectifs
+
   
   root 'calendars#index'
+
 end

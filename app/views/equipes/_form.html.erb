@@ -1,0 +1,13 @@
+<%= simple_form_for(@equipe) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :re, label: "Responsable d'équipe" %>
+    <%= f.association :personnes, label: "Membres" %>
+  </div>
+  <%= link_to 'Ajouter une personne', new_personne_path %>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

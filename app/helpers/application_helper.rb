@@ -135,7 +135,7 @@ module ApplicationHelper
         labels: [#{@range}],
         datasets: [{
             label: 'Year-to-date N',
-            yAxisID: 'A',
+            //yAxisID: 'A',
             data: [#{backlog_ytd.join(", ")}],
             borderColor: '#EB7D3C',
             backgroundColor: '#EB7D3C',
@@ -143,23 +143,24 @@ module ApplicationHelper
         },
         {
             label: 'Year-to-date N-1',
-            yAxisID: 'A',
+            //yAxisID: 'A',
             data: [#{backlog_ytdl.join(", ")}],
             borderColor: '#4674C1',
             backgroundColor: '#4674C1',
             fill: false
-        },
-        {
-            label: 'Tendance (%)',
-            yAxisID: 'B',
-            data: [#{backlog_ratio.join(", ")}],
-            borderColor: '#000000',
-            backgroundColor: '#000000',
-            datalabels: {
-                display: true
-            },
-            fill: false        
-        }]
+        }
+        // ,{
+        //     label: 'Tendance (%)',
+        //     yAxisID: 'B',
+        //     data: [#{backlog_ratio.join(", ")}],
+        //     borderColor: '#000000',
+        //     backgroundColor: '#000000',
+        //     datalabels: {
+        //         display: true
+        //     },
+        //     fill: false        
+        //}
+    ]
     },
     options: {
         scaleShowVerticalLines: false,
@@ -173,19 +174,20 @@ module ApplicationHelper
             },1000),
         scales: {
             yAxes: [{
-                id: 'A',
+                //id: 'A',
                 type: 'linear',
                 position: 'left',
-                scaleLabel: { display: true, labelString: 'Facturation' },
-                ticks: { stepSize: 2 }
-                },
-                {
-                id: 'B',
-                type: 'linear',
-                position: 'right',
-                scaleLabel: { display: false, labelString: 'Backlog' },
-                ticks: {stepSize: 5}
-                }],
+                scaleLabel: { display: false, labelString: 'Facturation' }
+                //ticks: { stepSize: 2 }
+                }
+                // ,{
+                // id: 'B',
+                // type: 'linear',
+                // position: 'right',
+                // scaleLabel: { display: false, labelString: 'Backlog' },
+                // ticks: {stepSize: 5}
+                // }
+            ],
              xAxes: [{ barThickness: 5, gridLines: { offsetGridLines: true, display: false }}],
             },
         elements: { line: { tension: 0 }, point: { radius: 3 }},
