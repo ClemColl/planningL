@@ -2,7 +2,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :week, label: "Numéro de semaine", input_html: { value: Date.today.cweek-1 } %>
+    <%= f.input :week, label: "Numéro de semaine", input_html: { value: @backlog.week || Date.today.cweek-1 } %>
     
     <%= f.input :mac, label: "Montant attendu à fin de mois courant" %>
     <%= f.input :mfc, label: "Montant facturation courante" %>

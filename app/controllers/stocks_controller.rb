@@ -24,7 +24,7 @@ class StocksController < ApplicationController
     @stock = Stock.new(stock_params)
 
     if @stock.save
-      redirect_to suivi_path, notice: 'Rapport enregistré avec succés.'
+      redirect_to suivi_path, notice: 'Rapport enregistré avec succés'
     else
       render :new
     end
@@ -33,7 +33,7 @@ class StocksController < ApplicationController
   # PATCH/PUT /stocks/1
   def update
     if @stock.update(stock_params)
-      redirect_to @stock, notice: 'Stock was successfully updated.'
+      redirect_to suivi_path, notice: 'Rapport modifié avec succés'
     else
       render :edit
     end

@@ -27,7 +27,7 @@ class BacklogsController < ApplicationController
 
   def update
     if @backlog.update(backlog_params)
-      redirect_to @backlog, notice: 'Backlog was successfully updated.'
+      redirect_to suivi_path, notice: 'Rapport modifié avec succés'
     else
       render :edit
     end

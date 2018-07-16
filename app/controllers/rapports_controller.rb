@@ -1,6 +1,7 @@
 class RapportsController < ApplicationController
-  before_action :set_rapport, only: [:show, :edit, :update, :destroy]
   before_action :set_machine
+  before_action :set_rapport, only: [:show, :edit, :update, :destroy]
+
 
   def index
     @rapports = Rapport.all
@@ -19,11 +20,11 @@ class RapportsController < ApplicationController
   def create
     @rapport = Rapport.new(rapport_params)
 
-    if !Rapport.where(machine_id: @rapport.machine_id, week: @rapport.week).blank?
-      Rapport.where(machine_id: @rapport.machine_id, week: @rapport.week, created_at: (Date.today-6.months)..Date.today.end_of_day).take.delete
-    end
-
     if @rapport.save
+      current_rapports = Rapport.where(machine_id: @rapport.machine_id, week: @rapport.week, created_at: (Date.today-6.months)..Date.today.end_of_day)
+      if current_rapports.count > 1
+        current_rapports.first.delete
+      end
       redirect_to suivi_path, notice: 'Rapport enregistré avec succés'
     else
       render :new
@@ -32,8 +33,7 @@ class RapportsController < ApplicationController
 
   def update
     if @rapport.update(rapport_params)
-      redirect_to @rapport, notice: 'Rapport modifié avec succés.'
-      render :show, status: :ok, location: @rapport
+      redirect_to suivi_path, notice: 'Rapport modifié avec succés'
     else
       render :edit
     end
