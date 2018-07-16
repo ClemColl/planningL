@@ -277,7 +277,7 @@ module ApplicationHelper
         },
         elements: {
             line: { tension: 0 },
-            point: { radius: 0 }
+            point: { radius: 3 }
         },
         title: { display: true, text: 'État du Stock', fontSize: 30}
     }
