@@ -17,7 +17,6 @@ module ApplicationHelper
 
     backlog_ytd = []
     backlog_ytdl = []
-    backlog_ratio =[]
 
     backlog_mb = []
     backlog_ob = []
@@ -30,7 +29,6 @@ module ApplicationHelper
 
         backlog_ytd << backlog[x].ytd
         backlog_ytdl << backlog[x].ytdl
-        backlog_ratio << ((backlog[x].ytd.to_f - backlog[x].ytdl.to_f) / backlog[x].ytdl.to_f) * 100
 
         backlog_mb << backlog[x].mb
         backlog_ob << backlog[x].ob
@@ -149,17 +147,6 @@ module ApplicationHelper
             backgroundColor: '#4674C1',
             fill: false
         }
-        // ,{
-        //     label: 'Tendance (%)',
-        //     yAxisID: 'B',
-        //     data: [#{backlog_ratio.join(", ")}],
-        //     borderColor: '#000000',
-        //     backgroundColor: '#000000',
-        //     datalabels: {
-        //         display: true
-        //     },
-        //     fill: false        
-        //}
     ]
     },
     options: {
@@ -174,19 +161,10 @@ module ApplicationHelper
             },1000),
         scales: {
             yAxes: [{
-                //id: 'A',
                 type: 'linear',
                 position: 'left',
                 scaleLabel: { display: false, labelString: 'Facturation' }
-                //ticks: { stepSize: 2 }
                 }
-                // ,{
-                // id: 'B',
-                // type: 'linear',
-                // position: 'right',
-                // scaleLabel: { display: false, labelString: 'Backlog' },
-                // ticks: {stepSize: 5}
-                // }
             ],
              xAxes: [{ barThickness: 5, gridLines: { offsetGridLines: true, display: false }}],
             },
