@@ -191,7 +191,7 @@ module ApplicationHelper
              xAxes: [{ barThickness: 5, gridLines: { offsetGridLines: true, display: false }}],
             },
         elements: { line: { tension: 0 }, point: { radius: 3 }},
-        title: { display: true, text: 'Year-To-Date', fontSize: 30 }}});
+        title: { display: true, text: 'Year-To-Date Conso. pièces', fontSize: 30 }}});
     #{visible[1]}
     </script>".html_safe
 
