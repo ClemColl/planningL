@@ -1,5 +1,6 @@
 class Backlog < ApplicationRecord
     before_save :set_quart, :setup_commas
+    validates_presence_of :week, :mac, :mfc, :mfcl, :ytd, :ytdl, :mb, :ob
 
     private
 

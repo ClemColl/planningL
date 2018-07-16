@@ -1,5 +1,6 @@
 class Stock < ApplicationRecord
     before_save :set_quart, :setup_commas
+    validates_presence_of :week, :smc, :rmc, :sma, :rma
 
     private
     

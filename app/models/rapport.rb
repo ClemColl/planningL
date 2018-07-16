@@ -1,5 +1,8 @@
 class Rapport < ApplicationRecord
   belongs_to :machine
+
+  validates_presence_of :week, :pdp, :cas, :dsa, :next_cas, :next_pdp
+
   before_save  :set_quart, :set_cta, :check_pdp, :set_dav
 
   private
