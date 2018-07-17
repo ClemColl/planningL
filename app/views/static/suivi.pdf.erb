@@ -28,129 +28,119 @@ h1 {
         <img src="<%= params["#{a.name.parameterize.underscore}_base64".to_sym] %>" style="width:45%;">
      <% if b %>
         <img src="<%= params["#{b.name.parameterize.underscore}_base64".to_sym] %>" style="width:45%;">
-    <% end %>
+     <% end %>
     </div>
 
-<div class="container">
-    <div style="width:50%;display:inline-block;">
-    <table style="width:300px;">
-        <tr>
-            <th style="width:300px;"></th>
-        <% @date_range.each do |dr| %>
-            <th><%=dr%></th>
+    <div class="container">
+        <div style="width:45%;">
+        <table>
+            <tr>
+                <th></th>
+            <% @date_range.each do |dr| %>
+                <th><%=dr%></th>
+            <% end %>
+            </tr>
+            <tr>
+                <td>PDP</td>
+            <% rapports1.select(:pdp).each do |bl| %>
+                <td><%= bl.pdp %></td>
+            <% end %>
+            </tr>
+            <tr>
+                <td>Commandes affectées dans la semaine</td>
+            <% rapports1.select(:cas).each do |bl| %>
+                <td><%= bl.cas %></td>
+            <% end %>
+            </tr>
+            <tr>
+                <td>Commandes totales affectées</td>
+            <% rapports1.select(:cta).each do |bl| %>
+                <td><%= bl.cta %></td>
+            <% end %>
+            </tr>
+            <tr>
+                <td>DAV</td>
+            <% rapports1.select(:dav).each do |bl| %>
+                <td><%= bl.dav %></td>
+            <% end %>
+            </tr>
+            <tr>
+                <td>Deals signés en attente d'acompte</td>
+            <% rapports1.select(:dsa).each do |bl| %>
+                <td><%= bl.dsa %></td>
+            <% end %>
+            </tr>
+            <tr>
+                <td>Commandes totales affectées + 1</td>
+            <% rapports1.select(:next_cas).each do |bl| %>
+                <td><%= bl.next_cas %></td>
+            <% end %>
+            </tr>
+            <tr>
+                <td>PDP + 1</td>
+            <% rapports1.select(:next_pdp).each do |bl| %>
+                <td><%= bl.next_pdp %></td>
+            <% end %>
+            </tr>
+        </table>
+        </div>
+
+        <% if b %>
+            <div style="width:45%;display:inline-block;">
+                <table>
+                    <tr>
+                        <th></th>
+                    <% @date_range.each do |dr| %>
+                        <th><%=dr%></th>
+                    <% end %>
+                    </tr>
+                    <tr>
+                        <td>PDP</td>
+                    <% rapports2.select(:pdp).each do |bl| %>
+                        <td><%= bl.pdp %></td>
+                    <% end %>
+                    </tr>
+                    <tr>
+                        <td>Commandes affectées dans la semaine</td>
+                    <% rapports2.select(:cas).each do |bl| %>
+                        <td><%= bl.cas %></td>
+                    <% end %>
+                    </tr>
+                    <tr>
+                        <td>Commandes totales affectées</td>
+                    <% rapports2.select(:cta).each do |bl| %>
+                        <td><%= bl.cta %></td>
+                    <% end %>
+                    </tr>
+                    <tr>
+                        <td>DAV</td>
+                    <% rapports2.select(:dav).each do |bl| %>
+                        <td><%= bl.dav %></td>
+                    <% end %>
+                    </tr>
+                    <tr>
+                        <td>Deals signés en attente d'acompte</td>
+                    <% rapports2.select(:dsa).each do |bl| %>
+                        <td><%= bl.dsa %></td>
+                    <% end %>
+                    </tr>
+                    <tr>
+                        <td>Commandes totales affectées + 1</td>
+                    <% rapports2.select(:next_cas).each do |bl| %>
+                        <td><%= bl.next_cas %></td>
+                    <% end %>
+                    </tr>
+                    <tr>
+                        <td>PDP + 1</td>
+                    <% rapports2.select(:next_pdp).each do |bl| %>
+                        <td><%= bl.next_pdp %></td>
+                    <% end %>
+                    </tr>
+                </table>
+            </div>
         <% end %>
-        </tr>
-        <tr>
-            <td style="width:300px;">PDP</td>
-        <% rapports1.select(:pdp).each do |bl| %>
-            <td><%= bl.pdp %></td>
-        <% end %>
-        </tr>
-        <tr>
-            <td style="width:300px;">Commandes affectées dans la semaine</td>
-        <% rapports1.select(:cas).each do |bl| %>
-            <td><%= bl.cas %></td>
-        <% end %>
-        </tr>
-        <tr>
-            <td style="width:300px;">Commandes totales affectées</td>
-        <% rapports1.select(:cta).each do |bl| %>
-            <td><%= bl.cta %></td>
-        <% end %>
-        </tr>
-        <tr>
-            <td style="width:300px;">DAV</td>
-        <% rapports1.select(:dav).each do |bl| %>
-            <td><%= bl.dav %></td>
-        <% end %>
-        </tr>
-        <tr>
-            <td style="width:300px;">Deals signés en attente d'acompte</td>
-        <% rapports1.select(:dsa).each do |bl| %>
-            <td><%= bl.dsa %></td>
-        <% end %>
-        </tr>
-        <tr>
-            <td style="width:300px;">Commandes totales affectées + 1</td>
-        <% rapports1.select(:next_cas).each do |bl| %>
-            <td><%= bl.next_cas %></td>
-        <% end %>
-        </tr>
-        <tr>
-            <td style="width:300px;">PDP + 1</td>
-        <% rapports1.select(:next_pdp).each do |bl| %>
-            <td><%= bl.next_pdp %></td>
-        <% end %>
-        </tr>
-    </table>
     </div>
-
-    <% if b %>
-    <div style="width:50%;display:inline-block;">
-    <table style="width:300px;">
-        <tr>
-            <th></th>
-        <% @date_range.each do |dr| %>
-            <th><%=dr%></th>
-        <% end %>
-        </tr>
-        <tr>
-            <td>PDP</td>
-        <% rapports2.select(:pdp).each do |bl| %>
-            <td><%= bl.pdp %></td>
-        <% end %>
-        </tr>
-        <tr>
-            <td>Commandes affectées dans la semaine</td>
-        <% rapports2.select(:cas).each do |bl| %>
-            <td><%= bl.cas %></td>
-        <% end %>
-        </tr>
-        <tr>
-            <td>Commandes totales affectées</td>
-        <% rapports2.select(:cta).each do |bl| %>
-            <td><%= bl.cta %></td>
-        <% end %>
-        </tr>
-        <tr>
-            <td>DAV</td>
-        <% rapports2.select(:dav).each do |bl| %>
-            <td><%= bl.dav %></td>
-        <% end %>
-        </tr>
-        <tr>
-            <td>Deals signés en attente d'acompte</td>
-        <% rapports2.select(:dsa).each do |bl| %>
-            <td><%= bl.dsa %></td>
-        <% end %>
-        </tr>
-        <tr>
-            <td>Commandes totales affectées + 1</td>
-        <% rapports2.select(:next_cas).each do |bl| %>
-            <td><%= bl.next_cas %></td>
-        <% end %>
-        </tr>
-        <tr>
-            <td>PDP + 1</td>
-        <% rapports2.select(:next_pdp).each do |bl| %>
-            <td><%= bl.next_pdp %></td>
-        <% end %>
-        </tr>
-    </table>
-    </div>
-    <% end %>
-</div>
-
-
 <% end %>
-
-
-
-
-
-
-
-
 
 
 <div class="container" style="margin-top:100px;">
