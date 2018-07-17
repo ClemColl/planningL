@@ -24,7 +24,7 @@ h1 {
 
     <% rapports2 = b.rapports.where(quart: ((Date.today-1.week).month / 3.0).ceil, created_at: (Date.today-4.months)..(Date.today+1.week)) if b%>
 
-    <div class="container" style="margin-top:50px">
+    <div class="container" style="margin-top:50px;">
         <img src="<%= params["#{a.name.parameterize.underscore}_base64".to_sym] %>" style="width:45%;">
      <% if b %>
         <img src="<%= params["#{b.name.parameterize.underscore}_base64".to_sym] %>" style="width:45%;">
@@ -32,7 +32,7 @@ h1 {
     </div>
 
     <div class="container">
-        <div style="width:40%;display:inline-block;margin:auto;">
+        <div style="width:45%;display:inline-block;">
         <table>
             <tr>
                 <th></th>
