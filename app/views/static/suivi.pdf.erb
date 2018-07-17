@@ -11,10 +11,6 @@ h1 {
     width:100%;
 }
 
-tr td:first-child {
-    width:300px;
-}
-
 </style>
 
 <h1 style="text-align:center;">Suivi activité - Direction industrielle</h1>
@@ -36,52 +32,52 @@ tr td:first-child {
     </div>
 
 <div class="container">
-<div style="width:50%;">
+    <div style="width:50%;">
     <table style="width:300px;display:inline-block;">
         <tr>
-            <th></th>
+            <th style="width:300px;"></th>
         <% @date_range.each do |dr| %>
             <th><%=dr%></th>
         <% end %>
         </tr>
         <tr>
-            <td>PDP</td>
+            <td style="width:300px;">PDP</td>
         <% rapports1.select(:pdp).each do |bl| %>
             <td><%= bl.pdp %></td>
         <% end %>
         </tr>
         <tr>
-            <td>Commandes affectées dans la semaine</td>
+            <td style="width:300px;">Commandes affectées dans la semaine</td>
         <% rapports1.select(:cas).each do |bl| %>
             <td><%= bl.cas %></td>
         <% end %>
         </tr>
         <tr>
-            <td>Commandes totales affectées</td>
+            <td style="width:300px;">Commandes totales affectées</td>
         <% rapports1.select(:cta).each do |bl| %>
             <td><%= bl.cta %></td>
         <% end %>
         </tr>
         <tr>
-            <td>DAV</td>
+            <td style="width:300px;">DAV</td>
         <% rapports1.select(:dav).each do |bl| %>
             <td><%= bl.dav %></td>
         <% end %>
         </tr>
         <tr>
-            <td>Deals signés en attente d'acompte</td>
+            <td style="width:300px;">Deals signés en attente d'acompte</td>
         <% rapports1.select(:dsa).each do |bl| %>
             <td><%= bl.dsa %></td>
         <% end %>
         </tr>
         <tr>
-            <td>Commandes totales affectées + 1</td>
+            <td style="width:300px;">Commandes totales affectées + 1</td>
         <% rapports1.select(:next_cas).each do |bl| %>
             <td><%= bl.next_cas %></td>
         <% end %>
         </tr>
         <tr>
-            <td>PDP + 1</td>
+            <td style="width:300px;">PDP + 1</td>
         <% rapports1.select(:next_pdp).each do |bl| %>
             <td><%= bl.next_pdp %></td>
         <% end %>
@@ -90,6 +86,7 @@ tr td:first-child {
     </div>
 
     <% if b %>
+    <div style="width:50%;">
     <table style="width:300px;display:inline-block;">
         <tr>
             <th></th>
@@ -140,6 +137,7 @@ tr td:first-child {
         <% end %>
         </tr>
     </table>
+    </div>
     <% end %>
 </div>
 
@@ -242,7 +240,7 @@ tr td:first-child {
 </div>
 
 <div class="container">
-    <div style="width:50%;">
+    <div style="width:50%;margin:auto;">
     <table style="width:300px;display:inline-block;">
         <tr>
             <th></th>
