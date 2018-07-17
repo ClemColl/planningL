@@ -32,7 +32,7 @@ h1 {
     </div>
 
     <div class="container">
-        <div style="width:45%;">
+        <div style="width:40%;display:inline-block;">
         <table>
             <tr>
                 <th></th>
@@ -86,7 +86,7 @@ h1 {
         </div>
 
         <% if b %>
-            <div style="width:45%;display:inline-block;">
+            <div style="width:40%;display:inline-block;">
                 <table>
                     <tr>
                         <th></th>
@@ -231,26 +231,28 @@ h1 {
 
 <div class="container">
     <div style="width:50%;margin:auto;">
-    <table style="width:300px;display:inline-block;">
-        <tr>
-            <th></th>
-        <% @date_range.each do |dr| %>
-            <th><%=dr%></th>
-        <% end %>
-        </tr>
-        <tr>
-            <td>Year-To-Date N</td>
-        <% backlog.select(:ytd).each do |bl| %>
-            <td><%= bl.ytd %></td>
-        <% end %>
-        </tr>
-        <tr>
-            <td>Year-To-Date N-1</td>
-        <% backlog.select(:ytdl).each do |bl| %>
-            <td><%= bl.ytdl %></td>
-        <% end %>
-        </tr>
-    </table>
+
+        <table style="width:300px;display:inline-block;">
+            <tr>
+                <th></th>
+            <% @date_range.each do |dr| %>
+                <th><%=dr%></th>
+            <% end %>
+            </tr>
+            <tr>
+                <td>Year-To-Date N</td>
+            <% backlog.select(:ytd).each do |bl| %>
+                <td><%= bl.ytd %></td>
+            <% end %>
+            </tr>
+            <tr>
+                <td>Year-To-Date N-1</td>
+            <% backlog.select(:ytdl).each do |bl| %>
+                <td><%= bl.ytdl %></td>
+            <% end %>
+            </tr>
+        </table>
+
     </div>
     <p style="text-align:center;">
         <% backlogYTD = Backlog.last %>
