@@ -99,8 +99,8 @@ td {
         <td><%= backlog.mb %></td>
         <td><%= backlog.ob %></td>
         <td><%= backlog.quart %></td>
-        <td><%= link_to 'Edit', edit_backlog_path(backlog) %></td>
-        <td><%= link_to 'Destroy', backlog, method: :delete, data: { confirm: 'Êtes vous sûr?' } %></td>
+        <td><%= link_to 'Modifier', edit_backlog_path(backlog) %></td>
+        <td><%= link_to 'Supprimer', backlog, method: :delete, data: { confirm: 'Êtes vous sûr?' } %></td>
       </tr>
     <% end %>
   </tbody>
