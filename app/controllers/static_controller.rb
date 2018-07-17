@@ -6,10 +6,10 @@ class StaticController < ApplicationController
       format.html {
         # Date range
         
-        date_range = []
+        @date_range = []
         dates = Date.commercial(Date.today.year, (Date.today.beginning_of_quarter+7.days).cweek, 3).cweek..Date.today.end_of_quarter.cweek
-        dates.each{ |s| date_range << "S#{s}"}
-        @range = "'#{date_range.join("','")}'"
+        dates.each{ |s| @date_range << "S#{s}"}
+        @range = "'#{@date_range.join("','")}'"
 
         @nb_semaine = dates.count
         
@@ -23,6 +23,11 @@ class StaticController < ApplicationController
       }
 
       format.pdf {
+
+        @date_range = []
+        dates = Date.commercial(Date.today.year, (Date.today.beginning_of_quarter+7.days).cweek, 3).cweek..Date.today.end_of_quarter.cweek
+        dates.each{ |s| @date_range << "S#{s}"}
+
         @machines_charts = []
         
         Machine.all.each do |m|
@@ -33,7 +38,7 @@ class StaticController < ApplicationController
         @backlog = params["backlog_base64".to_sym]
         @ytd = params["ytd_base64".to_sym]
 
-        render :pdf => "Suivi_activité", :layout => 'pdf.html', disposition: "attachment"
+        render :pdf => "Suivi_activité", :layout => 'pdf.html', disposition: "inline"
       }
     end
   end
