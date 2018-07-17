@@ -29,7 +29,7 @@ tr td:first-child {
     </div>
 
 <div class="container">
-    <table style="width:45%;display:inline-block;">
+    <table style="width:300px;display:inline-block;">
         <tr>
             <th></th>
         <% @date_range.each do |dr| %>
@@ -81,7 +81,7 @@ tr td:first-child {
     </table>
 
     <% if b %>
-    <table style="width:45%;display:inline-block;">
+    <table style="width:300px;display:inline-block;">
         <tr>
             <th></th>
         <% @date_range.each do |dr| %>
@@ -155,7 +155,7 @@ tr td:first-child {
 <div class="container">
     <% stock = Stock.where(quart: ((Date.today-1.week).month / 3.0).ceil, created_at: (Date.today-4.months)..(Date.today+1.week)) %>
     <% backlog = Backlog.where(quart: ((Date.today-1.week).month / 3.0).ceil, created_at: (Date.today-4.months)..(Date.today+1.week)) %>
-    <table style="width:45%;display:inline-block;">
+    <table style="width:300px;display:inline-block;">
         <tr>
             <th></th>
         <% @date_range.each do |dr| %>
@@ -188,7 +188,7 @@ tr td:first-child {
         </tr>
     </table>
 
-    <table style="width:45%;display:inline-block;">
+    <table style="width:300px;display:inline-block;">
         <tr>
             <th></th>
         <% @date_range.each do |dr| %>
@@ -233,7 +233,7 @@ tr td:first-child {
 </div>
 
 <div class="container">
-    <table style="width:45%;display:inline-block;">
+    <table style="width:300px;display:inline-block;">
         <tr>
             <th></th>
         <% @date_range.each do |dr| %>
