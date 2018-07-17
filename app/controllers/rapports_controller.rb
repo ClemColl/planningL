@@ -25,7 +25,7 @@ class RapportsController < ApplicationController
       if current_rapports.count > 1
         current_rapports.first.delete
       end
-      redirect_to suivi_path, notice: 'Rapport enregistré avec succés'
+      redirect_to suivi_path, notice: 'Rapport enregistré avec succès'
     else
       render :new
     end
@@ -33,7 +33,7 @@ class RapportsController < ApplicationController
 
   def update
     if @rapport.update(rapport_params)
-      redirect_to suivi_path, notice: 'Rapport modifié avec succés'
+      redirect_to suivi_path, notice: 'Rapport modifié avec succès'
     else
       render :edit
     end
@@ -41,7 +41,7 @@ class RapportsController < ApplicationController
 
   def destroy
     @rapport.destroy
-    redirect_to rapports_url, notice: 'Rapport was successfully destroyed.'
+    redirect_to suivi_path, notice: 'Rapport supprimé avec succès'
   end
 
   private

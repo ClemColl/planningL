@@ -45,11 +45,6 @@ class IndicateursController < ApplicationController
             efficacite: (eff_data[:t5][:qu]/eff_data[:t5][:qr]).round(2),
             utilisation: 0
           )
-          equipes[5].analyzes.create(
-            duree: @duree_eff,
-            efficacite: (eff_data[:fab][:qu]/eff_data[:fab][:qr]).round(2),
-            utilisation: 0
-          )
 
         else
           flash[:error] = "Erreur: les durées des fichiers ne correspondent pas"

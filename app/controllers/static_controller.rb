@@ -44,4 +44,8 @@ class StaticController < ApplicationController
     end
   end
 
+  def bugfix
+    @rapports = Rapport.last(10)
+  end
+
 end

@@ -1,10 +1,10 @@
 <h1>Equipes</h1>
 <div class="container">
 <% @equipes.each do |equipe| %>
-  <div style="width:30%;">
+  <div style="width:30%;display:inline-block;">
   <h3><%= equipe.re %></h3>
     <% equipe.personnes.each do |per|%>
-      <%= per.name %>
+      <%= per.name %><br>
     <% end %>
     <td><%= link_to 'Modifier', edit_equipe_path(equipe), class: 'btn btn-default' %></td>
     <td><%= link_to 'Supprimer', equipe, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>

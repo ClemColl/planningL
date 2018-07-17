@@ -1,0 +1,42 @@
+<style>
+th {
+    padding:5px;
+}
+</style>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Rapports</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Semaine</th>
+      <th>Cas</th>
+      <th>Pdp</th>
+      <th>Cta</th>
+      <th>Dav</th>
+      <th>Dsa</th>
+      <th>Machine</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rapports.sort_by(&:created_at).each do |rapport| %>
+      <tr>
+        <td><%= rapport.week %></td>
+        <td><%= rapport.cas %></td>
+        <td><%= rapport.pdp %></td>
+        <td><%= rapport.cta %></td>
+        <td><%= rapport.dav %></td>
+        <td><%= rapport.dsa %></td>
+        <td><%= rapport.machine.name %></td>
+        <td><%= link_to 'Modifier', edit_machine_rapport_path(rapport.machine_id, rapport) %></td>
+        <td><%= link_to 'Destroy', machine_rapport_path(rapport.machine_id, rapport), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to 'Retour', suivi_path, class: 'btn btn-default'%>

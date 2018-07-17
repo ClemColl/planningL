@@ -19,7 +19,7 @@ class EquipesController < ApplicationController
     @equipe = Equipe.new(equipe_params)
 
     if @equipe.save
-      redirect_to @equipe, notice: 'Equipe was successfully created.'
+      redirect_to equipes_path, notice: 'Equipe créée avec succès.'
     else
       render :new
     end
@@ -27,7 +27,7 @@ class EquipesController < ApplicationController
 
   def update
     if @equipe.update(equipe_params)
-      redirect_to equipes_path, notice: 'Equipe was successfully updated.'
+      redirect_to equipes_path, notice: 'Equipe modifiée avec succès.'
     else
       render :edit
     end
@@ -46,6 +46,6 @@ class EquipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def equipe_params
-      params.require(:equipe).permit(:re, :personne_id)
+      params.require(:equipe).permit(:re, personne_ids: [])
     end
 end

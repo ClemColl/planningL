@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   #Suivi d'activité
 
   get '/suivi' => "static#suivi"
+  get '/suivi/bugfix' => "static#bugfix"
   match "/suivi" => "static#suivi", :via => :post, :defaults => { :format => 'pdf' }
 
   resources :machines do
@@ -26,7 +27,9 @@ Rails.application.routes.draw do
   get 'indicateurs/production/new' => 'indicateurs#fichiers'
   match 'indicateurs/production/results' => "indicateurs#prod_results", :via => :post
   
-  resources :equipes, :personnes
+  resources :equipes do
+    resources :personnes
+  end
     resources :responsables
 
   resources :analyses
