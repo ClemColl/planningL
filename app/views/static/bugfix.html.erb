@@ -2,6 +2,10 @@
 th {
     padding:5px;
 }
+
+td {
+    padding:5px;
+}
 </style>
 
 <p id="notice"><%= notice %></p>
@@ -18,7 +22,7 @@ th {
       <th>Dav</th>
       <th>Dsa</th>
       <th>Machine</th>
-      <th></th>
+      <th coldspan="2"></th>
     </tr>
   </thead>
 
@@ -33,10 +37,73 @@ th {
         <td><%= rapport.dsa %></td>
         <td><%= rapport.machine.name %></td>
         <td><%= link_to 'Modifier', edit_machine_rapport_path(rapport.machine_id, rapport) %></td>
-        <td><%= link_to 'Destroy', machine_rapport_path(rapport.machine_id, rapport), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Supprimer', machine_rapport_path(rapport.machine_id, rapport), method: :delete, data: { confirm: 'Êtes vous sûr?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <br>
+
+<h1>Stocks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Semaine</th>
+      <th>Smc</th>
+      <th>Rmc</th>
+      <th>Sma</th>
+      <th>Rma</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stocks.sort_by(&:created_at).each do |stock| %>
+      <tr>
+        <td><%= stock.week %></td>
+        <td><%= stock.smc %></td>
+        <td><%= stock.rmc %></td>
+        <td><%= stock.sma %></td>
+        <td><%= stock.rma %></td>
+        <td><%= link_to 'Modifier', edit_stock_path(stock) %></td>
+        <td><%= link_to 'Supprimer', stock, method: :delete, data: { confirm: 'Êtes vous sûr?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h1>Backlogs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Semaine</th>
+      <th>Mfc</th>
+      <th>Mac</th>
+      <th>Mb</th>
+      <th>Ob</th>
+      <th>Quart</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @backlogs.each do |backlog| %>
+      <tr>
+        <td><%= backlog.week %></td>
+        <td><%= backlog.mfc %></td>
+        <td><%= backlog.mac %></td>
+        <td><%= backlog.mb %></td>
+        <td><%= backlog.ob %></td>
+        <td><%= backlog.quart %></td>
+        <td><%= link_to 'Edit', edit_backlog_path(backlog) %></td>
+        <td><%= link_to 'Destroy', backlog, method: :delete, data: { confirm: 'Êtes vous sûr?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= link_to 'Retour', suivi_path, class: 'btn btn-default'%>

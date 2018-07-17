@@ -46,6 +46,8 @@ class StaticController < ApplicationController
 
   def bugfix
     @rapports = Rapport.last(10)
+    @stocks = Stock.last(3)
+    @backlogs = Backlog.last(3)
   end
 
 end
