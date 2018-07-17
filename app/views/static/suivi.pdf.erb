@@ -7,8 +7,14 @@ h1 {
     font-size: 20px;
 }
 .container {
-    text-align:center;
-    width:100%;
+    text-align: center;
+    width: 100%;
+}
+
+.page-break {
+    display: block;
+    clear: both;
+    page-break-after: always;
 }
 
 </style>
@@ -19,7 +25,7 @@ h1 {
     <%= image_tag image_url('legende.png'), style: "width:40%;margin:auto;" %>
 </div>
 
-<% Machine.all.each_slice(2) do |a, b|%>
+<% Machine.all.each_slice(2).with_index do |(a, b), index|%>
     <% rapports1 = a.rapports.where(quart: ((Date.today-1.week).month / 3.0).ceil, created_at: (Date.today-4.months)..(Date.today+1.week))%>
 
     <% rapports2 = b.rapports.where(quart: ((Date.today-1.week).month / 3.0).ceil, created_at: (Date.today-4.months)..(Date.today+1.week)) if b%>
@@ -140,6 +146,9 @@ h1 {
             </div>
         <% end %>
     </div>
+    <% if index == 1 %>
+        <div class="page-break"></div>
+    <% end %>
 <% end %>
 
 

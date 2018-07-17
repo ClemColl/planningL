@@ -57,6 +57,9 @@ class IndicateursController < ApplicationController
     end
   end
 
+  def fichiers
+  end
+
 
   private
 
