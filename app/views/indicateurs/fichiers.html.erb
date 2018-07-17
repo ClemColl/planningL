@@ -5,5 +5,6 @@
     <%= label_tag :utilisation, "Fichier d'utilisation" %>
     <%= file_field_tag :utilisation %>
     
-    <%= submit_tag 'Traiter' %>
+    <%= submit_tag 'Traiter', class: 'btn btn-default' %>
+    <%= link_to 'Retour', indicateurs_path, class: 'btn btn-default'%>
 <% end %>
