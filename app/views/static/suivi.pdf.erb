@@ -86,7 +86,7 @@ h1 {
         </div>
 
         <% if b %>
-            <div style="width:40%;display:inline-block;">
+            <div style="width:45%;display:inline-block;">
                 <table>
                     <tr>
                         <th></th>
@@ -152,7 +152,7 @@ h1 {
 <div class="container">
     <% stock = Stock.where(quart: ((Date.today-1.week).month / 3.0).ceil, created_at: (Date.today-4.months)..(Date.today+1.week)) %>
     <% backlog = Backlog.where(quart: ((Date.today-1.week).month / 3.0).ceil, created_at: (Date.today-4.months)..(Date.today+1.week)) %>
-    <table style="width:300px;display:inline-block;">
+    <table style="width:300px;display:inline-block;margin-top:0px;">
         <tr>
             <th></th>
         <% @date_range.each do |dr| %>
