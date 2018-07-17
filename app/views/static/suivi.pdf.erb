@@ -7,6 +7,7 @@ h1 {
     font-size: 20px;
 }
 .container {
+    padding-left:none;
     text-align:center;
     width:100%;
 }
@@ -256,6 +257,6 @@ h1 {
     </div>
     <p style="text-align:center;">
         <% backlogYTD = Backlog.last %>
-        <%= (((backlogYTD.ytd.to_f - backlogYTD.ytdl.to_f) / backlogYTD.ytdl.to_f).round(2) * 100) %>% de changement
+        <%= (((backlogYTD.ytd.to_f - backlogYTD.ytdl.to_f) / backlogYTD.ytdl.to_f).round(2) * 100) %>% par rapport à l'année précédente
     </p>
 </div>
