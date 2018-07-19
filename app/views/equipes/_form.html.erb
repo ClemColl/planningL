@@ -4,7 +4,7 @@
 }
 .checkbox {
   display: inline-block;
-  width:100px;
+  width:250px;
 }
 </style>
 <%= simple_form_for(@equipe) do |f| %>
@@ -12,14 +12,17 @@
 
   <div class="form-inputs">
     <%= f.input :re, label: "Responsable d'équipe" %>
-    <%= f.association :personnes, as: :check_boxes, :label_method => :name, :value_method => :id %>
+    <%= f.association :personnes, collection: Personne.all.order(:name), as: :check_boxes, :label_method => :name, :value_method => :id %>
   </div>
-  <% if action_name == "edit" %>
-    <%= link_to 'Ajouter une personne', new_equipe_personne_path(equipe_id: @equipe), class: "btn btn-default" %>
-  <% end %>
+
 
   <div class="form-actions">
+
     <%= f.button :submit, "Valider" %>
+    <% if action_name == "edit" %>
+      <%= link_to 'Ajouter une personne', new_equipe_personne_path(equipe_id: @equipe), class: "btn btn-info" %>
+      <%= link_to 'Modifier la liste de personnes', equipe_personnes_path(@equipe), class: 'btn btn-default' %>
+    <% end %>
     <%= link_to 'Retour', equipes_path, class: "btn btn-default" %>
   </div>
 <% end %>

@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resources :equipes do
     resources :personnes
   end
+
     resources :responsables
 
   resources :analyses

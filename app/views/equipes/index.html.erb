@@ -1,8 +1,8 @@
 <h1>Equipes</h1>
-<p><b>Attention:</b> Ecrire le nom des personnes comme dans Oracle</p>
+<p><b>Attention:</b> Ecrire le nom des personnes comme dans Oracle: NOM, PRÉNOM</p>
 <div class="container">
 <% @equipes.each do |equipe| %>
-  <div style="width:30%;display:inline-block;">
+  <div style="width:30%;display:inline-block;vertical-align: top;">
   <h3><%= equipe.re %></h3>
     <% equipe.personnes.each do |per|%>
       <%= per.name %><br>

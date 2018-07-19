@@ -7,44 +7,27 @@ class IndicateursController < ApplicationController
   end
 
   def prod_results
+
     eff_file = params[:efficacite]
     util_file = params[:utilisation]
     if eff_data = get_efficacite(eff_file)
       if util_data = get_utilisation(util_file)
         if @duree_eff == @duree_util
           flash[:notice] = "Analyse réalisée avec succès"
+          
+          @equipes = Equipe.all
+          objectifs = Objectif.all
 
-          equipes = Equipe.all
-
-          equipes[0].analyzes.create(
-            duree: @duree_eff,
-            efficacite: (eff_data[:t1][:qu]/eff_data[:t1][:qr]).round(2),
-            utilisation: 0
-          )
-
-          equipes[1].analyzes.create(
-            duree: @duree_eff,
-            efficacite: (eff_data[:t2][:qu]/eff_data[:t2][:qr]).round(2),
-            utilisation: 0
-          )
-
-          equipes[2].analyzes.create(
-            duree: @duree_eff,
-            efficacite: (eff_data[:t3][:qu]/eff_data[:t3][:qr]).round(2),
-            utilisation: 0
-          )
-
-          equipes[3].analyzes.create(
-            duree: @duree_eff,
-            efficacite: (eff_data[:t4][:qu]/eff_data[:t4][:qr]).round(2),
-            utilisation: 0
-          )
-
-          equipes[4].analyzes.create(
-            duree: @duree_eff,
-            efficacite: (eff_data[:t5][:qu]/eff_data[:t5][:qr]).round(2),
-            utilisation: 0
-          )
+          
+          @equipes.each_with_index do |eq, index|
+            eq.analyzes.create!(
+              duree: @duree_eff,
+              efficacite: eff_data.values[index]*100,
+              eff_obj: objectifs.first.value,
+              utilisation: util_data.values[index]*100,
+              util_obj: objectifs.second.value
+            )
+          end
 
         else
           flash[:error] = "Erreur: les durées des fichiers ne correspondent pas"
@@ -227,30 +210,12 @@ class IndicateursController < ApplicationController
     end
 
     eff_data = {
-      fab: {
-        qu: quantite_utilisee.round(2),
-        qr: quantite_requise.round(2)
-      },
-      t1: {
-        qu: qu1.round(2),
-        qr: qr1.round(2)
-      },
-      t2: {
-        qu: qu2.round(2),
-        qr: qr2.round(2)
-      },
-      t3: {
-        qu: qu3.round(2),
-        qr: qr3.round(2)
-      },
-      t4: {
-        qu: qu4.round(2),
-        qr: qr4.round(2)
-      },
-      t5: {
-        qu: qu5.round(2),
-        qr: qr5.round(2)
-      },
+      fab: (quantite_utilisee/quantite_requise).round(2),
+      t1: (qu1/qr1).round(2),
+      t2: (qu2/qr2).round(2),
+      t3: (qu3/qr3).round(2),
+      t4: (qu4/qr4).round(2),
+      t5: (qu5/qr5).round(2)
     }
 
       if dates.count == 1
@@ -265,30 +230,26 @@ class IndicateursController < ApplicationController
   end
 
   def get_utilisation(file_url)
+    dates = []
 
     if lines = parse_txt_tab(file_url)
-      h_abs, h_indi, h_no_dispo = 0, 0, 0                     # HEURES
-      h_cedees = {                                            # HEURES CEDEES
-        rd: 0,
-        rds: 0,
-        serv: 0,
-        sqf: 0,
-        demo: 0,
-        di: 0,
-        filiale: 0,
-        total: 0
-      }
-      h_prod2, h_recond = 0, 0                                # HEURES PROD ou RECOND
-      total_conges_annuel_rtt = 0                             # CONGES
-      total_conges_except = 0                                 # CONGES
-      names = {}                                              # Personnes
+      equipes = {}
+      util_data = {}
+      Equipe.all.each do |eq|
 
-      responsables = []
-      Responsable.all.each do |r|
-        responsables << r.name.upcase
+        equipes[eq.id] = {
+          indi: 0,
+          di: 0,
+          prod: 0,
+          employees: []
+        }
+        
+        eq.personnes.each do |per|
+          equipes[eq.id][:employees] << per.name
+        end
+
       end
-      dates = []
-    
+
       lines.each do |d|
 
         if dates.include?(d[:date_de_la_transaction])
@@ -296,79 +257,33 @@ class IndicateursController < ApplicationController
           dates << d[:date_de_la_transaction]
         end
 
-        if !names.key?(d[:employe])
-          names[d[:employe]] = {nonprod: 0, prod2: 0, recond: 0} unless responsables.include?(d[:employe].split.first.gsub(/,/,''))
-        end
-      
-        if d[:produit] == "HEURES_ABSENCES"
-          h_abs += d[:temps_reel_renseigne].to_f
-      
-          if d[:description_de_l_operation].include? "annuels et RTT"
-            total_conges_annuel_rtt += d[:temps_reel_renseigne].to_f
-          elsif d[:description_de_l_operation].include? "exceptionnels"
-            total_conges_except += d[:temps_reel_renseigne].to_f
+        if d[:produit] == "HEURES_INDIRECTES"
+          equipes[1][:indi] += d[:temps_reel_renseigne].to_f.round(2)
+          equipes.drop(1).each do |eq|
+            if eq[1][:employees].include?(d[:employe])
+              eq[1][:indi] += d[:temps_reel_renseigne].to_f.round(2)
+            end
           end
 
-        elsif d[:produit] == "HEURES_INDIRECTES"
-          h_indi += d[:temps_reel_renseigne].to_f
-        elsif d[:produit] == "HEURES_NON_DISPONIBLES"
-          h_no_dispo += d[:temps_reel_renseigne].to_f
-          
-          if d[:description_de_l_operation].include? "R&D ("
-            h_cedees[:rd] += d[:temps_reel_renseigne].to_f.round(2)
-          elsif d[:description_de_l_operation].include? "R&D Soft"
-            h_cedees[:rds] += d[:temps_reel_renseigne].to_f.round(2)
-          elsif d[:description_de_l_operation].include? "cedees SERVICES"
-            h_cedees[:serv] += d[:temps_reel_renseigne].to_f.round(2)
-          elsif d[:description_de_l_operation].include? "SQF"
-            h_cedees[:sqf] += d[:temps_reel_renseigne].to_f.round(2)
-          elsif d[:description_de_l_operation].start_with?("Heures cedees Demo*")
-            h_cedees[:demo] += d[:temps_reel_renseigne].to_f.round(2)
-          elsif d[:description_de_l_operation].start_with?("Heures cedees DI*")
-            h_cedees[:di] += d[:temps_reel_renseigne].to_f.round(2)
-          elsif d[:description_de_l_operation].include? "Filiales"
-            h_cedees[:filiale] += d[:temps_reel_renseigne].to_f.round(2)
+        elsif d[:produit] == "HEURES_NON_DISPONIBLES" && d[:description_de_l_operation].start_with?("Heures cedees DI*")
+          equipes[1][:di] += d[:temps_reel_renseigne].to_f.round(2)
+          equipes.drop(1).each do |eq|
+            if eq[1][:employees].include?(d[:employe])
+              eq[1][:di] += d[:temps_reel_renseigne].to_f.round(2)
+            end
           end
         end
       
         if d[:wip_class] == "PROD2"
-          h_prod2 += d[:temps_reel_renseigne].to_f.round(2)
-          names[d[:employe]][:prod2] += d[:temps_reel_renseigne].to_f.round(2) if names[d[:employe]]
-        elsif d[:wip_class] == "RECOND"
-          h_recond += d[:temps_reel_renseigne].to_f.round(2)
-          names[d[:employe]][:recond] += d[:temps_reel_renseigne].to_f.round(2) if names[d[:employe]]
-        elsif d[:wip_class] == "NONPROD"
-          h_recond += d[:temps_reel_renseigne].to_f.round(2)
-          names[d[:employe]][:nonprod] += d[:temps_reel_renseigne].to_f.round(2) if names[d[:employe]]
+          equipes[1][:prod] += d[:temps_reel_renseigne].to_f.round(2)
+          equipes.drop(1).each do |eq|
+            if eq[1][:employees].include?(d[:employe])
+              eq[1][:prod] += d[:temps_reel_renseigne].to_f.round(2)
+            end
+          end
         end
+        
       end
-      
-      # CALCUL
-      h_no_dispo_c = h_no_dispo - h_cedees[:total]
-      h_cedees[:total] = (h_cedees[:rd] + h_cedees[:rds] + h_cedees[:serv] + h_cedees[:sqf] + h_cedees[:demo] + h_cedees[:di] + h_cedees[:filiale])
-      util_data = {
-        abs: h_abs.round(2),
-        indi: h_indi.round(2),
-        no_dispo: h_no_dispo.round(2),
-        no_dispo_c: h_no_dispo_c.round(2),
-        total_c: (h_abs + h_indi + h_no_dispo_c).round(2),
-        conges_j: ((total_conges_annuel_rtt/7.32)/43).round(2),
-        cedees: {
-          rd: h_cedees[:rd],
-          rds: h_cedees[:rds],
-          serv: h_cedees[:serv],
-          sqf: h_cedees[:sqf],
-          demo: h_cedees[:demo],
-          di: h_cedees[:di],
-          filiale: h_cedees[:filiale],
-          total: h_cedees[:total]
-        },
-        prod2: h_prod2,
-        recond: h_recond,
-        total_conges_annuel_rtt: total_conges_annuel_rtt.round(2),
-        total_conges_except: total_conges_except.round(2),
-        employees: names
-      }
     else
       flash[:error] = "Erreur dans la lecture du fichier utilisation"
     end
@@ -379,6 +294,12 @@ class IndicateursController < ApplicationController
       @duree_util = "week"
     else
       @duree_util = "month"
+    end
+
+    Equipe.all.each do |eq|
+
+      util_data[eq.id] = (equipes[eq.id][:prod] / (equipes[eq.id][:prod] + equipes[eq.id][:indi] + equipes[eq.id][:di])).round(2)
+
     end
 
     return util_data
