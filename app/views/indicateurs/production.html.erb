@@ -1,4 +1,4 @@
-<div style="display:inline-block;width:30%;">  
+<div style="display:inline-block;width:100%;">  
     <%= line_chart [{name: "Productivité", data: @result[:prod]}, {name: "Objectif", data: @result[:obj_prod]}], legend: true, title: "Productivité Fab par mois", suffix: "%", min: 70, max: 150, download: true, colors: ["#5C98CE", "#E87C3B"], library: { animation: { duration: 300, easing: "linear" }} %>
 </div>
 
