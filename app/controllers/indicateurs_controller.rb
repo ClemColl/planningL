@@ -6,26 +6,25 @@ class IndicateursController < ApplicationController
   def production
     analyzes = Equipe.first.analyzes.where(duree: 'mois').last(13)
 
-    @result = {
-      eff: {},
-      obj_eff: {},
-      util: {},
-      obj_util: {},
-      prod: {},
-      obj_prod: {}
-    }
+      @result = {
+        eff: {},
+        obj_eff: {},
+        util: {},
+        obj_util: {},
+        prod: {},
+        obj_prod: {}
+      }
 
+      analyzes.each do |an|
+        @result[:eff][an.created_at.strftime("%d/%m")] = an.efficacite
+        @result[:obj_eff][an.created_at.strftime("%d/%m")] = an.eff_obj
 
-    analyzes.each do |an|
-      @result[:eff][an.created_at.strftime("%d/%m")] = an.efficacite
-      @result[:obj_eff][an.created_at.strftime("%d/%m")] = an.eff_obj
+        @result[:util][an.created_at.strftime("%d/%m")] = an.utilisation
+        @result[:obj_util][an.created_at.strftime("%d/%m")] = an.util_obj
 
-      @result[:util][an.created_at.strftime("%d/%m")] = an.utilisation
-      @result[:obj_util][an.created_at.strftime("%d/%m")] = an.util_obj
-
-      @result[:prod][an.created_at.strftime("%d/%m")] = (an.efficacite + an.utilisation)/2
-      @result[:obj_prod][an.created_at.strftime("%d/%m")] = (an.eff_obj + an.util_obj)/2
-    end
+        @result[:prod][an.created_at.strftime("%d/%m")] = (an.efficacite + an.utilisation)/2
+        @result[:obj_prod][an.created_at.strftime("%d/%m")] = (an.eff_obj + an.util_obj)/2
+      end
 
   end
 

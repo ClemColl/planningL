@@ -11,7 +11,7 @@ EventType.create([
     {id: 3, name: 'Montage Vector Petit Cutter', duree: "2"},
     {id: 4, name: 'Test Vector Petit Cutter', duree: "4"},
     {id: 5, name: 'Versalis', duree: "2"},
-    {id: 6, name: 'Carte Classique', duree: "2"},
+    {id: 6, name: 'Carte Classique', duree: "2"}
 ])
 
 EventField.create([
