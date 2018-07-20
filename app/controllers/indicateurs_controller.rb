@@ -3,6 +3,32 @@ class IndicateursController < ApplicationController
   def all
   end
 
+  def production
+    analyzes = Equipe.first.analyzes.where(duree: 'mois').last(13)
+
+    @result = {
+      eff: {},
+      obj_eff: {},
+      util: {},
+      obj_util: {},
+      prod: {},
+      obj_prod: {}
+    }
+
+
+    analyzes.each do |an|
+      @result[:eff][an.created_at.strftime("%d/%m")] = an.efficacite
+      @result[:obj_eff][an.created_at.strftime("%d/%m")] = an.eff_obj
+
+      @result[:util][an.created_at.strftime("%d/%m")] = an.utilisation
+      @result[:obj_util][an.created_at.strftime("%d/%m")] = an.util_obj
+
+      @result[:prod][an.created_at.strftime("%d/%m")] = (an.efficacite + an.utilisation)/2
+      @result[:obj_prod][an.created_at.strftime("%d/%m")] = (an.eff_obj + an.util_obj)/2
+    end
+
+  end
+
   def suivi
   end
 
@@ -219,11 +245,11 @@ class IndicateursController < ApplicationController
     }
 
       if dates.count == 1
-        @duree_eff = "day"
+        @duree_eff = "jour"
       elsif dates.count < 7
-        @duree_eff = "week"
+        @duree_eff = "semaine"
       else
-        @duree_eff = "month"
+        @duree_eff = "mois"
       end
 
     return eff_data
@@ -289,11 +315,11 @@ class IndicateursController < ApplicationController
     end
 
     if dates.count == 1
-      @duree_util = "day"
+      @duree_util = "jour"
     elsif dates.count < 7
-      @duree_util = "week"
+      @duree_util = "semaine"
     else
-      @duree_util = "month"
+      @duree_util = "mois"
     end
 
     Equipe.all.each do |eq|

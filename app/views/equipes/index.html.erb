@@ -2,14 +2,16 @@
 <p><b>Attention:</b> Ecrire le nom des personnes comme dans Oracle: NOM, PRÉNOM</p>
 <div class="container">
 <% @equipes.each do |equipe| %>
+ <% unless equipe == @equipes.first %>
   <div style="width:30%;display:inline-block;vertical-align: top;">
   <h3><%= equipe.re %></h3>
     <% equipe.personnes.each do |per|%>
       <%= per.name %><br>
     <% end %>
-    <td><%= link_to 'Modifier', edit_equipe_path(equipe), class: 'btn btn-default' %></td>
+    <td><%= link_to 'Modifier', edit_equipe_path(equipe), class: 'btn btn-default'%></td> 
     <td><%= link_to 'Supprimer', equipe, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
   </div>
+  <% end %>
 <% end %>
 </div>
 

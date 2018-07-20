@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'indicateurs' => 'indicateurs#all'
 
   get 'indicateurs/production/new' => 'indicateurs#fichiers'
+  get 'indicateurs/production' => 'indicateurs#production'
   match 'indicateurs/production/results' => "indicateurs#prod_results", :via => :post
   
   resources :equipes do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180710123834) do
+ActiveRecord::Schema.define(version: 20180719094601) do
 
   create_table "analyzes", force: :cascade do |t|
     t.integer "equipe_id"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20180710123834) do
     t.float "utilisation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "eff_obj"
+    t.float "util_obj"
     t.index ["equipe_id"], name: "index_analyzes_on_equipe_id"
   end
 

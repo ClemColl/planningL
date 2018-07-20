@@ -81,6 +81,11 @@ Equipe.create([
     {id: 6, re: "L.Dubois"}
 ])
 
+Objectif.create([
+    {name: 'Efficacité', value: 100},
+    {name: 'Utilisation', value: 100}
+])
+
 Personne.create([
     {name: "ARLOT, JEREMY", equipe_id: 2},
     {name: "BOURGOIN, AMANDINE", equipe_id: 2},

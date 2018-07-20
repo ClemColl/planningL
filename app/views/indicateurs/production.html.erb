@@ -1,2 +1,19 @@
-<h1>Indicateurs#production</h1>
-<p>Find me in app/views/indicateurs/production.html.erb</p>
+
+
+    <div style="display:inline-block;width:30%;">  
+        <%= line_chart [{name: "Efficacité", data: @result[:eff]}, {name: "Objectif", data: @result[:obj_eff]}], legend: true, title: "Efficacite Fab par mois", suffix: "%", min: 70, max: 150, download: true, colors: ["#5C98CE", "#E87C3B"], library: { animation: { duration: 300, easing: "linear" }} %>
+    </div>
+
+    <div style="display:inline-block;width:30%;">  
+        <%= line_chart [{name: "Utilisation", data: @result[:util]}, {name: "Objectif", data: @result[:obj_util]}], legend: true, title: "Utilisation Fab par mois", suffix: "%", min: 70, max: 150, download: true, colors: ["#5C98CE", "#E87C3B"], library: { animation: { duration: 300, easing: "linear" }} %>
+    </div>
+
+    <div style="display:inline-block;width:30%;">  
+        <%= line_chart [{name: "Productivité", data: @result[:prod]}, {name: "Objectif", data: @result[:obj_prod]}], legend: true, title: "Productivité Fab par mois", suffix: "%", min: 70, max: 150, download: true, colors: ["#5C98CE", "#E87C3B"], library: { animation: { duration: 300, easing: "linear" }} %>
+    </div>
+
+
+
+<div style="text-align:center;">
+<%= link_to 'Retour aux indicateurs', indicateurs_path, class: 'btn btn-default'%>
+</div>
