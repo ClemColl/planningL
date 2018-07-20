@@ -5,7 +5,7 @@
  <% unless equipe == @equipes.first %>
   <div style="width:30%;display:inline-block;vertical-align: top;">
   <h3><%= equipe.re %></h3>
-    <% equipe.personnes.each do |per|%>
+    <% equipe.personnes.order(:name).each do |per|%>
       <%= per.name %><br>
     <% end %>
     <td><%= link_to 'Modifier', edit_equipe_path(equipe), class: 'btn btn-default'%></td> 

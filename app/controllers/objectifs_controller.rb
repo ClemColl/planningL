@@ -42,7 +42,7 @@ class ObjectifsController < ApplicationController
   def update
     respond_to do |format|
       if @objectif.update(objectif_params)
-        format.html { redirect_to @objectif, notice: 'Objectif was successfully updated.' }
+        format.html { redirect_to objectifs_path, notice: 'Objectif was successfully updated.' }
         format.json { render :show, status: :ok, location: @objectif }
       else
         format.html { render :edit }

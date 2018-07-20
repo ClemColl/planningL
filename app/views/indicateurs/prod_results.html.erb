@@ -1,32 +1,28 @@
 <% if @duree_eff == @duree_util %>
+
+    <% result_eff = {} %>
+    <% obj_eff = {} %>
+
+    <% result_util = {} %>
+    <% obj_util = {} %>
+
+    <% result_prod = {} %>
+    <% obj_prod = {} %>
+
     <% @equipes.each do |eq| %>
         <% if @duree_eff == 'jour' %>
             <% analyzes = eq.analyzes.where(duree: 'jour').last(5)%>
-        <% elsif @duree_eff == 'semaine' %>
-            <% analyzes = eq.analyzes.where(duree: 'semaine').last(4)%>
-        <% else %>
-            <% analyzes = eq.analyzes.where(duree: 'mois').last(13)%>
-        <% end %>
-
-        <% result_eff = {} %>
-        <% obj_eff = {} %>
-
-        <% result_util = {} %>
-        <% obj_util = {} %>
-
-        <% result_prod = {} %>
-        <% obj_prod = {} %>
-            
+            <% date = -1.day %>
 
         <% analyzes.each do |an| %>
-            <% result_eff[an.created_at.strftime("%d/%m")] = an.efficacite %>
-            <% obj_eff[an.created_at.strftime("%d/%m")] = an.eff_obj %>
+            <% result_eff[(an.created_at-1.day).strftime("%d/%m")] = an.efficacite %>
+            <% obj_eff[(an.created_at-1.day).strftime("%d/%m")] = an.eff_obj %>
 
-            <% result_util[an.created_at.strftime("%d/%m")] = an.utilisation %>
-            <% obj_util[an.created_at.strftime("%d/%m")] = an.util_obj %>
+            <% result_util[(an.created_at-1.day).strftime("%d/%m")] = an.utilisation %>
+            <% obj_util[(an.created_at-1.day).strftime("%d/%m")] = an.util_obj %>
 
-            <% result_prod[an.created_at.strftime("%d/%m")] = (an.efficacite+an.utilisation)/2 %>
-            <% obj_prod[an.created_at.strftime("%d/%m")] = (an.eff_obj + an.util_obj)/2 %>
+            <% result_prod[(an.created_at-1.day).strftime("%d/%m")] = (an.efficacite+an.utilisation)/2 %>
+            <% obj_prod[(an.created_at-1.day).strftime("%d/%m")] = (an.eff_obj + an.util_obj)/2 %>
         <% end %>
 
         <div style="display:inline-block;width:30%;">  
@@ -40,6 +36,67 @@
         <div style="display:inline-block;width:30%;">  
             <%= line_chart [{name: "Productivité", data: result_prod}, {name: "Objectif", data: obj_prod}], legend: true, title: "Productivité #{eq.re} par #{@duree_eff}", suffix: "%", min: 70, max: 150, download: true, colors: ["#5C98CE", "#E87C3B"] %>
         </div>
+        <% elsif @duree_eff == 'semaine' %>
+            <% analyzes = eq.analyzes.where(duree: 'semaine').last(4)%>
+            <% date = -1.day %>
+
+                    <% analyzes.each do |an| %>
+                        <% result_eff["S#{(an.created_at-4.days).to_date.cweek}"] = an.efficacite %>
+                        <% obj_eff["S#{(an.created_at-4.days).to_date.cweek}"] = an.eff_obj %>
+
+                        <% result_util["S#{(an.created_at-4.days).to_date.cweek}"] = an.utilisation %>
+                        <% obj_util["S#{(an.created_at-4.days).to_date.cweek}"] = an.util_obj %>
+
+                        <% result_prod["S#{(an.created_at-4.days).to_date.cweek}"] = (an.efficacite+an.utilisation)/2 %>
+                        <% obj_prod["S#{(an.created_at-4.days).to_date.cweek}"] = (an.eff_obj + an.util_obj)/2 %>
+                    <% end %>
+
+            <div style="display:inline-block;width:30%;">  
+                <%= line_chart [{name: "Efficacité", data: result_eff}, {name: "Objectif", data: obj_eff}], legend: true, title: "Efficacite #{eq.re} par #{@duree_eff}", suffix: "%", min: 70, max: 150, download: true, colors: ["#5C98CE", "#E87C3B"] %>
+            </div>
+
+            <div style="display:inline-block;width:30%;">  
+                <%= line_chart [{name: "Utilisation", data: result_util}, {name: "Objectif", data: obj_util}], legend: true, title: "Utilisation #{eq.re} par #{@duree_util}", suffix: "%", min: 70, max: 150, download: true, colors: ["#5C98CE", "#E87C3B"] %>
+            </div>
+
+            <div style="display:inline-block;width:30%;">  
+                <%= line_chart [{name: "Productivité", data: result_prod}, {name: "Objectif", data: obj_prod}], legend: true, title: "Productivité #{eq.re} par #{@duree_eff}", suffix: "%", min: 70, max: 150, download: true, colors: ["#5C98CE", "#E87C3B"] %>
+            </div>
+
+
+        <% else %>
+            <% analyzes = eq.analyzes.where(duree: 'mois').last(13)%>
+
+                <% analyzes.each do |an| %>
+                    <% result_eff[(an.created_at - 5.days).strftime("%m-%Y")] = an.efficacite %>
+                    <% obj_eff[(an.created_at - 5.days).strftime("%m-%Y")] = an.eff_obj %>
+
+                    <% result_util[(an.created_at - 5.days).strftime("%m-%Y")] = an.utilisation %>
+                    <% obj_util[(an.created_at - 5.days).strftime("%m-%Y")] = an.util_obj %>
+
+                    <% result_prod[(an.created_at - 5.days).strftime("%m-%Y")] = (an.efficacite+an.utilisation)/2 %>
+                    <% obj_prod[(an.created_at - 5.days).strftime("%m-%Y")] = (an.eff_obj + an.util_obj)/2 %>
+                <% end %>
+
+            <div style="display:inline-block;width:30%;">  
+                <%= line_chart [{name: "Efficacité", data: result_eff}, {name: "Objectif", data: obj_eff}], legend: true, title: "Efficacite #{eq.re} par #{@duree_eff}", suffix: "%", min: 70, max: 150, download: true, colors: ["#5C98CE", "#E87C3B"] %>
+            </div>
+
+            <div style="display:inline-block;width:30%;">  
+                <%= line_chart [{name: "Utilisation", data: result_util}, {name: "Objectif", data: obj_util}], legend: true, title: "Utilisation #{eq.re} par #{@duree_util}", suffix: "%", min: 70, max: 150, download: true, colors: ["#5C98CE", "#E87C3B"] %>
+            </div>
+
+            <div style="display:inline-block;width:30%;">  
+                <%= line_chart [{name: "Productivité", data: result_prod}, {name: "Objectif", data: obj_prod}], legend: true, title: "Productivité #{eq.re} par #{@duree_eff}", suffix: "%", min: 70, max: 150, download: true, colors: ["#5C98CE", "#E87C3B"] %>
+            </div>
+
+
+        <% end %>
+
+
+            
+
+
 
     <% end %>
 <% end %>
