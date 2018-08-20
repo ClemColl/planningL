@@ -1,0 +1,14 @@
+<%= simple_form_for(@taux_expecc) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :cmd, label: 'Commandes sur appel' %>
+    <%= f.input :obj, label: 'Objectif' %>
+    <%= f.input :total, label: 'Total' %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Enregistrer' %>
+    <%= link_to 'Retour', indicateurs_path, class: 'btn btn-default' %>
+  </div>
+<% end %>

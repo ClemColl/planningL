@@ -1,0 +1,95 @@
+<script>
+chartOptions = {
+    responsive: false,
+    maintainAspectRatio: false,
+    scales: {
+        yAxes: [{
+            id: 'A',
+            ticks: {
+                max: 100,
+                min: 90,
+                stepSize: 2,
+                callback: function(value, context) {
+                    return value + '%';
+                }
+            },
+            gridLines: { display: false }
+        },
+        {
+            id: 'B',
+            type: 'linear',
+            position: 'right',
+            ticks: { max: 4500, min: 0 }
+        }],
+        xAxes: [{
+            barThickness: 30,
+            offset: true,
+            gridLines: { offsetGridLines: true, display: false }
+        }],
+    },
+    elements: { line: { tension: 0 }, point: { radius: 0 }},
+    legend: { display: false },
+    tooltips: { display: false },
+    title: { display: true, text: 'Taux Expédition Filiales et Agents', fontSize: 20, fontColor: '#333333' }
+}
+
+var ctx = document.getElementById('expe_fa').getContext('2d');
+var expe_fa = new Chart(ctx, {
+    data: {
+        labels: <%= raw @date_range %>,
+        datasets: [{
+            label: 'Objectif',
+            yAxisID: 'A',
+            type: 'line',
+            fill: false,
+            radius: 0,
+            data: <%= @expefa_obj %>,
+            borderColor: 'black',
+            backgroundColor: 'black'
+        },
+        {
+            label: 'Expe',
+            yAxisID: 'B',
+            type: 'line',
+            fill: false,
+            data: <%= @expefa_nb %>,
+            borderColor: 'red',
+            backgroundColor: 'red',
+            datalabels: {
+                color: 'black',
+                align: 'top',
+                offset: 5,
+                display: function(context) {
+                    return context.dataset.data[context.dataIndex]
+                }
+            }
+        },
+        {
+            label: 'Expe',
+            yAxisID: 'A',
+            type: 'bar',
+            data: <%= @expefa %>,
+            borderColor: ['green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green'],
+            backgroundColor: ['green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green'],
+            datalabels: {
+                rotation: 270,
+                anchor: 'top',
+                align: 'bottom',
+                offset: 30
+            }
+        }]
+    },
+    options: chartOptions
+    });
+
+var colorChangeValue = <%= @expefa_obj.last %>
+var dataset = expe_fa.data.datasets[2]
+for (var i = 0; i < dataset.data.length; i++) {
+    if (dataset.data[i] < colorChangeValue) {
+        dataset.backgroundColor[i] = 'red'
+        dataset.borderColor = 'red'
+    }
+}
+
+expe_fa.update();
+</script>

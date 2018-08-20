@@ -1,0 +1,14 @@
+<%= simple_form_for(@taux_expefa) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :taux, label: 'Taux' %>
+    <%= f.input :obj, label: 'Objectif' %>
+    <%= f.input :nbligne, label: 'Nombre de lignes' %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Enregistrer' %>
+    <%= link_to 'Retour', indicateurs_path, class: 'btn btn-default' %>
+  </div>
+<% end %>

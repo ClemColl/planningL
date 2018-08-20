@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tmpdef: 1.5
+  obj: 1.5
+  hdirect: 1
+
+two:
+  tmpdef: 1.5
+  obj: 1.5
+  hdirect: 1

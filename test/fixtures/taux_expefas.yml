@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  taux: 1.5
+  obj: 1.5
+  nbligne: 1
+
+two:
+  taux: 1.5
+  obj: 1.5
+  nbligne: 1

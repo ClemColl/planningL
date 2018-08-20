@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cmd: 1.5
+  obj: 1.5
+  total: 1.5
+
+two:
+  cmd: 1.5
+  obj: 1.5
+  total: 1.5

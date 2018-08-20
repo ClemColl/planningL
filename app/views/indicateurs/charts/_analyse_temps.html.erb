@@ -1,0 +1,86 @@
+<script>
+chartOptions = {
+    responsive: false,
+    maintainAspectRatio: false,
+    scales: {
+        yAxes: [{
+            id: 'A',
+            ticks: {
+                max: 10,
+                min: 0,
+                stepSize: 2,
+                callback: function(value, context) {
+                    return value + '%';
+                }
+            },
+            gridLines: { display: false }
+        },
+        {
+            id: 'B',
+            type: 'linear',
+            position: 'right',
+            ticks: { max: 8000, min: 0 }
+        }],
+        xAxes: [{
+            barThickness: 30,
+            offset: true,
+            gridLines: { offsetGridLines: true, display: false }
+        }],
+    },
+    elements: { line: { tension: 0 }, point: { radius: 0 }},
+    legend: { display: false },
+    tooltips: { display: false },
+    title: { display: true, text: 'Analyse des temps passés en résolution de problèmes', fontSize: 20, fontColor: '#333333' }
+}
+
+var ctx = document.getElementById('analyse_temps').getContext('2d');
+var analyse_temps = new Chart(ctx, {
+    data: {
+        labels: <%= raw @date_range %>,
+        datasets: [{
+            label: 'Objectif Temps',
+            yAxisID: 'A',
+            type: 'line',
+            fill: false,
+            radius: 0,
+            data: <%= @analyses_obj %>,
+            borderColor: 'black',
+            backgroundColor: 'black'
+        },
+        {
+            label: 'Temps défauts',
+            yAxisID: 'A',
+            type: 'line',
+            fill: false,
+            radius: 0,
+            data: <%= @analyses %>,
+            borderColor: 'red',
+            backgroundColor: 'red',
+            datalabels: {
+                color: 'red',
+                align: 'top',
+                offset: 5,
+                display: function(context) {
+                    return context.dataset.data[context.dataIndex]
+                }
+            }
+        },
+        {
+            label: 'Heures directes',
+            yAxisID: 'B',
+            type: 'bar',
+            fill: false,
+            data: <%= @analyses_hdirect %>,
+            borderColor: 'lightgrey',
+            backgroundColor: 'lightgray',
+            datalabels: {
+                display: function(context) {
+                    return 0
+                }
+            }
+        }]
+    },
+    options: chartOptions
+    });
+
+</script>

@@ -1,9 +1,53 @@
-<div style="display:inline-block;width:100%;">  
-    <%= line_chart [{name: "Productivité", data: @result[:prod]}, {name: "Objectif", data: @result[:obj_prod]}], legend: true, title: "Productivité Fab par mois", suffix: "%", min: 70, max: 150, download: true, colors: ["#5C98CE", "#E87C3B"], library: { animation: { duration: 300, easing: "linear" }} %>
-</div>
+<%= render 'labels' %>
+<script>
+Chart.defaults.global.plugins.datalabels = {
+    color: 'white',
+    font: { weight: 'bold' },
+    display: function(context) {
+        if (context.dataset.type == 'bar') {
+            return context.dataset.data[context.dataIndex];
+        } else {
+            return 0
+        }
+    }
+}
+</script>
 
+<canvas id="prod" style="display:inline-block;width:33%;height:300px;">
+</canvas>
 
+<canvas id="rotation" style="display:inline-block;width:33%;height:300px;">
+</canvas>
+
+<canvas id="expe" style="display:inline-block;width:33%;height:300px;">
+</canvas>
+
+<canvas id="expe_fa" style="display:inline-block;width:49%;height:300px;">
+</canvas>
+
+<canvas id="expe_cc" style="display:inline-block;width:49%;height:300px;">
+</canvas>
+
+<canvas id="analyse_temps" style="display:inline-block;width:49%;height:300px;">
+</canvas>
+
+<canvas id="ecart" style="display:inline-block;width:49%;height:300px;">
+</canvas>
 
 <div style="text-align:center;">
-    <%= link_to 'Retour', indicateurs_path, class: 'btn btn-default'%>
+    <%= link_to 'Modifier les données', indicateurs_path, class: 'btn btn-default'%>
 </div>
+
+<%= render 'indicateurs/charts/productivite'%>
+
+<%= render 'indicateurs/charts/rotation' %>
+
+<%= render 'indicateurs/charts/expe'%>
+
+<%= render 'indicateurs/charts/expe_fa'%>
+
+<%= render 'indicateurs/charts/expe_cc'%>
+
+<%= render 'indicateurs/charts/analyse_temps'%>
+
+<%= render 'indicateurs/charts/ecart'%>

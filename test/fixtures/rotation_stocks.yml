@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rotation: 1.5
+  objectif: 1.5
+  mois: MyString
+
+two:
+  rotation: 1.5
+  objectif: 1.5
+  mois: MyString

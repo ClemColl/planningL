@@ -1,0 +1,177 @@
+<style>
+th {
+    padding:5px;
+}
+td {
+    padding:5px;
+}
+</style>
+
+<!-- <div>
+    <h3>Productivité</h3>
+    <table>
+
+    </table>
+</div> -->
+
+<div>
+    <h3>Rotation des stocks</h3>
+    <table>
+        <thead>
+            <tr>
+            <th>Rotation</th>
+            <th>Objectif</th>
+            <th>Créée le</th>
+            <th colspan="2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @rotation.each do |r| %>
+            <tr>
+                <td><%= r.rotation %></td>
+                <td><%= r.objectif %></td>
+                <td><%= r.created_at.to_formatted_s(:short) %></td>
+                <td><%= link_to 'Modifier', edit_rotation_stock_path(r), class: 'btn btn-default' %></td>
+                <td><%= link_to 'Supprimer', r, method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: 'btn btn-danger' %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <h3>Analyse des temps passés en résolution de problèmes</h3>
+    <table>
+        <thead>
+            <tr>
+            <th>Temps de défauts</th>
+            <th>Objectif</th>
+            <th>Heures directes</th>
+            <th>Créée le</th>
+            <th colspan="2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @analyse_temps.each do |r| %>
+            <tr>
+                <td><%= r.tmpdef %></td>
+                <td><%= r.obj %></td>
+                <td><%= r.hdirect %></td>
+                <td><%= r.created_at.to_formatted_s(:short) %></td>
+                <td><%= link_to 'Modifier', edit_analyse_temps_probleme_path(r), class: 'btn btn-default' %></td>
+                <td><%= link_to 'Supprimer', r, method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: 'btn btn-danger' %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <h3>Evolution de l'écart d'inventaire</h3>
+    <table>
+        <thead>
+            <tr>
+            <th>Valeur moyenne stock compté</th>
+            <th>Ecart inventaire</th>
+            <th>Objectif</th>
+            <th>Créé le</th>
+            <th colspan="2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @ecart_stock.each do |r| %>
+            <tr>
+                <td><%= r.valeur %></td>
+                <td><%= r.ecart %></td>
+                <td><%= r.obj %></td>
+                <td><%= r.created_at.to_formatted_s(:short) %></td>
+                <td><%= link_to 'Modifier', edit_ecart_stock_path(r), class: 'btn btn-default' %></td>
+                <td><%= link_to 'Supprimer', r, method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: 'btn btn-danger' %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <h3>Taux d’expédition Equipements</h3>
+    <table>
+        <thead>
+            <tr>
+            <th>Taux</th>
+            <th>Objectif</th>
+            <th>Créé le</th>
+            <th colspan="2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @taux_equip.each do |r| %>
+            <tr>
+                <td><%= r.taux %></td>
+                <td><%= r.obj %></td>
+                <td><%= r.created_at.to_formatted_s(:short) %></td>
+                <td><%= link_to 'Modifier', edit_taux_expe_path(r), class: 'btn btn-default' %></td>
+                <td><%= link_to 'Supprimer', r, method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: 'btn btn-danger' %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <h3>Taux d’expédition Filiales et Agents</h3>
+    <table>
+        <thead>
+            <tr>
+            <th>Taux</th>
+            <th>Objectif</th>
+            <th>Nombre de ligne servies</th>
+            <th>Créé le</th>
+            <th colspan="2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @taux_fa.each do |r| %>
+            <tr>
+                <td><%= r.taux %></td>
+                <td><%= r.obj %></td>
+                <td><%= r.nbligne %></td>
+                <td><%= r.created_at.to_formatted_s(:short) %></td>
+                <td><%= link_to 'Modifier', edit_taux_expefa_path(r), class: 'btn btn-default' %></td>
+                <td><%= link_to 'Supprimer', r, method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: 'btn btn-danger' %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <h3>Taux d’expédition clients directs WW, avec contrat</h3>
+    <table>
+        <thead>
+            <tr>
+            <th>Commandes sur appel</th>
+            <th>Objectif</th>
+            <th>Total</th>
+            <th>Créé le</th>
+            <th colspan="2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @taux_client.each do |r| %>
+            <tr>
+                <td><%= r.cmd %></td>
+                <td><%= r.obj %></td>
+                <td><%= r.total %></td>
+                <td><%= r.created_at.to_formatted_s(:short) %></td>
+                <td><%= link_to 'Modifier', edit_taux_expecc_path(r), class: 'btn btn-default' %></td>
+                <td><%= link_to 'Supprimer', r, method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: 'btn btn-danger' %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <%= link_to 'Retour', indicateurs_path, class: 'btn btn-default' %>
+</div>
