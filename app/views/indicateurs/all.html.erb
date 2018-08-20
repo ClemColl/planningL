@@ -1,16 +1,37 @@
+<style>
+.btn-default {
+    margin:5px;
+}
+</style>
+
 <div>
     <div style="text-align:center;">
         <%= link_to "Mode Présentation", indicateurs_production_path, class: 'btn btn-info' %>
     </div>
     <div>
-        <h1>Productivité</h1>
+        <h2>Productivité</h2>
         <%= link_to "Analyser productivité", indicateurs_production_new_path, class: 'btn btn-default' %>
         <%= link_to "Equipes", equipes_path, class: 'btn btn-default' %>
-        <%= link_to "Objectifs", objectifs_path, class: 'btn btn-default' %>
+        <%= link_to "Modifier les Objectifs", objectifs_path, class: 'btn btn-default' %>
     </div>
+
     <br>
 
-</div>
+    <div>
+        <h2>Ajouter des données</h2>
+        <%= link_to "Rotation des stocks", new_rotation_stock_path, class: 'btn btn-default' %>
+        <%= link_to "Analyse des temps passés en résolution de problèmes", new_analyse_temps_probleme_path, class: 'btn btn-default' %>
+        <%= link_to "Evolution de l'écart d'inventaire", new_ecart_stock_path, class: 'btn btn-default' %>
+        <br>
+        <%= link_to "Taux d’expédition Equipements", new_taux_expe_path, class: 'btn btn-default' %>
+        <%= link_to "Taux d’expédition Filiales et Agents", new_taux_expefa_path, class: 'btn btn-default' %>
+        <%= link_to "Taux d’expédition clients directs WW, avec contrat", new_taux_expecc_path, class: 'btn btn-default' %>
+    </div>
 
-<div>
-    
+    <br>
+
+    <div>
+        <%= link_to "Gérer les données", indicateurs_data_path, class: 'btn btn-danger'%>
+    </div>
+
+</div>

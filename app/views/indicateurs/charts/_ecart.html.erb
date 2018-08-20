@@ -1,0 +1,85 @@
+<script>
+chartOptions = {
+    responsive: false,
+    maintainAspectRatio: false,
+    scales: {
+        yAxes: [{
+            id: 'A',
+            ticks: {
+                max: 1.2,
+                min: 0,
+                stepSize: 0.2,
+                callback: function(value, context) {
+                    return value + '%';
+                }
+            },
+            gridLines: { display: false }
+        },
+        {
+            id: 'B',
+            type: 'linear',
+            position: 'right',
+            ticks: { max: 5000000, min: 0 }
+        }],
+        xAxes: [{
+            barThickness: 30,
+            offset: true,
+            gridLines: { offsetGridLines: true, display: false }
+        }],
+    },
+    elements: {point: { radius: 0 }},
+    legend: { display: false },
+    tooltips: { display: false },
+    title: { display: true, text: 'Evolution de l\'écart d\'inventaire', fontSize: 20, fontColor: '#333333' }
+}
+
+var ctx = document.getElementById('ecart').getContext('2d');
+var ecart = new Chart(ctx, {
+    data: {
+        labels: <%= raw @date_range %>,
+        datasets: [{
+            label: 'Objectif Temps',
+            yAxisID: 'A',
+            type: 'line',
+            fill: false,
+            radius: 0,
+            data: <%= @ecart_obj %>,
+            borderColor: 'black',
+            backgroundColor: 'black'
+        },
+        {
+            label: 'Temps défauts',
+            yAxisID: 'A',
+            type: 'line',
+            fill: false,
+            radius: 0,
+            data: <%= @ecart %>,
+            borderColor: 'red',
+            backgroundColor: 'red',
+            datalabels: {
+                color: 'red',
+                align: 'top',
+                offset: 5,
+                display: function(context) {
+                    return context.dataset.data[context.dataIndex]
+                }
+            }
+        },
+        {
+            label: 'Heures directes',
+            yAxisID: 'B',
+            type: 'bar',
+            data: <%= @ecart_val %>,
+            borderColor: 'lightgrey',
+            backgroundColor: 'lightgray',
+            datalabels: {
+                display: function(context) {
+                    return 0
+                }
+            }
+        }]
+    },
+    options: chartOptions
+    });
+
+</script>

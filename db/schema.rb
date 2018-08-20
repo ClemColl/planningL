@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180719094601) do
+ActiveRecord::Schema.define(version: 20180816140348) do
+
+  create_table "analyse_temps_problemes", force: :cascade do |t|
+    t.string "tmpdef"
+    t.string "obj"
+    t.string "hdirect"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "analyzes", force: :cascade do |t|
     t.integer "equipe_id"
@@ -40,6 +48,14 @@ ActiveRecord::Schema.define(version: 20180719094601) do
 
   create_table "calendars", force: :cascade do |t|
     t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ecart_stocks", force: :cascade do |t|
+    t.string "valeur"
+    t.string "ecart"
+    t.string "obj"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -126,6 +142,14 @@ ActiveRecord::Schema.define(version: 20180719094601) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "rotation_stocks", force: :cascade do |t|
+    t.string "rotation"
+    t.string "objectif"
+    t.string "mois"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "stocks", force: :cascade do |t|
     t.string "week"
     t.string "smc"
@@ -135,6 +159,29 @@ ActiveRecord::Schema.define(version: 20180719094601) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "quart"
+  end
+
+  create_table "taux_expeccs", force: :cascade do |t|
+    t.string "cmd"
+    t.string "obj"
+    t.string "total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "taux_expefas", force: :cascade do |t|
+    t.string "taux"
+    t.string "obj"
+    t.string "nbligne"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "taux_expes", force: :cascade do |t|
+    t.string "taux"
+    t.string "obj"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "teams", force: :cascade do |t|

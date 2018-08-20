@@ -1,0 +1,14 @@
+<%= simple_form_for(@analyse_temps_probleme) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :tmpdef, label: 'Temps de défauts' %>
+    <%= f.input :obj, label: 'Objectif' %>
+    <%= f.input :hdirect, label: 'Heures directes' %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Enregistrer' %>
+    <%= link_to 'Retour', indicateurs_path, class: 'btn btn-default'  %>
+  </div>
+<% end %>

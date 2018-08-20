@@ -5,15 +5,13 @@ class BacklogsController < ApplicationController
     @backlogs = Backlog.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @backlog = Backlog.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @backlog = Backlog.new(backlog_params)
@@ -35,15 +33,16 @@ class BacklogsController < ApplicationController
 
   def destroy
     @backlog.destroy
-    redirect_to backlogs_url, notice: 'Backlog was successfully destroyed.'
+    redirect_to backlogs_url, notice: 'Donnée supprimée avec succès.'
   end
 
   private
-    def set_backlog
-      @backlog = Backlog.find(params[:id])
-    end
 
-    def backlog_params
-      params.require(:backlog).permit(:mac, :mfc, :mfcl, :ytd, :ytdl, :mb, :ob, :quart, :week)
-    end
+  def set_backlog
+    @backlog = Backlog.find(params[:id])
+  end
+
+  def backlog_params
+    params.require(:backlog).permit(:mac, :mfc, :mfcl, :ytd, :ytdl, :mb, :ob, :quart, :week)
+  end
 end

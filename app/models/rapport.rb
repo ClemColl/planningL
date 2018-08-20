@@ -3,21 +3,21 @@ class Rapport < ApplicationRecord
 
   validates_presence_of :week, :pdp, :cas, :dsa, :next_cas, :next_pdp
 
-  before_save  :set_quart, :set_cta, :check_pdp, :set_dav
+  before_save :set_quart, :set_cta, :check_pdp, :set_dav
 
   private
 
   def set_cta
-      if last_record = Rapport.where(machine_id: self.machine_id).last
-        if last_record.quart == self.quart
-          self.cta = last_record.cta + self.cas
-        else 
-          rapports = Rapport.where(machine_id: self.machine_id, quart: (self.quart)%4 + 1, created_at: (Date.today - 4.months)..Date.today)
-          self.cta = last_record.cta + self.cas + rapports.each.sum{|r| r.next_cas}
-        end
-      else
-        self.cta = self.cas
+    if last_record = Rapport.where(machine_id: self.machine_id).last
+      if last_record.quart == self.quart
+        self.cta = last_record.cta + self.cas
+      else 
+        rapports = Rapport.where(machine_id: self.machine_id, quart: (self.quart)%4 + 1, created_at: (Date.today - 4.months)..Date.today)
+        self.cta = last_record.cta + self.cas + rapports.each.sum{|r| r.next_cas}
       end
+    else
+      self.cta = self.cas
+    end
   end
 
   def check_pdp
@@ -28,6 +28,7 @@ class Rapport < ApplicationRecord
   end
 
   def set_dav
+    self.dav = 0
     if self.cta
       self.dav = self.pdp - self.cta
     else

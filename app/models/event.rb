@@ -70,23 +70,23 @@ class Event < ApplicationRecord
 
         elsif largeur == "86"
 
-            if gamme == "iQ50" || gamme == "iQ80"
-              self.color = colors[:orange]
-            elsif gamme == "iX6" || gamme == "iX9"
-              self.color = colors[:vert]
-            end
+          if gamme == "iQ50" || gamme == "iQ80"
+            self.color = colors[:orange]
+          elsif gamme == "iX6" || gamme == "iX9"
+            self.color = colors[:vert]
+          end
 
         elsif gamme == "Q25" || gamme == "iX"
 
-            self.color = colors[:bleu]
+          self.color = colors[:bleu]
 
         elsif gamme == "iXEML"
 
-            self.color = colors[:bleu_clair]
+          self.color = colors[:bleu_clair]
 
         else
 
-            self.color = colors[:gris]
+          self.color = colors[:gris]
 
         end
       else

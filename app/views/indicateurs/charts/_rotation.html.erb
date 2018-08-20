@@ -1,0 +1,59 @@
+<script>
+chartOptions = {
+    responsive: false,
+    maintainAspectRatio: false,
+    scales: {
+        yAxes: [{
+            ticks: { max: 3.5, min: 0 },
+            gridLines: { display: false }
+        }],
+        xAxes: [
+            {
+            barThickness: 20,
+            offset: true,
+            gridLines: { offsetGridLines: true, display: false }
+            }
+        ],
+    },
+    elements: { line: { tension: 0 }, point: { radius: 3 }},
+    legend: {display: false},
+    tooltips: {display: false},
+    title: { display: true, text: 'Rotation des stocks', fontSize: 20, fontColor: '#333333' }
+}
+
+var ctx = document.getElementById('rotation').getContext('2d');
+var rotation = new Chart(ctx, {
+    data: {
+        labels: <%= raw @date_range %>,
+        datasets: [
+        {
+        label: 'Objectif',
+        type: 'line',
+        fill: false,
+        radius: 0,
+        data: <%= @rotations_obj %>,
+        borderColor: 'black',
+        backgroundColor: 'black'
+        },
+        {
+        label: 'Rotation',
+        type: 'bar',
+        data: <%= @rotations %>,
+        backgroundColor: ['green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green']
+        }
+        ]
+    },
+    options: chartOptions
+    });
+
+
+var colorChangeValue = <%= @rotations_obj.last %>
+var dataset = rotation.data.datasets[1];
+for (var i = 0; i < dataset.data.length; i++) {
+    if (dataset.data[i] < colorChangeValue) {
+        dataset.backgroundColor[i] = 'red';
+    }
+}
+
+rotation.update();
+</script>

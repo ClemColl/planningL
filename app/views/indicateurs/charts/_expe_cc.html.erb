@@ -1,0 +1,90 @@
+<script>
+chartOptions = {
+    responsive: false,
+    maintainAspectRatio: false,
+    scales: {
+        yAxes: [{
+            id: 'A',
+            ticks: {
+                max: 98,
+                min: 84,
+                callback: function(value, context) {
+                    return value + '%';
+                }
+            },
+            gridLines: { display: false }
+        }],
+        xAxes: [{
+            offset: true,
+            gridLines: { offsetGridLines: true, display: false }
+        }],
+    },
+    elements: { line: { tension: 0 }},
+    legend: { display: false },
+    tooltips: { display: false },
+    title: { display: true, text: 'Taux Expédition commandes des clients avec contrat', fontSize: 20, fontColor: '#333333' },
+    plugins: {
+        datalabels: {
+            color: 'black',
+            align: 'top',
+            display: function(context) {
+                return context.dataset.data[context.dataIndex]
+            }
+        }
+    }
+}
+
+var ctx = document.getElementById('expe_cc').getContext('2d');
+var expe_cc = new Chart(ctx, {
+    data: {
+        labels: <%= raw @date_range %>,
+        datasets: [{
+            label: 'Commandes sur appel',
+            type: 'line',
+            fill: false,
+            data: <%= @expecc_cmd %>,
+            borderColor: '#5C98CE',
+            backgroundColor: '#5C98CE',
+            datalabels: {
+                align: 'bottom',
+                offset: 5,
+                color: '#5C98CE',
+                formatter: function(value, context) {
+                    return value + '%';
+                }
+            }
+        },
+        {
+            label: 'Total',
+            type: 'line',
+            fill: false,
+            data: <%= @expecc_total %>,
+            borderColor: 'red',
+            backgroundColor: 'red',
+            datalabels: {
+                align: 'top',
+                offset: 5,
+                color: 'red',
+                formatter: function(value, context) {
+                    return value + '%';
+                }
+            }
+        },
+        {
+            label: 'Objectif',
+            type: 'line',
+            fill: false,
+            radius: 0,
+            data: <%= @expecc_obj %>,
+            borderColor: 'black',
+            backgroundColor: 'black',
+            datalabels: {
+                display: function(context) {
+                    return 0
+                }
+            }
+        }]
+    },
+    options: chartOptions
+    });
+</script>
