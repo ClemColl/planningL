@@ -177,7 +177,7 @@ h1 {
         <tr>
             <td>Stock montant courant</td>
         <% stock.select(:smc).each do |bl| %>
-            <td><%= bl.smc %></td>
+            <td><%= bl.smc.to_f.round(1) %></td>
         <% end %>
         </tr>
         <tr>
@@ -189,7 +189,7 @@ h1 {
         <tr>
             <td>Réception montant courant</td>
         <% stock.select(:rmc).each do |bl| %>
-            <td><%= bl.rmc %></td>
+            <td><%= bl.rmc.to_f.round(1) %></td>
         <% end %>
         </tr>
     </table>
@@ -204,19 +204,19 @@ h1 {
         <tr>
             <td>Montant facturation courante</td>
         <% backlog.select(:mfc).each do |bl| %>
-            <td><%= bl.mfc %></td>
+            <td><%= bl.mfc.to_f.round(1) %></td>
         <% end %>
         </tr>
         <tr>
             <td>Montant attendu à fin de mois courant</td>
         <% backlog.select(:mac).each do |bl| %>
-            <td><%= bl.mac %></td>
+            <td><%= bl.mac.to_f.round(1) %></td>
         <% end %>
         </tr>
         <tr>
             <td>Montant facturation courante - année précédente</td>
         <% backlog.select(:mfcl).each do |bl| %>
-            <td><%= bl.mfcl %></td>
+            <td><%= bl.mfcl.to_f.round(1) %></td>
         <% end %>
         </tr>
         <tr>
@@ -251,13 +251,13 @@ h1 {
             <tr>
                 <td>Year-To-Date N</td>
             <% backlog.select(:ytd).each do |bl| %>
-                <td><%= bl.ytd %></td>
+                <td><%= bl.ytd.to_f.round(1) %></td>
             <% end %>
             </tr>
             <tr>
                 <td>Year-To-Date N-1</td>
             <% backlog.select(:ytdl).each do |bl| %>
-                <td><%= bl.ytdl %></td>
+                <td><%= bl.ytdl.to_f.round(1) %></td>
             <% end %>
             </tr>
         </table>

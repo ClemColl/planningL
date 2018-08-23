@@ -1,0 +1,124 @@
+<% @backlog = Backlog.where(quart: ((Date.today-1.week).month / 3.0).ceil, created_at: (Date.today-4.months)..(Date.today+1.week)) %>
+<script>
+var ctx = document.getElementById('backlog').getContext('2d');
+var backlog = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: <%= raw @date_range %>,
+        datasets: [
+        {
+        label: 'Montant attendu à fin de mois courant',
+        yAxisID: 'A',
+        type: 'line',
+        data: <%= @backlog.pluck(:mac).map(&:to_f) %>,
+        borderColor: '#4674C1',
+        backgroundColor: '#4674C1',
+        fill: false
+        },
+        {
+        label: 'Montant facturation courante',
+        yAxisID: 'A',
+        data: <%= @backlog.pluck(:mfc).map(&:to_f) %>,
+        borderColor: '#EB7D3C',
+        backgroundColor: '#EB7D3C'
+        },
+        {
+        label: 'Montant facturation courante - année précédente',
+        yAxisID: 'A',
+        data: <%= @backlog.pluck(:mfcl).map(&:to_f) %>,
+        borderColor: '#FDBF2D',
+        backgroundColor: '#FDBF2D'
+        },
+        {
+        label: 'Montant backlog en K€',
+        yAxisID: 'B',
+        type: 'line',
+        data: <%= @backlog.pluck(:mb).map(&:to_f) %>,
+        borderColor: '#000000',
+        backgroundColor: '#000000',
+        fill: false        
+        },
+        {
+        label: 'Objectif backlog en K€',
+        yAxisID: 'B',
+        type: 'line',
+        data: <%= @backlog.pluck(:ob).map(&:to_f) %>,
+        borderColor: '#A5A5A5',
+        backgroundColor: '#A5A5A5',
+        fill: false
+        }]
+    },
+    options: {
+        scaleShowVerticalLines: false,
+        spanGaps: true,
+        animation: { duration: 0 },
+        responsive: false,
+        maintainAspectRatio: false,
+        onAnimationComplete: setTimeout( function() {
+            var dataURL = backlog.toBase64Image();
+            $('#backlog_base64').val(dataURL);
+            },1000),
+        scales: {
+            yAxes: [{
+                id: 'A',
+                type: 'linear',
+                position: 'left',
+                scaleLabel: { display: true, labelString: 'Facturation' },
+                ticks: { max: 5, min: 0 }
+            }, {
+                id: 'B',
+                type: 'linear',
+                position: 'right',
+                scaleLabel: { display: true, labelString: 'Backlog' },
+                ticks: { beginAtZero: true, stepSize: 20}}],
+            xAxes: [{ barThickness: 5, gridLines: { offsetGridLines: true, display: false }}],
+            },
+        elements: { line: { tension: 0 }, point: { radius: 3 }},
+        title: { display: true, text: 'Consommables et pièces', fontSize: 30 }
+        }
+    });
+</script>
+<script>
+var htx = document.getElementById('ytd').getContext('2d');
+var ytd = new Chart(htx, {
+type: 'line',
+data: {
+    labels: <%= raw @date_range %>,
+    datasets: [{
+        label: 'Year-to-date N',
+        data: <%= @backlog.pluck(:ytd).map(&:to_f) %>,
+        borderColor: '#EB7D3C',
+        backgroundColor: '#EB7D3C',
+        fill: false
+    },
+    {
+        label: 'Year-to-date N-1',
+        data: <%= @backlog.pluck(:ytdl).map(&:to_f) %>,
+        borderColor: '#4674C1',
+        backgroundColor: '#4674C1',
+        fill: false
+    }
+]
+},
+options: {
+    scaleShowVerticalLines: false,
+    spanGaps: true,
+    animation: { duration: 0 },
+    responsive: false,
+    maintainAspectRatio: false,
+    onAnimationComplete: setTimeout( function() {
+        var dataURL = ytd.toBase64Image();
+        $('#ytd_base64').val(dataURL);
+        },1000),
+    scales: {
+        yAxes: [{
+            type: 'linear',
+            position: 'left',
+            scaleLabel: { display: false, labelString: 'Facturation' }
+            }
+        ],
+            xAxes: [{ barThickness: 5, gridLines: { offsetGridLines: true, display: false }}],
+        },
+    elements: { line: { tension: 0 }, point: { radius: 3 }},
+    title: { display: true, text: 'Year-To-Date Conso. pièces', fontSize: 30 }}});
+</script>

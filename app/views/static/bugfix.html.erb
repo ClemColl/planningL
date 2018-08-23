@@ -1,10 +1,11 @@
 <style>
 th {
-    padding:5px;
+  padding:5px;
 }
 
 td {
-    padding:5px;
+  padding-bottom:5px;
+  padding-right:5px;
 }
 </style>
 
@@ -16,11 +17,13 @@ td {
   <thead>
     <tr>
       <th>Semaine</th>
-      <th>Cas</th>
-      <th>Pdp</th>
-      <th>Cta</th>
-      <th>Dav</th>
-      <th>Dsa</th>
+      <th>Commandes<br>Affectées</th>
+      <th>PDP</th>
+      <th>Commandes<br>Totales</th>
+      <th>DAV</th>
+      <th>Deals signés<br>en attente</th>
+      <th>PDP+1</th>
+      <th>Commandes<br>Totales+1</th>
       <th>Machine</th>
       <th coldspan="2"></th>
     </tr>
@@ -35,9 +38,10 @@ td {
         <td><%= rapport.cta %></td>
         <td><%= rapport.dav %></td>
         <td><%= rapport.dsa %></td>
+        <td><%= rapport.next_pdp %></td>
+        <td><%= rapport.next_cas %></td>
         <td><%= rapport.machine.name %></td>
-        <td><%= link_to 'Modifier', edit_machine_rapport_path(rapport.machine_id, rapport) %></td>
-        <td><%= link_to 'Supprimer', machine_rapport_path(rapport.machine_id, rapport), method: :delete, data: { confirm: 'Êtes vous sûr?' } %></td>
+        <td><%= link_to 'Supprimer', machine_rapport_path(rapport.machine_id, rapport), method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: 'btn btn-danger', style: 'padding:5px;' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -50,10 +54,10 @@ td {
   <thead>
     <tr>
       <th>Semaine</th>
-      <th>Smc</th>
-      <th>Rmc</th>
-      <th>Sma</th>
-      <th>Rma</th>
+      <th>Stock Courant</th>
+      <th>Réception Courant</th>
+      <th>Stock Attendu</th>
+      <th>Réception Attendu</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -81,11 +85,12 @@ td {
   <thead>
     <tr>
       <th>Semaine</th>
-      <th>Mfc</th>
-      <th>Mac</th>
-      <th>Mb</th>
-      <th>Ob</th>
-      <th>Quart</th>
+      <th>Montant Facturation</th>
+      <th>Montant Attendu</th>
+      <th>Montant Backlog</th>
+      <th>Objectif Backlog</th>
+      <th>YTD</th>
+      <th>YTD N-1</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -98,7 +103,8 @@ td {
         <td><%= backlog.mac %></td>
         <td><%= backlog.mb %></td>
         <td><%= backlog.ob %></td>
-        <td><%= backlog.quart %></td>
+        <td><%= backlog.ytd %></td>
+        <td><%= backlog.ytdl %></td>
         <td><%= link_to 'Modifier', edit_backlog_path(backlog) %></td>
         <td><%= link_to 'Supprimer', backlog, method: :delete, data: { confirm: 'Êtes vous sûr?' } %></td>
       </tr>
