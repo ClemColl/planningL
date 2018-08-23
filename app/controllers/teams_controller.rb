@@ -1,28 +1,18 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
 
-  # GET /teams
-  # GET /teams.json
   def index
     @teams = Team.where(calendar_id: $calendar_id )
   end
 
-  # GET /teams/1
-  # GET /teams/1.json
-  def show
-  end
+  def show; end
 
-  # GET /teams/new
   def new
     @team = Team.new
   end
 
-  # GET /teams/1/edit
-  def edit
-  end
+  def edit; end
 
-  # POST /teams
-  # POST /teams.json
   def create
     @team = Team.new(team_params)
 

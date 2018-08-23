@@ -1,3 +1,18 @@
+<%= render 'indicateurs/labels' %>
+<script>
+Chart.defaults.global.plugins.datalabels = {
+    color: 'white',
+    font: { size: 10, weight: 'bold' },
+    display: function(context) {
+        if (context.dataset.type == 'bar') {
+            return context.dataset.data[context.dataIndex];
+        } else {
+            return 0
+        }
+    }
+}
+</script>
+
 <h1>Suivi d'activité</h1>
 
 <p>Aujourd'hui nous sommes en semaine <%= Date.today.cweek %></p>
@@ -11,7 +26,7 @@
             </div>
         <% end %>
             
-            <%= link_to "Nouvelle machine", new_machine_path, class:"col-4 btn btn-info btn-block" %>
+            <%= link_to "Nouvelle machine", new_machine_path, class: "col-4 btn btn-info btn-block", style:'margin-top:5px;' %>
             
     </div>
 
@@ -30,163 +45,130 @@
     </div>
 
 </div>
-
-<%= form_tag suivi_path, { :method => :post } do %>
-
+<%= form_tag suivi_path, { :method => :post, style: 'margin-top:100px;margin-bottom:100px;' } do %>
     <div class="row">
-        <div class="col-md-2 col-md-offset-5">
+        <div class="col-md-4 col-md-offset-4">
         <%= submit_tag "Chargement...", id: "get_pdf",
                                         class: "btn btn-primary",
                                         disabled: true,
-                                        data: { disable_with: false } %>  
+                                        data: { disable_with: false } %>
+        <%= link_to 'Modifier les données', suivi_bugfix_path, class: 'btn btn-danger', style: 'margin-left:10px;' %>
         </div>
     </div>
 
-    <canvas id="stock"></canvas>
-    <canvas id='backlog'></canvas>
-    <canvas id='ytd'></canvas>
+    <% @machines.each do |m| %>
+        <%= hidden_field_tag "#{m.underscore_id}_base64".to_sym %>
+    <% end %>    
     <%= hidden_field_tag "stock_base64".to_sym %>
     <%= hidden_field_tag "backlog_base64".to_sym %>
     <%= hidden_field_tag "ytd_base64".to_sym %>
+    <%# text_field_tag %>
+<% end %>
 
-    <% @machines.each do |m| %>
-        <canvas id="<%= m.underscore_id %>"></canvas>
-        <%= hidden_field_tag "#{m.underscore_id}_base64".to_sym %>
+<% @machines.each do |m| %>
+    <canvas id="<%= m.underscore_id %>" style="display: inline-block;"></canvas>
+<% end %>
+<canvas id="stock" style="display: inline-block;"></canvas>
+<canvas id='backlog' style="display: inline-block;"></canvas>
+<canvas id='ytd' style="display: inline-block;"></canvas>
 
-        <% rapport = m.rapports_quarter %>
-        <% rapports_dsa = rapport.map(&:dsa)%>
-        
-        <% if rapport.last %>
+<% @rapports.each do |r| %>
 
-            <script>
-                var ctx = document.getElementById("<%= m.underscore_id %>").getContext('2d');
-                var <%= m.underscore_id %> = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: [<%= @range.html_safe %>, "T+1"],
-                    datasets: [{
-                                label: 'PDP',
-                                type: 'line',
-                                data: [<% @nb_semaine.times do |x| %>
-                                        <% if rapport[x] %>
-                                            <%= rapport[x].pdp %>,
-                                        <% else %>
-                                            <%= rapport.last.pdp %>,
-                                        <% end %>
-                                    <% end %>],
-                                borderColor: "#5E9CD3",
-                                backgroundColor: "#5E9CD3",
-                                fill: false
-                            },
-                            {
-                                label: 'PDP+1',
-                                type: 'bar',
-                                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, <%= rapport.last.next_pdp %>],
-                                borderColor: "red",
-                                backgroundColor: "red"
-                            },
-                            {
-                                label: 'Commandes totale affectées + 1',
-                                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, <%= rapport.each.sum{|r| r.next_cas} %>],
-                                borderColor: 'grey',
-                                backgroundColor: 'grey',
-                                type: 'bar'
-                            },
-                            {
-                                label: "Deals signés en attente d'acompte",
-                                data: [<%= rapports_dsa.join(",") %>],
-                                borderColor: "#4674C1",
-                                backgroundColor: "#4674C1",
-                                lineTension: 0,
-                                type: 'line',
-                                fill: false  
-                            },
-                            {
-                                label: "DAV",
-                                data: [
-                                    <% @nb_semaine.times do |x| %>
-                                        <% if rapport[x] %>
-                                            <%= rapport[x].dav %>,
-                                        <% else %>
-                                            <%= rapport.last.dav %>,
-                                        <% end %>
-                                    <% end %>
-                                ],
-                                borderColor: '#FDBF2D',
-                                backgroundColor: '#FDBF2D',
-                                type: 'line',
-                                fill: false
-                            },
-                            {
-                                label: 'Commandes totale affectées',
-                                data: [
-                                    <% @nb_semaine.times do |x| %>
-                                        <% if rapport[x] %>
-                                            <%= rapport[x].cta %>,
-                                        <% else %>
-                                            <%= rapport.last.cta %>,
-                                        <% end %>
-                                    <% end %>
-                                ],
-                                borderColor: '#EA7D3C',
-                                backgroundColor: '#EA7D3C'
-                            },
-                            {
-                                label: 'Commandes  affectées dans la semaine',
-                                data: [
-                                    <% @nb_semaine.times do |x| %>
-                                        <% if rapport[x] %>
-                                            <%= rapport[x].cas %>,
-                                        <% end %>
-                                    <% end %>
-                                ],
-                                borderColor: '#94CE58',
-                                backgroundColor: '#94CE58'
-                            },
-                            ]
-                },
-                options: {
-                    animation: { duration: 0 },
-                    spanGaps: true,
-                    responsive: false,
-                    maintainAspectRatio: false,
-                    legend: { display: false },
-                    onAnimationComplete: setTimeout( function() {
-                        var dataURL = <%= m.name.parameterize.underscore%>.toBase64Image();
-                        $('#<%= m.name.parameterize.underscore%>_base64').val(dataURL);
-                        },1000),
-                    scales: {
-                        yAxes: [{
-                            ticks: { beginAtZero: true, stepSize: <%= (rapport.last.pdp/5).to_i %> }
-                        }],
-                        xAxes: [{
-                            barThickness: 6,
-                            gridLines: { offsetGridLines: true, display: false }
-                        }],
-                    },
-                    elements: {
-                        line: { tension: 0 },
-                        point: { radius: 3 }
-                    },
-                    title: { display: true, text: 'Activité <%= m.name %>', fontSize: 30 }
-                }});
-                $('#<%= m.name.parameterize.underscore%>').css('visibility', 'hidden');
-            </script>
-        
-        <% end %>
-
-    <% end %>
+<% m_id = r.first.machine.underscore_id %>
+<script>
+var ctx = document.getElementById("<%= m_id %>").getContext('2d');
+var <%= m_id %> = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: <%= raw @date_range + ["T+1"] %>,
+        datasets: [{
+            label: 'PDP',
+            type: 'line',
+            data: <%= r.pluck(:pdp).map(&:to_i) %>,
+            borderColor: "#5E9CD3",
+            backgroundColor: "#5E9CD3",
+            fill: false
+        },
+        {
+            label: 'PDP+1',
+            type: 'bar',
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, <%= r.last.next_pdp %>],
+            borderColor: 'red',
+            backgroundColor: 'red'
+        },
+        {
+            label: 'Commandes totale affectées + 1',
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, <%= r.each.sum{|ra| ra.next_cas} %>],
+            borderColor: 'grey',
+            backgroundColor: 'grey',
+            type: 'bar'
+        },
+        {
+            label: "Deals signés en attente d'acompte",
+            data: <%= r.pluck(:dsa).map(&:to_i) %>,
+            borderColor: '#4674C1',
+            backgroundColor: '#4674C1',
+            lineTension: 0,
+            type: 'line',
+            fill: false  
+        },
+        {
+            label: 'DAV',
+            data: <%= r.pluck(:dav).map(&:to_i) %>,
+            borderColor: '#FDBF2D',
+            backgroundColor: '#FDBF2D',
+            type: 'line',
+            fill: false
+        },
+        {
+            label: 'Commandes totale affectées',
+            data: <%= r.pluck(:cta).map(&:to_i) %>,
+            borderColor: '#EA7D3C',
+            backgroundColor: '#EA7D3C'
+        },
+        {
+            label: 'Commandes  affectées dans la semaine',
+            data: <%= r.pluck(:cas).map(&:to_i) %>,
+            borderColor: '#94CE58',
+            backgroundColor: '#94CE58'
+        }]
+    },
+    options: {
+        animation: { duration: 0 },
+        spanGaps: true,
+        responsive: false,
+        maintainAspectRatio: false,
+        legend: { display: false },
+        onAnimationComplete: setTimeout( function() {
+            var dataURL = <%= m_id %>.toBase64Image();
+            $('#<%= m_id %>_base64').val(dataURL);
+            },1000),
+        scales: {
+            yAxes: [{
+                ticks: { beginAtZero: true, stepSize: <%= (r.last.next_pdp/5).to_i %> }
+            }],
+            xAxes: [{
+                barThickness: 10,
+                gridLines: { offsetGridLines: true, display: false }
+            }],
+        },
+        elements: {
+            line: { tension: 0 },
+            point: { radius: 3 }
+        },
+        title: { display: true, text: 'Activité <%= r.first.machine.name %>', fontSize: 30 }
+    }});
+</script>
     
 <% end %>
 
+<%= render 'static/charts/stock' %>
 
-<%= stock_chart true, @nb_semaine %>
-
-<%= backlog_charts true, @nb_semaine %>
+<%= render 'static/charts/backlog' %>
 
 <script>
-    setTimeout(() => {
-        $("#get_pdf").prop('value', 'Rapport PDF');
-        $("#get_pdf").prop( "disabled", false );
-    }, 3000);
+setTimeout(() => {
+    $("#get_pdf").prop('value', 'Rapport PDF');
+    $("#get_pdf").prop( "disabled", false );
+}, 2000);
 </script>

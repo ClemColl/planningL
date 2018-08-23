@@ -110,8 +110,7 @@ class IndicateursController < ApplicationController
     end
   end
 
-  def fichiers
-  end
+  def fichiers; end
 
   def data
     @rotation = RotationStock.last(13)
@@ -165,8 +164,8 @@ class IndicateursController < ApplicationController
             qr5 += d[:quantite_requise].to_f
 
           ## HARD DATA
-          elsif grp_planif == ""
-            if desc_op.include?("poste STD") || code_article.start_with?("70601")
+          elsif grp_planif == ''
+            if desc_op.include?('poste STD') || code_article.start_with?('70601')
               qu2 += d[:quantite_utilisee].to_f
               qr2 += d[:quantite_requise].to_f
             else
@@ -174,8 +173,8 @@ class IndicateursController < ApplicationController
               qr3 += d[:quantite_requise].to_f
             end
 
-          elsif grp_planif == "A_AFFECTER"
-            if code_article.start_with?("ATO_70160")
+          elsif grp_planif == 'A_AFFECTER'
+            if code_article.start_with?('ATO_70160')
               qu3 += d[:quantite_utilisee].to_f
               qr3 += d[:quantite_requise].to_f
             else
@@ -183,8 +182,8 @@ class IndicateursController < ApplicationController
               qr2 += d[:quantite_requise].to_f
             end
 
-          elsif grp_planif == "C_CODA_NS"
-            if code_article == "706093"
+          elsif grp_planif == 'C_CODA_NS'
+            if code_article == '706093'
               qu2 += d[:quantite_utilisee].to_f
               qr2 += d[:quantite_requise].to_f
             else
@@ -192,8 +191,8 @@ class IndicateursController < ApplicationController
               qr4 += d[:quantite_requise].to_f
             end
 
-          elsif grp_planif == "C_CODA_S"
-            if code_article == "706093"
+          elsif grp_planif == 'C_CODA_S'
+            if code_article == '706093'
               qu2 += d[:quantite_utilisee].to_f
               qr2 += d[:quantite_requise].to_f
             else
@@ -202,10 +201,10 @@ class IndicateursController < ApplicationController
             end
 
           elsif grp_planif == 'C_EQUIP'
-            if desc_op.start_with?("Assemblage") || desc_op.include?("Montage Gros")
+            if desc_op.start_with?('Assemblage') || desc_op.include?('Montage Gros')
               qu1 += d[:quantite_utilisee].to_f
               qr1 += d[:quantite_requise].to_f
-            elsif code_article.include?("701495")
+            elsif code_article.include?('701495')
               qu2 += d[:quantite_utilisee].to_f
               qr2 += d[:quantite_requise].to_f
             else
@@ -213,11 +212,11 @@ class IndicateursController < ApplicationController
               qr5 += d[:quantite_requise].to_f
             end
 
-          elsif grp_planif == "PC_EQUIP"
-            if desc_op.start_with?("Test FX") || desc_op.start_with?("Transfo")
+          elsif grp_planif == 'PC_EQUIP'
+            if desc_op.start_with?('Test FX') || desc_op.start_with?('Transfo')
               qu5 += d[:quantite_utilisee].to_f
               qr5 += d[:quantite_requise].to_f
-            elsif desc_op.start_with?("Assemblage FX") || desc_op.start_with?("Finalisation Montage")
+            elsif desc_op.start_with?('Assemblage FX') || desc_op.start_with?('Finalisation Montage')
               qu1 += d[:quantite_utilisee].to_f
               qr1 += d[:quantite_requise].to_f
             else
@@ -225,8 +224,8 @@ class IndicateursController < ApplicationController
               qr3 += d[:quantite_requise].to_f
             end
 
-          elsif grp_planif == "PERIPH_PRE"
-            if code_article.start_with?("70") || code_article.start_with?("12")
+          elsif grp_planif == 'PERIPH_PRE'
+            if code_article.start_with?('70') || code_article.start_with?('12')
               qu4 += d[:quantite_utilisee].to_f
               qr4 += d[:quantite_requise].to_f
             else
@@ -234,8 +233,8 @@ class IndicateursController < ApplicationController
               qr2 += d[:quantite_requise].to_f
             end
 
-          elsif grp_planif == "PIL_NS"
-            if desc_op.start_with?("Preparation et configuration PC")
+          elsif grp_planif == 'PIL_NS'
+            if desc_op.start_with?('Preparation et configuration PC')
               qu1 += d[:quantite_utilisee].to_f
               qr1 += d[:quantite_requise].to_f
             else
@@ -243,35 +242,35 @@ class IndicateursController < ApplicationController
               qr2 += d[:quantite_requise].to_f
             end
 
-          elsif grp_planif == "SE_COL1_S"
-            if code_article.start_with?("7072")
+          elsif grp_planif == 'SE_COL1_S'
+            if code_article.start_with?('7072')
               qu2 += d[:quantite_utilisee].to_f
               qr2 += d[:quantite_requise].to_f
             else
               qu3 += d[:quantite_utilisee].to_f
               qr3 += d[:quantite_requise].to_f
             end
-    
-          elsif grp_planif == "SE_COL3_S"
-            if code_article.to_i.between?(706940, 707256) || code_article == "701958A"
+
+          elsif grp_planif == 'SE_COL3_S'
+            if code_article.to_i.between?(706940, 707256) || code_article == '701958A'
               qu2 += d[:quantite_utilisee].to_f
               qr2 += d[:quantite_requise].to_f
             else
               qu3 += d[:quantite_utilisee].to_f
               qr3 += d[:quantite_requise].to_f
             end
-    
-          elsif grp_planif == "SE_RUNN_S"
-            if desc_op.include?("zone affutage")
+
+          elsif grp_planif == 'SE_RUNN_S'
+            if desc_op.include?('zone affutage')
               qu4 += d[:quantite_utilisee].to_f
               qr4 += d[:quantite_requise].to_f
             else
               qu3 += d[:quantite_utilisee].to_f
               qr3 += d[:quantite_requise].to_f
             end
-    
-          elsif grp_planif == "SE_VIB_S"
-            if code_article == "705510"
+
+          elsif grp_planif == 'SE_VIB_S'
+            if code_article == '705510'
               qu2 += d[:quantite_utilisee].to_f
               qr2 += d[:quantite_requise].to_f
             else
@@ -387,7 +386,6 @@ class IndicateursController < ApplicationController
 
     file = File.open(url.path, "r")
     file.each_with_index do |line, index|
-        
       if index == 0
         line.split("\t").each do |l|
           columns << l.parameterize.underscore
@@ -402,20 +400,20 @@ class IndicateursController < ApplicationController
 
     data = []
     rows.each do |row|
-        h = {}
-        columns.zip(row) { |a,b| h[a.to_sym] = b }
-        data << h
+      h = {}
+      columns.zip(row) { |a,b| h[a.to_sym] = b }
+      data << h
     end
 
     return data
   end
 
   def initial_t1(data)
-    data == "C_ARBRE_NS" || data == "C_ARBRE_S" || data == "PIL_S"
+    data == 'C_ARBRE_NS' || data == 'C_ARBRE_S' || data == 'PIL_S'
   end
 
   def initial_t2(data)
-    data == "SE_COL_TAB" || data == "VERS_EQUIP" || data == "VERS_PDET" || data == "VERS_SE" || data == "VG_ASS_DEC" || data == "VG_ASS_MOD" || data == "VG_SE"
+    data == 'SE_COL_TAB' || data == 'VERS_EQUIP' || data == 'VERS_PDET' || data == 'VERS_SE' || data == 'VG_ASS_DEC' || data == 'VG_ASS_MOD' || data == 'VG_SE'
   end
 
   def initial_t3(data)
@@ -427,7 +425,6 @@ class IndicateursController < ApplicationController
   end
 
   def initial_t5(data)
-    data == "FQ-EQUIP" || data == "FQ-PDET"
+    data == 'FQ-EQUIP' || data == 'FQ-PDET'
   end
-
 end

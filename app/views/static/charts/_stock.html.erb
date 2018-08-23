@@ -1,0 +1,64 @@
+<script>
+    var ctx = document.getElementById('stock').getContext('2d');
+    var stock = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: <%= raw @date_range %>,
+        datasets: [{
+          label: 'Stock: Montant courant',
+          data: <%= @stock.pluck(:smc).map(&:to_f) %>,
+          borderColor: '#EB7D3C',
+          backgroundColor: '#EB7D3C'
+        },
+        {
+          label: 'Réception: Montant courant',
+          data: <%= @stock.pluck(:rmc).map(&:to_f) %>,
+          borderColor: '#4674C1',
+          backgroundColor: '#4674C1'
+        },
+        {
+          label: 'Stock: Montant attendu',
+          type: 'line',
+          data: <%= @stock.pluck(:sma).map(&:to_f) %>,
+          borderColor: '#000000',
+          backgroundColor: '#000000',
+          fill: false
+        },
+        {
+          label: 'Réception: Montant attendu',
+          type: 'line',
+          data: <%= @stock.pluck(:rma).map(&:to_f) %>,
+          borderColor: '#A5A5A5',
+          backgroundColor: '#A5A5A5',
+          fill: false
+        }]
+    },
+    options: {
+        scaleShowVerticalLines: false,
+        spanGaps: true,
+        animation: {
+            duration: 0
+        },
+        responsive: false,
+        maintainAspectRatio: false,
+        onAnimationComplete: setTimeout( function() {
+            var dataURL = stock.toBase64Image();
+            $('#stock_base64').val(dataURL);
+            },1000),
+        scales: {
+            yAxes: [{
+                ticks: { beginAtZero: true, stepSize: 5 }
+            }],
+            xAxes: [{
+                barThickness: 5,
+                gridLines: { offsetGridLines: true, display: false }
+            }],
+        },
+        elements: {
+            line: { tension: 0 },
+            point: { radius: 3 }
+        },
+        title: { display: true, text: 'État du Stock', fontSize: 30}
+    }
+    });
+    </script>
