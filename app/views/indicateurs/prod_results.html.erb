@@ -21,8 +21,8 @@
             <% result_util[(an.created_at-1.day).strftime("%d/%m")] = an.utilisation %>
             <% obj_util[(an.created_at-1.day).strftime("%d/%m")] = an.util_obj %>
 
-            <% result_prod[(an.created_at-1.day).strftime("%d/%m")] = (an.efficacite+an.utilisation)/2 %>
-            <% obj_prod[(an.created_at-1.day).strftime("%d/%m")] = (an.eff_obj + an.util_obj)/2 %>
+            <% result_prod[(an.created_at-1.day).strftime("%d/%m")] = (an.efficacite*an.utilisation)/100 %>
+            <% obj_prod[(an.created_at-1.day).strftime("%d/%m")] = (an.eff_obj * an.util_obj)/100 %>
         <% end %>
 
         <div style="display:inline-block;width:30%;">  
@@ -47,8 +47,8 @@
                         <% result_util["S#{(an.created_at-4.days).to_date.cweek}"] = an.utilisation %>
                         <% obj_util["S#{(an.created_at-4.days).to_date.cweek}"] = an.util_obj %>
 
-                        <% result_prod["S#{(an.created_at-4.days).to_date.cweek}"] = (an.efficacite+an.utilisation)/2 %>
-                        <% obj_prod["S#{(an.created_at-4.days).to_date.cweek}"] = (an.eff_obj + an.util_obj)/2 %>
+                        <% result_prod["S#{(an.created_at-4.days).to_date.cweek}"] = (an.efficacite*an.utilisation)/100 %>
+                        <% obj_prod["S#{(an.created_at-4.days).to_date.cweek}"] = (an.eff_obj * an.util_obj)/100 %>
                     <% end %>
 
             <div style="display:inline-block;width:30%;">  
@@ -74,8 +74,8 @@
                     <% result_util[(an.created_at - 5.days).strftime("%m-%Y")] = an.utilisation %>
                     <% obj_util[(an.created_at - 5.days).strftime("%m-%Y")] = an.util_obj %>
 
-                    <% result_prod[(an.created_at - 5.days).strftime("%m-%Y")] = (an.efficacite+an.utilisation)/2 %>
-                    <% obj_prod[(an.created_at - 5.days).strftime("%m-%Y")] = (an.eff_obj + an.util_obj)/2 %>
+                    <% result_prod[(an.created_at - 5.days).strftime("%m-%Y")] = (an.efficacite*an.utilisation)/100 %>
+                    <% obj_prod[(an.created_at - 5.days).strftime("%m-%Y")] = (an.eff_obj * an.util_obj)/100 %>
                 <% end %>
 
             <div style="display:inline-block;width:30%;">  
@@ -103,5 +103,5 @@
 
 
 <div style="text-align:center;">
-<%= link_to 'Retour aux indicateurs', indicateurs_path, class: 'btn btn-default'%>
+    <%= link_to 'Retour aux indicateurs', indicateurs_path, class: 'btn btn-default'%>
 </div>

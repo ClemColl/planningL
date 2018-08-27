@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sps: MyString
+  obj_p: MyString
+  spc: MyString
+  sls: MyString
+  obj_l: MyString
+  slc: MyString
+
+two:
+  sps: MyString
+  obj_p: MyString
+  spc: MyString
+  sls: MyString
+  obj_l: MyString
+  slc: MyString

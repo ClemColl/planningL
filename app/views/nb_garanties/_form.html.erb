@@ -1,0 +1,15 @@
+<%= simple_form_for(@nb_garanty) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :week, label: 'Numéro de semaine', input_html: { value: @nb_garanty.week || Date.today.cweek-1 } %>
+    <%= f.input :ge, label: 'Nb garanties Equipement' %>
+    <%= f.input :gcp, label: 'Nb de garanties C&P' %>
+    <%= f.input :gar, label: 'Garanties N-1' %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Enregistrer' %>
+    <%= link_to 'Retour', suivi_path, class: 'btn btn-default' %>
+  </div>
+<% end %>

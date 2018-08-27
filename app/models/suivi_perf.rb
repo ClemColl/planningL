@@ -1,0 +1,2 @@
+class SuiviPerf < ApplicationRecord
+end

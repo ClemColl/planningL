@@ -4,21 +4,9 @@ class IndicateursController < ApplicationController
 
   def production
     ## ALL
-    @date_range = [
-      I18n.l(Date.today - 12.month, format: '%B'),
-      I18n.l(Date.today - 11.month, format: '%B'),
-      I18n.l(Date.today - 10.month, format: '%B'),
-      I18n.l(Date.today - 9.month, format: '%B'),
-      I18n.l(Date.today - 8.month, format: '%B'),
-      I18n.l(Date.today - 7.month, format: '%B'),
-      I18n.l(Date.today - 6.month, format: '%B'),
-      I18n.l(Date.today - 5.month, format: '%B'),
-      I18n.l(Date.today - 4.month, format: '%B'),
-      I18n.l(Date.today - 3.month, format: '%B'),
-      I18n.l(Date.today - 2.month, format: '%B'),
-      I18n.l(Date.today - 1.month, format: '%B'),
-      I18n.l(Date.today, format: '%B')
-    ]
+    @date_range = []
+    dates = Date.commercial(Date.today.year, (Date.today.beginning_of_quarter+7.days).cweek, 3).cweek..Date.today.end_of_quarter.cweek
+    dates.each { |s| @date_range << "S#{s}" }
 
     ## Productivité
     analyzes = Equipe.first.analyzes.where(duree: 'mois').last(13)
@@ -27,8 +15,8 @@ class IndicateursController < ApplicationController
     productivite_objectif = []
 
     analyzes.count.times do |i|
-      productivite[i] = ((analyzes.pluck(:efficacite)[i] + analyzes.pluck(:utilisation)[i]) / 2).round(2)
-      productivite_objectif[i] = ((analyzes.pluck(:eff_obj)[i] + analyzes.pluck(:util_obj)[i]) / 2).round(2)
+      productivite[i] = ((analyzes.pluck(:efficacite)[i] * analyzes.pluck(:utilisation)[i]) / 100).round(2)
+      productivite_objectif[i] = ((analyzes.pluck(:eff_obj)[i] * analyzes.pluck(:util_obj)[i]) / 100).round(2)
     end
 
     @prod = productivite

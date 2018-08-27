@@ -1,0 +1,78 @@
+<script>
+chartOptions = {
+    responsive: false,
+    maintainAspectRatio: false,
+    animation: { duration: 0 },
+    scales: {
+        yAxes: [{
+            ticks: {
+                max: 700000,
+                min: 0
+            },
+            gridLines: { display: false }
+        }],
+        xAxes: [{
+            barThickness: 15,
+            offset: true,
+            gridLines: { offsetGridLines: true, display: false }
+        }],
+    },
+    elements: { line: { tension: 0 }, point: { radius: 0 }},
+    legend: { display: true },
+    tooltips: { display: false },
+    title: { display: true, text: 'Projection gains achats de production', fontSize: 30 },
+}
+
+var ctx = document.getElementById('achat').getContext('2d');
+var achat = new Chart(ctx, {
+    data: {
+        labels: ['Mars', 'Juin', 'Septembre', 'Décembre'],
+        datasets: [{
+            label: 'Objectif',
+            type: 'line',
+            fill: false,
+            data: <%= @projections.pluck(:obj).map(&:to_i) %>,
+            borderColor: 'black',
+            backgroundColor: 'black',
+            datalabels: {
+                display: function(context, value) {
+                    return 0
+                }
+            }
+        },
+        {
+            label: 'Projection actualisée',
+            type: 'line',
+            fill: false,
+            data: <%= @projections.pluck(:proj_act).map(&:to_i) %>,
+            borderColor: 'red',
+            backgroundColor: 'red',
+            datalabels: {
+                display: function(context) {
+                    return context.dataset.data[context.dataIndex]
+                },
+                color: 'red',
+                align: 'bottom',
+                offset: 7
+            }
+        },
+        {
+            label: 'Projection janvier 2018',
+            type: 'line',
+            fill: false,
+            data: <%= @projections.pluck(:proj).map(&:to_i) %>,
+            borderColor: 'grey',
+            backgroundColor: 'gray',
+            datalabels: {
+                display: function(context) {
+                    return context.dataset.data[context.dataIndex]
+                },
+                color: 'gray',
+                align: 'top',
+                offset: 7
+            }
+        }]
+    },
+    options: chartOptions
+})
+</script>

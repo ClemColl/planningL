@@ -1,0 +1,18 @@
+<%= simple_form_for(@suivi_infic) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :week, label: 'Numéro de semaine', input_html: { value: @suivi_infic.week || Date.today.cweek-1 } %>
+    <%= f.input :sps, label: 'Pièces - Semaine' %>
+    <%= f.input :obj_p, label: 'Pièces - Objectif' %>
+    <%= f.input :spc, label: 'Pièces - Cumul' %>
+    <%= f.input :sls, label: 'Lots - Semaine' %>
+    <%= f.input :obj_l, label: 'Lots - Objectif'  %>
+    <%= f.input :slc, label: 'Lots - Cumul' %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Enregistrer' %>
+    <%= link_to 'Retour', suivi_path, class: 'btn btn-default' %>
+  </div>
+<% end %>

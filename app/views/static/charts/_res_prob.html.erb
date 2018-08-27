@@ -1,0 +1,68 @@
+<script>
+chartOptions = {
+    responsive: false,
+    maintainAspectRatio: false,
+    animation: { duration: 0 },
+    scales: {
+        yAxes: [{
+            ticks: {
+                max: 250,
+                min: 0,
+                stepSize: 50
+            },
+            gridLines: { display: false }
+        }],
+        xAxes: [{
+            barThickness: 15,
+            offset: true,
+            gridLines: { offsetGridLines: true, display: false }
+        }],
+    },
+    elements: { line: { tension: 0 }, point: { radius: 0 }},
+    legend: { display: true },
+    tooltips: { display: false },
+    title: { display: true, text: 'Temps Fab résolution de problème (heures)', fontSize: 30 },
+    plugins: {
+        datalabels: {
+            display: function(context) {
+                return 0
+            }
+        }
+    }
+}
+
+var ctx = document.getElementById('res_prob').getContext('2d');
+var res_prob = new Chart(ctx, {
+    data: {
+        labels: <%= raw @date_range %>,
+        datasets: [{
+            label: 'Temps passé en résolution de problème',
+            type: 'line',
+            fill: false,
+            data: <%= @tmps_fab.pluck(:tp).map(&:to_i) %>,
+            borderColor: 'lightblue',
+            backgroundColor: 'lightblue',
+            datalabels: {
+                display: function(context, value) {
+                    return 0
+                }
+            }
+        },
+        {
+            label: 'Temps passé 2016',
+            type: 'line',
+            fill: false,
+            data: <%= @tmps_fab.pluck(:tp_last).map(&:to_i) %>,
+            borderColor: 'orange',
+            backgroundColor: 'orange',
+            datalabels: {
+                rotation: 270,
+                anchor: 'top',
+                align: 'bottom',
+                offset: 10
+            }
+        }]
+    },
+    options: chartOptions
+})
+</script>

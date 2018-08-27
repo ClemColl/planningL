@@ -1,0 +1,91 @@
+<script>
+chartOptions = {
+    responsive: false,
+    maintainAspectRatio: false,
+    animation: { duration: 0 },
+    scales: {
+        yAxes: [{
+            ticks: {
+                max: 100,
+                min: 0,
+                stepSize: 10
+            },
+            gridLines: { display: false }
+        }],
+        xAxes: [{
+            barThickness: 15,
+            offset: true,
+            gridLines: { offsetGridLines: true, display: false }
+        }],
+    },
+    elements: { line: { tension: 0 }, point: { radius: 0 }},
+    legend: { display: true },
+    tooltips: { display: false },
+    title: { display: true, text: 'Suivi des indicateurs', fontSize: 30 },
+    plugins: {
+        datalabels: {
+            display: function(context) {
+                return 0
+            }
+        }
+    }
+}
+
+var ctx = document.getElementById('indics').getContext('2d');
+var indics = new Chart(ctx, {
+    data: {
+        labels: <%= raw @date_range %>,
+        datasets: [{
+            label: 'Pièces - Semaine',
+            type: 'line',
+            fill: false,
+            data: <%= @suivi_indic.pluck(:sps).map(&:to_f) %>,
+            borderColor: 'lightskyblue',
+            backgroundColor: 'transparent',
+            borderDash: [10,5]
+        },
+        {
+            label: 'Pièces - Objectif taux non-conformité',
+            type: 'line',
+            fill: false,
+            data: <%= @suivi_indic.pluck(:obj_p).map(&:to_f) %>,
+            borderColor: 'darkblue',
+            backgroundColor: 'darkblue'
+        },
+        {
+            label: 'Pièces - Cumul',
+            type: 'line',
+            fill: false,
+            data: <%= @suivi_indic.pluck(:spc).map(&:to_f) %>,
+            borderColor: 'lightskyblue',
+            backgroundColor: 'transparent'
+        },
+        {
+            label: 'Lots - Semaine',
+            type: 'line',
+            fill: false,
+            data: <%= @suivi_indic.pluck(:sls).map(&:to_f) %>,
+            borderColor: 'orange',
+            backgroundColor: 'transparent',
+            borderDash: [10,5]
+        },
+        {
+            label: 'Lots - Objectif taux non-conformité',
+            type: 'line',
+            fill: false,
+            data: <%= @suivi_indic.pluck(:obj_l).map(&:to_f) %>,
+            borderColor: '#ee7600',
+            backgroundColor: '#ee7600'
+        },
+        {
+            label: 'Lots - Cumul',
+            type: 'line',
+            fill: false,
+            data: <%= @suivi_indic.pluck(:slc).map(&:to_f) %>,
+            borderColor: 'orange',
+            backgroundColor: 'transparent'
+        }]
+    },
+    options: chartOptions
+})
+</script>

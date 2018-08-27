@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ge: MyString
+  gcp: MyString
+  gar: MyString
+
+two:
+  ge: MyString
+  gcp: MyString
+  gar: MyString

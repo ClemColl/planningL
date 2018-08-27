@@ -27,8 +27,6 @@ class TeamsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /teams/1
-  # PATCH/PUT /teams/1.json
   def update
     respond_to do |format|
       if @team.update(team_params)
@@ -41,8 +39,6 @@ class TeamsController < ApplicationController
     end
   end
 
-  # DELETE /teams/1
-  # DELETE /teams/1.json
   def destroy
     @team.destroy
     respond_to do |format|
@@ -52,13 +48,12 @@ class TeamsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_team
-      @team = Team.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def team_params
-      params.require(:team).permit(:user_id, :name, :event_id, :user_count, :calendar_id, :user_ids)
-    end
+  def set_team
+    @team = Team.find(params[:id])
+  end
+
+  def team_params
+    params.require(:team).permit(:user_id, :name, :event_id, :user_count, :calendar_id, :user_ids)
+  end
 end

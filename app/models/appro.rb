@@ -1,0 +1,2 @@
+class Appro < ApplicationRecord
+end

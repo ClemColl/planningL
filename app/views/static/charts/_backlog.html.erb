@@ -1,4 +1,3 @@
-<% @backlog = Backlog.where(quart: ((Date.today-1.week).month / 3.0).ceil, created_at: (Date.today-4.months)..(Date.today+1.week)) %>
 <script>
 var ctx = document.getElementById('backlog').getContext('2d');
 var backlog = new Chart(ctx, {

@@ -2,7 +2,7 @@
 <script>
 Chart.defaults.global.plugins.datalabels = {
     color: 'white',
-    font: { size: 10, weight: 'bold' },
+    font: { size: 10 },
     display: function(context) {
         if (context.dataset.type == 'bar') {
             return context.dataset.data[context.dataIndex];
@@ -21,7 +21,7 @@ Chart.defaults.global.plugins.datalabels = {
     <div class="col-md-4">
         <% @machines.each do |m| %>
             <div class="btn-group", style="width:100%;">
-                <%= link_to "#{m.name} - #{m.last_week}", new_machine_rapport_path(m.id), class:"btn btn-default", style: "width:70%;" %>
+                <%= link_to "#{m.name} - S#{m.last_week}", new_machine_rapport_path(m.id), class:"btn btn-default", style: "width:70%;" %>
                 <%= link_to "X", machine_path(m), class:"btn btn-danger", method: :delete, confirm: "Êtes vous sûr?", style:"width:10%;"%>
             </div>
         <% end %>
@@ -45,6 +45,24 @@ Chart.defaults.global.plugins.datalabels = {
     </div>
 
 </div>
+
+<div class="row">
+    <div class="col-md-4" style='margin-top:50px;'>
+        <%= link_to 'Risques d\'approvisionnement', new_appro_path, class: 'btn btn-default', style: 'width:80%;' %>
+        <%= link_to 'Projection gains achats de production', new_projection_path, class: 'btn btn-default', style: 'width:80%;' %>
+    </div>
+
+    <div class="col-md-4" style='margin-top:50px;'>
+        <%= link_to 'Contrôle en attente', new_suivi_perf_path, class: 'btn btn-default', style: 'width:80%;' %>
+        <%= link_to 'Temps Fab résolution de problème (heures)', new_temps_fab_path, class: 'btn btn-default', style: 'width:80%;' %>
+        <%= link_to 'Nombre de garanties', new_nb_garanty_path, class: 'btn btn-default', style: 'width:80%;' %>
+    </div>
+
+    <div class="col-md-4" style='margin-top:50px;'>
+        <%= link_to 'Suivi des indicateurs', new_suivi_infic_path, class: 'btn btn-default', style: 'width:80%;' %>
+    </div>
+</div>
+
 <%= form_tag suivi_path, { :method => :post, style: 'margin-top:100px;margin-bottom:100px;' } do %>
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
@@ -72,99 +90,35 @@ Chart.defaults.global.plugins.datalabels = {
 <canvas id='backlog' style="display: inline-block;"></canvas>
 <canvas id='ytd' style="display: inline-block;"></canvas>
 
-<% @rapports.each do |r| %>
+<canvas id='prod' style="display: inline-block;"></canvas>
+<canvas id='risques' style="display: inline-block;"></canvas>
+<!-- Tableau simple -->
+<canvas id='achat' style="display: inline-block;"></canvas>
+<canvas id='ctrl' style="display: inline-block;"></canvas>
+<canvas id='res_prob' style="display: inline-block;"></canvas>
+<canvas id='nb_garanti' style="display: inline-block;"></canvas>
+<!-- Commentaires -->
+<canvas id='indics' style="display: inline-block;"></canvas>
 
-<% m_id = r.first.machine.underscore_id %>
-<script>
-var ctx = document.getElementById("<%= m_id %>").getContext('2d');
-var <%= m_id %> = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: <%= raw @date_range + ["T+1"] %>,
-        datasets: [{
-            label: 'PDP',
-            type: 'line',
-            data: <%= r.pluck(:pdp).map(&:to_i) %>,
-            borderColor: "#5E9CD3",
-            backgroundColor: "#5E9CD3",
-            fill: false
-        },
-        {
-            label: 'PDP+1',
-            type: 'bar',
-            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, <%= r.last.next_pdp %>],
-            borderColor: 'red',
-            backgroundColor: 'red'
-        },
-        {
-            label: 'Commandes totale affectées + 1',
-            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, <%= r.each.sum{|ra| ra.next_cas} %>],
-            borderColor: 'grey',
-            backgroundColor: 'grey',
-            type: 'bar'
-        },
-        {
-            label: "Deals signés en attente d'acompte",
-            data: <%= r.pluck(:dsa).map(&:to_i) %>,
-            borderColor: '#4674C1',
-            backgroundColor: '#4674C1',
-            lineTension: 0,
-            type: 'line',
-            fill: false  
-        },
-        {
-            label: 'DAV',
-            data: <%= r.pluck(:dav).map(&:to_i) %>,
-            borderColor: '#FDBF2D',
-            backgroundColor: '#FDBF2D',
-            type: 'line',
-            fill: false
-        },
-        {
-            label: 'Commandes totale affectées',
-            data: <%= r.pluck(:cta).map(&:to_i) %>,
-            borderColor: '#EA7D3C',
-            backgroundColor: '#EA7D3C'
-        },
-        {
-            label: 'Commandes  affectées dans la semaine',
-            data: <%= r.pluck(:cas).map(&:to_i) %>,
-            borderColor: '#94CE58',
-            backgroundColor: '#94CE58'
-        }]
-    },
-    options: {
-        animation: { duration: 0 },
-        spanGaps: true,
-        responsive: false,
-        maintainAspectRatio: false,
-        legend: { display: false },
-        onAnimationComplete: setTimeout( function() {
-            var dataURL = <%= m_id %>.toBase64Image();
-            $('#<%= m_id %>_base64').val(dataURL);
-            },1000),
-        scales: {
-            yAxes: [{
-                ticks: { beginAtZero: true, stepSize: <%= (r.last.next_pdp/5).to_i %> }
-            }],
-            xAxes: [{
-                barThickness: 10,
-                gridLines: { offsetGridLines: true, display: false }
-            }],
-        },
-        elements: {
-            line: { tension: 0 },
-            point: { radius: 3 }
-        },
-        title: { display: true, text: 'Activité <%= r.first.machine.name %>', fontSize: 30 }
-    }});
-</script>
-    
-<% end %>
+<%= render 'static/charts/machines' %>
 
 <%= render 'static/charts/stock' %>
 
 <%= render 'static/charts/backlog' %>
+
+<%= render 'static/charts/productivite' %>
+
+<%= render 'static/charts/risques' %>
+
+<%= render 'static/charts/achat' %>
+
+<%= render 'static/charts/ctrl' %>
+
+<%= render 'static/charts/res_prob' %>
+
+<%= render 'static/charts/nb_garanti' %>
+
+<%= render 'static/charts/indics' %>
 
 <script>
 setTimeout(() => {

@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :suivi_infics
+  resources :nb_garanties
+  resources :temps_fabs
+  resources :suivi_perves
+  resources :projections
+  resources :appros
   resources :ecart_stocks
   resources :analyse_temps_problemes
   resources :taux_expeccs
@@ -40,8 +46,7 @@ Rails.application.routes.draw do
     resources :personnes
   end
 
-    resources :responsables
-
+  
   resources :analyses
   resources :objectifs
 

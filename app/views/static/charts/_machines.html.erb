@@ -1,0 +1,89 @@
+<% @rapports.each do |r| %>
+
+<% m_id = r.first.machine.underscore_id %>
+<script>
+var ctx = document.getElementById("<%= m_id %>").getContext('2d');
+var <%= m_id %> = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: <%= raw @date_range + ["T+1"] %>,
+        datasets: [{
+            label: 'PDP',
+            type: 'line',
+            data: <%= r.pluck(:pdp).map(&:to_i) %>,
+            borderColor: "#5E9CD3",
+            backgroundColor: "#5E9CD3",
+            fill: false
+        },
+        {
+            label: 'PDP+1',
+            type: 'bar',
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, <%= r.last.next_pdp %>],
+            borderColor: 'red',
+            backgroundColor: 'red'
+        },
+        {
+            label: 'Commandes totale affectées + 1',
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, <%= r.each.sum{|ra| ra.next_cas} %>],
+            borderColor: 'grey',
+            backgroundColor: 'grey',
+            type: 'bar'
+        },
+        {
+            label: "Deals signés en attente d'acompte",
+            data: <%= r.pluck(:dsa).map(&:to_i) %>,
+            borderColor: '#4674C1',
+            backgroundColor: '#4674C1',
+            lineTension: 0,
+            type: 'line',
+            fill: false  
+        },
+        {
+            label: 'DAV',
+            data: <%= r.pluck(:dav).map(&:to_i) %>,
+            borderColor: '#FDBF2D',
+            backgroundColor: '#FDBF2D',
+            type: 'line',
+            fill: false
+        },
+        {
+            label: 'Commandes totale affectées',
+            data: <%= r.pluck(:cta).map(&:to_i) %>,
+            borderColor: '#EA7D3C',
+            backgroundColor: '#EA7D3C'
+        },
+        {
+            label: 'Commandes  affectées dans la semaine',
+            data: <%= r.pluck(:cas).map(&:to_i) %>,
+            borderColor: '#94CE58',
+            backgroundColor: '#94CE58'
+        }]
+    },
+    options: {
+        animation: { duration: 0 },
+        spanGaps: true,
+        responsive: false,
+        maintainAspectRatio: false,
+        legend: { display: false },
+        onAnimationComplete: setTimeout( function() {
+            var dataURL = <%= m_id %>.toBase64Image();
+            $('#<%= m_id %>_base64').val(dataURL);
+            },1000),
+        scales: {
+            yAxes: [{
+                ticks: { beginAtZero: true, stepSize: <%= (r.last.next_pdp/5).to_i %> }
+            }],
+            xAxes: [{
+                barThickness: 10,
+                gridLines: { offsetGridLines: true, display: false }
+            }],
+        },
+        elements: {
+            line: { tension: 0 },
+            point: { radius: 3 }
+        },
+        title: { display: true, text: 'Activité <%= r.first.machine.name %>', fontSize: 30 }
+    }});
+</script>
+    
+<% end %>

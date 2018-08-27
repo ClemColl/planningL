@@ -1,0 +1,74 @@
+<script>
+chartOptions = {
+    responsive: false,
+    maintainAspectRatio: false,
+    animation: { duration: 0 },
+    scales: {
+        yAxes: [{
+            ticks: {
+                max: 20,
+                min: 0,
+                stepSize: 2
+            },
+            gridLines: { display: false }
+        }],
+        xAxes: [{
+            barThickness: 15,
+            offset: true,
+            gridLines: { offsetGridLines: true, display: false }
+        }],
+    },
+    elements: { line: { tension: 0 }, point: { radius: 0 }},
+    legend: { display: true },
+    tooltips: { display: false },
+    title: { display: true, text: 'Risques d\'approvisionnement', fontSize: 30 },
+    plugins: {
+        datalabels: {
+            display: function(context) {
+                return 0
+            }
+        }
+    }
+}
+
+var ctx = document.getElementById('risques').getContext('2d');
+var risques = new Chart(ctx, {
+    data: {
+        labels: <%= raw @month_range %>,
+        datasets: [{
+            label: 'Gravité High et Proba high',
+            type: 'line',
+            fill: false,
+            data: <%= @risques.pluck(:ghh).map(&:to_i) %>,
+            borderColor: 'red',
+            backgroundColor: 'red'
+        },
+        {
+            label: 'Sujets en cours Gravité High et Proba high',
+            type: 'bar',
+            fill: false,
+            data: <%= @risques.pluck(:sghh).map(&:to_i) %>,
+            borderColor: 'black',
+            backgroundColor: 'red',
+            borderWidth: 1
+        },
+        {
+            label: 'Gravité High et Proba Médium',
+            type: 'line',
+            fill: false,
+            data: <%= @risques.pluck(:ghm).map(&:to_i) %>,
+            borderColor: 'orange',
+            backgroundColor: 'orange'
+        },
+        {
+            label: 'Sujets en cours Gravité High et Proba Médium',
+            type: 'bar',
+            data: <%= @risques.pluck(:sghm).map(&:to_i) %>,
+            borderColor: 'black',
+            backgroundColor: 'orange',
+            borderWidth: 1
+        }]
+    },
+    options: chartOptions
+})
+</script>

@@ -5,9 +5,9 @@ chartOptions = {
     scales: {
         yAxes: [{
             ticks: {
-                max: 100,
-                min: 90,
-                stepSize: 2,
+                max: 120,
+                min: 70,
+                stepSize: 10,
                 callback: function(value, index, values) {
                     return value + '%'
                 }
@@ -68,7 +68,7 @@ var prod = new Chart(ctx, {
     options: chartOptions
 })
 
-var colorChangeValue = <%= @prod_obj.last %>
+var colorChangeValue = <%= @prod_obj.first %>
 var dataset = prod.data.datasets[1]
 for (var i = 0; i < dataset.data.length; i++) {
     if (dataset.data[i] < colorChangeValue) {

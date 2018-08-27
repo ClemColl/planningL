@@ -1,0 +1,2 @@
+class SuiviInfic < ApplicationRecord
+end

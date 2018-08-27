@@ -70,8 +70,8 @@ td {
         <td><%= stock.rmc %></td>
         <td><%= stock.sma %></td>
         <td><%= stock.rma %></td>
-        <td><%= link_to 'Modifier', edit_stock_path(stock) %></td>
-        <td><%= link_to 'Supprimer', stock, method: :delete, data: { confirm: 'Êtes vous sûr?' } %></td>
+        <td><%= link_to 'Modifier', edit_stock_path(stock), class: 'btn btn-default', style: 'padding:5px;' %></td>
+        <td><%= link_to 'Supprimer', stock, method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: 'btn btn-danger', style: 'padding:5px;' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -105,8 +105,188 @@ td {
         <td><%= backlog.ob %></td>
         <td><%= backlog.ytd %></td>
         <td><%= backlog.ytdl %></td>
-        <td><%= link_to 'Modifier', edit_backlog_path(backlog) %></td>
-        <td><%= link_to 'Supprimer', backlog, method: :delete, data: { confirm: 'Êtes vous sûr?' } %></td>
+        <td><%= link_to 'Modifier', edit_backlog_path(backlog), class: 'btn btn-default', style: 'padding:5px;' %></td>
+        <td><%= link_to 'Supprimer', backlog, method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: 'btn btn-danger', style: 'padding:5px;' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h1>Risques d'approvisionnement</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Semaine</th>
+      <th>Gravité High et Proba High</th>
+      <th>Gravité High et Proba Moyen</th>
+      <th>Sujet en cours<br>Gravité High et Proba High</th>
+      <th>Sujet en cours<br>Gravité High et Proba Moyen</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @risques.each do |r| %>
+      <tr>
+        <td><%= r.week %></td>
+        <td><%= r.ghh %></td>
+        <td><%= r.ghm %></td>
+        <td><%= r.sghh %></td>
+        <td><%= r.sghm %></td>
+        <td><%= link_to 'Modifier', edit_appro_path(r), class: 'btn btn-default', style: 'padding:5px;' %></td>
+        <td><%= link_to 'Supprimer', r, method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: 'btn btn-danger', style: 'padding:5px;' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h1>Projection gains achats de production</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Semaine</th>
+      <th>Objectif</th>
+      <th>Projection actualisée</th>
+      <th>Projection janvier 2018</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @projections.each do |r| %>
+      <tr>
+        <td><%= r.week %></td>
+        <td><%= r.obj %></td>
+        <td><%= r.prof_act %></td>
+        <td><%= r.proj %></td>
+        <td><%= link_to 'Modifier', edit_projection_path(r), class: 'btn btn-default', style: 'padding:5px;' %></td>
+        <td><%= link_to 'Supprimer', r, method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: 'btn btn-danger', style: 'padding:5px;' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h1>Contrôle en attente</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Semaine</th>
+      <th>Objectif</th>
+      <th>Backlog contrôle série</th>
+      <th>Backlog contrôle total</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ctrl.each do |backlog| %>
+      <tr>
+        <td><%= backlog.week %></td>
+        <td><%= backlog.obj %></td>
+        <td><%= backlog.bcs %></td>
+        <td><%= backlog.bct %></td>
+        <td><%= link_to 'Modifier', edit_suivi_perf_path(backlog), class: 'btn btn-default', style: 'padding:5px;' %></td>
+        <td><%= link_to 'Supprimer', backlog, method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: 'btn btn-danger', style: 'padding:5px;' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h1>Temps Fab résolution de problème (heures)</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Semaine</th>
+      <th>Temps passé en<br>résolution de problème</th>
+      <th>Temps passé N-1</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tmps_fab.each do |backlog| %>
+      <tr>
+        <td><%= backlog.week %></td>
+        <td><%= backlog.tp %></td>
+        <td><%= backlog.tp_last %></td>
+        <td><%= link_to 'Modifier', edit_temps_fab_path(backlog), class: 'btn btn-default', style: 'padding:5px;' %></td>
+        <td><%= link_to 'Supprimer', backlog, method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: 'btn btn-danger', style: 'padding:5px;' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h1>Nombre de garanties</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Semaine</th>
+      <th>Objectif</th>
+      <th>Nb garanties Equipement</th>
+      <th>Nb garanties C&P</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @nb_garanti.each do |backlog| %>
+      <tr>
+        <td><%= backlog.week %></td>
+        <td><%= backlog.gar %></td>
+        <td><%= backlog.ge %></td>
+        <td><%= backlog.gcp %></td>
+        <td><%= link_to 'Modifier', edit_nb_garanty_path(backlog), class: 'btn btn-default', style: 'padding:5px;' %></td>
+        <td><%= link_to 'Supprimer', backlog, method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: 'btn btn-danger', style: 'padding:5px;' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h1>Backlogs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Semaine</th>
+      <th>Pièces - Semaine</th>
+      <th>Pièces - Objectif taux non-conformité</th>
+      <th>Pièces - Cumul</th>
+      <th>Lots - Semaine</th>
+      <th>Lots - Objectif taux non-conformité</th>
+      <th>Lots - Cumul</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @suivi_indic.each do |backlog| %>
+      <tr>
+        <td><%= backlog.week %></td>
+        <td><%= backlog.sps %></td>
+        <td><%= backlog.obj_p %></td>
+        <td><%= backlog.spc %></td>
+        <td><%= backlog.sls %></td>
+        <td><%= backlog.obj_l %></td>
+        <td><%= backlog.slc %></td>
+        <td><%= link_to 'Modifier', edit_suivi_infic_path(backlog), class: 'btn btn-default', style: 'padding:5px;' %></td>
+        <td><%= link_to 'Supprimer', backlog, method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: 'btn btn-danger', style: 'padding:5px;' %></td>
       </tr>
     <% end %>
   </tbody>

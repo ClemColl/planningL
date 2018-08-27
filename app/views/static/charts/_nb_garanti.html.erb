@@ -1,0 +1,75 @@
+<script>
+chartOptions = {
+    responsive: false,
+    maintainAspectRatio: false,
+    animation: { duration: 0 },
+    scales: {
+        yAxes: [{
+            ticks: {
+                max: 50,
+                min: 0,
+                stepSize: 10
+            },
+            gridLines: { display: false },
+            stacked: true
+        }],
+        xAxes: [{
+            barThickness: 15,
+            offset: true,
+            gridLines: { offsetGridLines: true, display: false },
+            stacked: true,
+        }],
+    },
+    elements: { line: { tension: 0 }, point: { radius: 0 }},
+    legend: { display: true },
+    tooltips: { display: false },
+    title: { display: true, text: 'Nombre de garanties', fontSize: 30 },
+    plugins: {
+        datalabels: {
+            align: 'top',
+            display: function(context) {
+                return context.dataset.data[context.dataIndex]
+            }
+        }
+    }
+}
+
+var ctx = document.getElementById('nb_garanti').getContext('2d');
+var nb_garanti = new Chart(ctx, {
+    data: {
+        labels: <%= raw @date_range %>,
+        datasets: [{
+            label: 'Garanties 2016',
+            type: 'line',
+            fill: false,
+            data: <%= @nb_garanti.pluck(:gar).map(&:to_i) %>,
+            borderColor: 'black',
+            backgroundColor: 'black',
+            datalabels: {
+                display: function(context, value) {
+                    return 0
+                }
+            }
+        },
+        {
+            label: 'Nb garanties Equipement',
+            type: 'bar',
+            data: <%= @nb_garanti.pluck(:ge).map(&:to_i) %>,
+            backgroundColor: 'lightblue',
+            datalabels: {
+                color:'black'
+            }
+        },
+        {
+            label: 'Nb garanties C&P',
+            type: 'bar',
+            data: <%= @nb_garanti.pluck(:gcp).map(&:to_i) %>,
+            backgroundColor: 'orange',
+            datalabels: {
+                color:'black'
+            }
+        }]
+    },
+    options: chartOptions
+})
+</script>

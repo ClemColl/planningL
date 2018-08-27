@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ghh: MyString
+  ghm: MyString
+  sghh: MyString
+  sghm: MyString
+
+two:
+  ghh: MyString
+  ghm: MyString
+  sghh: MyString
+  sghm: MyString

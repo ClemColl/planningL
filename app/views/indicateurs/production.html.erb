@@ -2,7 +2,6 @@
 <script>
 Chart.defaults.global.plugins.datalabels = {
     color: 'white',
-    font: { weight: 'bold' },
     display: function(context) {
         if (context.dataset.type == 'bar') {
             return context.dataset.data[context.dataIndex];
@@ -13,7 +12,7 @@ Chart.defaults.global.plugins.datalabels = {
 }
 </script>
 
-<canvas id="prod" style="display:inline-block;width:33%;height:300px;">
+<canvas id="prod" style="display:inline-block;width:33%;height:300px;visibility:hidden;">
 </canvas>
 
 <canvas id="rotation" style="display:inline-block;width:33%;height:300px;">

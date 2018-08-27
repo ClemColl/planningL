@@ -1,30 +1,68 @@
 class StaticController < ApplicationController
   def suivi
-    @date_range = []
-    dates = Date.commercial(Date.today.year, (Date.today.beginning_of_quarter+7.days).cweek, 3).cweek..Date.today.end_of_quarter.cweek
-    dates.each { |s| @date_range << "S#{s}" }
+    @date_range = [
+      "S#{(Date.today - 9.week).cweek}",
+      "S#{(Date.today - 8.week).cweek}",
+      "S#{(Date.today - 7.week).cweek}",
+      "S#{(Date.today - 6.week).cweek}",
+      "S#{(Date.today - 5.week).cweek}",
+      "S#{(Date.today - 4.week).cweek}",
+      "S#{(Date.today - 3.week).cweek}",
+      "S#{(Date.today - 2.week).cweek}",
+      "S#{(Date.today - 1.week).cweek}",
+      "S#{Date.today.cweek}",
+      "S#{(Date.today + 1.week).cweek}",
+      "S#{(Date.today + 2.week).cweek}",
+      "S#{(Date.today + 3.week).cweek}"
+    ]
+
+    @month_range = [
+      (Date.today - 8.month).strftime('%b').first,
+      (Date.today - 7.month).strftime('%b').first,
+      (Date.today - 6.month).strftime('%b').first,
+      (Date.today - 5.month).strftime('%b').first,
+      (Date.today - 4.month).strftime('%b').first,
+      (Date.today - 3.month).strftime('%b').first,
+      (Date.today - 2.month).strftime('%b').first,
+      (Date.today - 1.month).strftime('%b').first,
+      Date.today.strftime('%b').first,
+      (Date.today + 1.month).strftime('%b').first,
+      (Date.today + 2.month).strftime('%b').first,
+      (Date.today + 3.month).strftime('%b').first
+    ]
+    # dates = Date.commercial(Date.today.year, (Date.today.beginning_of_quarter+7.days).cweek, 3).cweek..Date.today.end_of_quarter.cweek
+    # dates.each { |s| @date_range << "S#{s}" }
 
     respond_to do |format|
       format.html do
+        quart = ((Date.today - 1.week).month / 3.0).ceil
+        range = (Date.today - 4.months)..(Date.today + 1.week)
 
         ## Button Last Week ##
-        @stock_last_week = Stock.last ? Stock.last.week.to_s : 'Pas de données'
-        @backlog_last_week = Backlog.last ? Backlog.last.week.to_s : 'Pas de données'
+        @stock_last_week = Stock.last ? "S#{Stock.last.week}" : 'Pas de données'
+        @backlog_last_week = Backlog.last ? "S#{Backlog.last.week}" : 'Pas de données'
 
+        # Data
         @machines = Machine.all
 
         @rapports = []
         @machines.each do |m|
-          raps = m.rapports.where(quart: ((Date.today-1.week).month/3.0).ceil, created_at: (Date.today-4.months)..(Date.today+1.week))
+          raps = m.rapports.where(quart: quart, created_at: range)
           @rapports << raps unless raps.empty?
         end
 
-        @stock = Stock.where(quart: ((Date.today - 1.week).month / 3.0).ceil,
-                             created_at: (Date.today - 4.months)..(Date.today + 1.week))
+        @stock = Stock.where(quart: quart, created_at: range)
+        @backlog = Backlog.where(quart: quart, created_at: range)
+        @risques = Appro.last(12)
+        @projections = Projection.last(4)
+        @ctrl = SuiviPerf.last(13)
+        @tmps_fab = TempsFab.last(13)
+        @nb_garanti = NbGarantie.last(13)
+        @suivi_indic = SuiviInfic.last(13)
+
       end
 
       format.pdf do
-
         @machines_charts = []
 
         Machine.all.each do |m|
@@ -35,7 +73,7 @@ class StaticController < ApplicationController
         @backlog = params['backlog_base64'.to_sym]
         @ytd = params['ytd_base64'.to_sym]
 
-        render pdf: "Suivi_activité_S#{Date.today.cweek-1}",
+        render pdf: "Suivi_activité_S#{Date.today.cweek - 1}",
                layout: 'pdf.html',
                disposition: 'inline',
                viewport_size: '1280x1024'
@@ -44,8 +82,14 @@ class StaticController < ApplicationController
   end
 
   def bugfix
-    @rapports = Rapport.last(Machine.all.count * 2)
+    @rapports = Rapport.all.order(:machine_id).last(Machine.all.count * 6)
     @stocks = Stock.last(3)
     @backlogs = Backlog.last(3)
+    @risques = Appro.last(3)
+    @projections = Projection.last(4)
+    @ctrl = SuiviPerf.last(3)
+    @tmps_fab = TempsFab.last(3)
+    @nb_garanti = NbGarantie.last(3)
+    @suivi_indic = SuiviInfic.last(3)
   end
 end

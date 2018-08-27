@@ -1,0 +1,89 @@
+<script>
+chartOptions = {
+    responsive: false,
+    maintainAspectRatio: false,
+    animation: { duration: 0 },
+    scales: {
+        yAxes: [{
+            ticks: {
+                max: 250,
+                min: 0,
+                stepSize: 50
+            },
+            gridLines: { display: false }
+        }],
+        xAxes: [{
+            barThickness: 15,
+            offset: true,
+            gridLines: { offsetGridLines: true, display: false }
+        }],
+    },
+    elements: { line: { tension: 0 }, point: { radius: 0 }},
+    legend: { display: true },
+    tooltips: { display: false },
+    title: { display: true, text: 'Contrôle en attente', fontSize: 30 },
+    plugins: {
+        datalabels: {
+            align: 'top',
+            display: function(context) {
+                return context.dataset.data[context.dataIndex]
+            }
+        }
+    }
+}
+
+var ctx = document.getElementById('ctrl').getContext('2d');
+var ctrl = new Chart(ctx, {
+    data: {
+        labels: <%= raw @date_range %>,
+        datasets: [{
+            label: 'Objectif',
+            type: 'line',
+            fill: false,
+            data: <%= @ctrl.pluck(:obj).map(&:to_i) %>,
+            borderColor: 'black',
+            backgroundColor: 'black',
+            datalabels: {
+                display: function(context, value) {
+                    return 0
+                }
+            }
+        },
+        {
+            label: 'Backlog contrôle série',
+            type: 'bar',
+            data: <%= @ctrl.pluck(:bcs).map(&:to_i) %>,
+            backgroundColor: ['green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green'],
+            datalabels: {
+                rotation: 270,
+                anchor: 'top',
+                align: 'bottom',
+                offset: 10
+            }
+        },
+        {
+            label: 'Backlog contrôle total',
+            type: 'bar',
+            data: <%= @ctrl.pluck(:bct).map(&:to_i) %>,
+            backgroundColor: 'orange',
+            datalabels: {
+                rotation: 270,
+                anchor: 'top',
+                align: 'bottom',
+                offset: 10
+            }
+        }]
+    },
+    options: chartOptions
+})
+
+var colorChangeValue = <%#= @prod_obj.first %>100
+var dataset = ctrl.data.datasets[1]
+for (var i = 0; i < dataset.data.length; i++) {
+    if (dataset.data[i] > colorChangeValue) {
+        dataset.backgroundColor[i] = 'red'
+    }
+}
+
+ctrl.update()
+</script>

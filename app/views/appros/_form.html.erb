@@ -1,0 +1,16 @@
+<%= simple_form_for(@appro) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :week, label: 'Numéro de semaine', input_html: { value: @appro.week || Date.today.cweek-1 } %>
+    <%= f.input :ghh, label: 'Gravité High et Probabilité High' %>
+    <%= f.input :ghm, label: 'Gravité High et Probabilité Medium' %>
+    <%= f.input :sghh, label: 'Sujets en cours Gravité High et Proba High' %>
+    <%= f.input :sghm, label: 'Sujets en cours Gravité High et Proba Medium' %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Enregistrer' %>
+    <%= link_to 'Retour', suivi_path, class: 'btn btn-default'%>
+  </div>
+<% end %>

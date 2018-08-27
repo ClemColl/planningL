@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  obj: MyString
+  bcs: MyString
+  bct: MyString
+
+two:
+  obj: MyString
+  bcs: MyString
+  bct: MyString

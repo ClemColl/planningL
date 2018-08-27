@@ -1,0 +1,15 @@
+<%= simple_form_for(@projection) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :week, label: 'Numéro de semaine', input_html: { value: @projection.week || Date.today.cweek-1 } %>
+    <%= f.input :obj, label: 'Objectif' %>
+    <%= f.input :prof_act, label: 'Projection actualisée' %>
+    <%= f.input :proj, label: 'Projection Janvier' %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Enregistrer' %>
+    <%= link_to 'Retour', suivi_path, class: 'btn btn-default' %>
+  </div>
+<% end %>

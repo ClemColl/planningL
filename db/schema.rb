@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180816140348) do
+ActiveRecord::Schema.define(version: 20180827075707) do
 
   create_table "analyse_temps_problemes", force: :cascade do |t|
     t.string "tmpdef"
@@ -30,6 +30,16 @@ ActiveRecord::Schema.define(version: 20180816140348) do
     t.float "eff_obj"
     t.float "util_obj"
     t.index ["equipe_id"], name: "index_analyzes_on_equipe_id"
+  end
+
+  create_table "appros", force: :cascade do |t|
+    t.string "ghh"
+    t.string "ghm"
+    t.string "sghh"
+    t.string "sghm"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "week"
   end
 
   create_table "backlogs", force: :cascade do |t|
@@ -105,6 +115,15 @@ ActiveRecord::Schema.define(version: 20180816140348) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "nb_garanties", force: :cascade do |t|
+    t.string "ge"
+    t.string "gcp"
+    t.string "gar"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "week"
+  end
+
   create_table "objectifs", force: :cascade do |t|
     t.string "name"
     t.float "value"
@@ -118,6 +137,15 @@ ActiveRecord::Schema.define(version: 20180816140348) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["equipe_id"], name: "index_personnes_on_equipe_id"
+  end
+
+  create_table "projections", force: :cascade do |t|
+    t.string "obj"
+    t.string "prof_act"
+    t.string "proj"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "week"
   end
 
   create_table "rapports", force: :cascade do |t|
@@ -161,6 +189,27 @@ ActiveRecord::Schema.define(version: 20180816140348) do
     t.integer "quart"
   end
 
+  create_table "suivi_infics", force: :cascade do |t|
+    t.string "sps"
+    t.string "obj_p"
+    t.string "spc"
+    t.string "sls"
+    t.string "obj_l"
+    t.string "slc"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "week"
+  end
+
+  create_table "suivi_perves", force: :cascade do |t|
+    t.string "obj"
+    t.string "bcs"
+    t.string "bct"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "week"
+  end
+
   create_table "taux_expeccs", force: :cascade do |t|
     t.string "cmd"
     t.string "obj"
@@ -191,6 +240,14 @@ ActiveRecord::Schema.define(version: 20180816140348) do
     t.integer "calendar_id"
     t.integer "user_count"
     t.index ["calendar_id"], name: "index_teams_on_calendar_id"
+  end
+
+  create_table "temps_fabs", force: :cascade do |t|
+    t.string "tp"
+    t.string "tp_last"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "week"
   end
 
   create_table "users", force: :cascade do |t|

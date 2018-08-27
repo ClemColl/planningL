@@ -1,0 +1,15 @@
+<%= simple_form_for(@suivi_perf) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :week, label: 'Numéro de semaine', input_html: { value: @suivi_perf.week || Date.today.cweek-1 } %>
+    <%= f.input :obj, label: 'Objectif' %>
+    <%= f.input :bcs, label: 'Backlog contrôle série' %>
+    <%= f.input :bct, label: 'Backlog contrôle total' %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Enregistrer' %>
+    <%= link_to 'Retour', suivi_path, class: 'btn btn-default' %>
+  </div>
+<% end %>
