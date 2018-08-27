@@ -2,7 +2,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :week, label: 'Numéro de semaine', input_html: { value: @appro.week || Date.today.cweek-1 } %>
+    <%= f.input :week, label: 'Mois', input_html: { value: @appro.week || "" } %>
     <%= f.input :ghh, label: 'Gravité High et Probabilité High' %>
     <%= f.input :ghm, label: 'Gravité High et Probabilité Medium' %>
     <%= f.input :sghh, label: 'Sujets en cours Gravité High et Proba High' %>

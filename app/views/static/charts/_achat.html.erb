@@ -47,7 +47,7 @@ var achat = new Chart(ctx, {
             label: 'Projection actualisée',
             type: 'line',
             fill: false,
-            data: <%= @projections.pluck(:proj_act).map(&:to_i) %>,
+            data: <%= @projections.pluck(:prof_act).map(&:to_i) %>,
             borderColor: 'red',
             backgroundColor: 'red',
             datalabels: {

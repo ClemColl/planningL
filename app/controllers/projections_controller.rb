@@ -1,6 +1,10 @@
 class ProjectionsController < ApplicationController
   before_action :set_projection, only: [:edit, :update, :destroy]
 
+  def index
+    @projections = Projection.all
+  end
+
   def new
     @projection = Projection.new
   end
@@ -11,7 +15,7 @@ class ProjectionsController < ApplicationController
     @projection = Projection.new(projection_params)
 
     if @projection.save
-      redirect_to suivi_path, notice: 'Donnée créée avec succès.'
+      redirect_to projections_path, notice: 'Donnée créée avec succès.'
     else
       render :new
     end
