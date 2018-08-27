@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   def index
-    @events = Event.where(calendar_id: $calendar_id, start: (params[:start].to_date-3)..params[:end].to_date)
+    @events = Event.where(calendar_id: $calendar_id, start: (params[:start].to_date-7)..params[:end].to_date)
   end
 
   def show; end
