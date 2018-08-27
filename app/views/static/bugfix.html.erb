@@ -30,7 +30,7 @@ td {
   </thead>
 
   <tbody>
-    <% @rapports.sort_by(&:created_at).each do |rapport| %>
+    <% Rapport.order("week ASC, machine_id ASC").last(5*3).each do |rapport| %>
       <tr>
         <td><%= rapport.week %></td>
         <td><%= rapport.cas %></td>

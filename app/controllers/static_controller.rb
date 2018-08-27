@@ -1,7 +1,6 @@
 class StaticController < ApplicationController
   def suivi
     @date_range = [
-      "S#{(Date.today - 9.week).cweek}",
       "S#{(Date.today - 8.week).cweek}",
       "S#{(Date.today - 7.week).cweek}",
       "S#{(Date.today - 6.week).cweek}",
@@ -13,7 +12,8 @@ class StaticController < ApplicationController
       "S#{Date.today.cweek}",
       "S#{(Date.today + 1.week).cweek}",
       "S#{(Date.today + 2.week).cweek}",
-      "S#{(Date.today + 3.week).cweek}"
+      "S#{(Date.today + 3.week).cweek}",
+      "S#{(Date.today + 4.week).cweek}"
     ]
 
     @month_range = [
