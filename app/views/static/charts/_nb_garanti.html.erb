@@ -24,6 +24,9 @@ chartOptions = {
     legend: { display: true },
     tooltips: { display: false },
     title: { display: true, text: 'Nombre de garanties', fontSize: 30 },
+    onAnimationComplete: setTimeout( function() {
+        $('#nb_garanti_base64').val(nb_garanti.toBase64Image());
+        },10),
     plugins: {
         datalabels: {
             align: 'top',

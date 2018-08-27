@@ -11,7 +11,7 @@ class ProjectionsController < ApplicationController
     @projection = Projection.new(projection_params)
 
     if @projection.save
-      redirect_to suivi_path, notice: 'Projection was successfully created.'
+      redirect_to suivi_path, notice: 'Donnée créée avec succès.'
     else
       render :new
     end
@@ -19,7 +19,7 @@ class ProjectionsController < ApplicationController
 
   def update
     if @projection.update(projection_params)
-      redirect_to @projection, notice: 'Projection was successfully updated.'
+      redirect_to @projection, notice: 'Donnée modifiée avec succès.'
     else
       render :edit
     end
@@ -27,7 +27,7 @@ class ProjectionsController < ApplicationController
 
   def destroy
     @projection.destroy
-    redirect_to projections_url, notice: 'Projection was successfully destroyed.'
+    redirect_to projections_url, notice: 'Donnée supprimée avec succès.'
   end
 
   private

@@ -66,9 +66,8 @@ var <%= m_id %> = new Chart(ctx, {
         maintainAspectRatio: false,
         legend: { display: false },
         onAnimationComplete: setTimeout( function() {
-            var dataURL = <%= m_id %>.toBase64Image();
-            $('#<%= m_id %>_base64').val(dataURL);
-            },1000),
+            $('#<%= raw m_id %>_base64').val(<%= raw m_id %>.toBase64Image());
+            },10),
         scales: {
             yAxes: [{
                 ticks: { beginAtZero: true, stepSize: <%= (r.last.next_pdp/5).to_i %> }

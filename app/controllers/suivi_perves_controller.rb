@@ -11,7 +11,7 @@ class SuiviPervesController < ApplicationController
     @suivi_perf = SuiviPerf.new(suivi_perf_params)
 
     if @suivi_perf.save
-      redirect_to suivi_path, notice: 'Suivi perf was successfully created.'
+      redirect_to suivi_path, notice: 'Donnée créée avec succès.'
     else
       render :new
     end
@@ -19,7 +19,7 @@ class SuiviPervesController < ApplicationController
 
   def update
     if @suivi_perf.update(suivi_perf_params)
-      redirect_to @suivi_perf, notice: 'Suivi perf was successfully updated.'
+      redirect_to @suivi_perf, notice: 'Donnée modifiée avec succès.'
     else
       render :edit
     end
@@ -27,7 +27,7 @@ class SuiviPervesController < ApplicationController
 
   def destroy
     @suivi_perf.destroy
-    redirect_to suivi_perves_url, notice: 'Suivi perf was successfully destroyed.'
+    redirect_to suivi_perves_url, notice: 'Donnée supprimée avec succès.'
   end
 
   private

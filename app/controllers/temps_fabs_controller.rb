@@ -11,7 +11,7 @@ class TempsFabsController < ApplicationController
     @temps_fab = TempsFab.new(temps_fab_params)
 
     if @temps_fab.save
-      redirect_to suivi_path, notice: 'Temps fab was successfully created.'
+      redirect_to suivi_path, notice: 'Donnée créée avec succès.'
     else
       render :new
     end
@@ -19,7 +19,7 @@ class TempsFabsController < ApplicationController
 
   def update
     if @temps_fab.update(temps_fab_params)
-      redirect_to @temps_fab, notice: 'Temps fab was successfully updated.'
+      redirect_to @temps_fab, notice: 'Donnée modifiée avec succès.'
     else
       render :edit
     end
@@ -27,7 +27,7 @@ class TempsFabsController < ApplicationController
 
   def destroy
     @temps_fab.destroy
-    redirect_to temps_fabs_url, notice: 'Temps fab was successfully destroyed.'
+    redirect_to temps_fabs_url, notice: 'Donnée supprimée avec succès.'
   end
 
   private

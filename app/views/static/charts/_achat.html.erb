@@ -17,6 +17,9 @@ chartOptions = {
             gridLines: { offsetGridLines: true, display: false }
         }],
     },
+    onAnimationComplete: setTimeout( function() {
+            $('#achat_base64').val(achat.toBase64Image());
+            },10),
     elements: { line: { tension: 0 }, point: { radius: 0 }},
     legend: { display: true },
     tooltips: { display: false },

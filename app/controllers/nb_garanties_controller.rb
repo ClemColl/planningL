@@ -11,7 +11,7 @@ class NbGarantiesController < ApplicationController
     @nb_garanty = NbGarantie.new(nb_garanty_params)
 
     if @nb_garanty.save
-      redirect_to suivi_path, notice: 'Nb garantie was successfully created.'
+      redirect_to suivi_path, notice: 'Donnée créée avec succès.'
     else
       render :new
     end
@@ -19,7 +19,7 @@ class NbGarantiesController < ApplicationController
 
   def update
     if @nb_garanty.update(nb_garanty_params)
-      redirect_to @nb_garanty, notice: 'Nb garantie was successfully updated.'
+      redirect_to @nb_garanty, notice: 'Donnée modifiée avec succès.'
     else
       render :edit
     end
@@ -27,7 +27,7 @@ class NbGarantiesController < ApplicationController
 
   def destroy
     @nb_garanty.destroy
-    redirect_to nb_garanties_url, notice: 'Nb garantie was successfully destroyed.'
+    redirect_to nb_garanties_url, notice: 'Donnée supprimée avec succès.'
   end
 
   private

@@ -11,7 +11,7 @@ class SuiviInficsController < ApplicationController
     @suivi_infic = SuiviInfic.new(suivi_infic_params)
 
     if @suivi_infic.save
-      redirect_to suivi_path, notice: 'Suivi infic was successfully created.'
+      redirect_to suivi_path, notice: 'Donnée créée avec succès.'
     else
       render :new
     end
@@ -19,7 +19,7 @@ class SuiviInficsController < ApplicationController
 
   def update
     if @suivi_infic.update(suivi_infic_params)
-      redirect_to @suivi_infic, notice: 'Suivi infic was successfully updated.'
+      redirect_to @suivi_infic, notice: 'Donnée modifiée avec succès.'
     else
       render :edit
     end
@@ -27,7 +27,7 @@ class SuiviInficsController < ApplicationController
 
   def destroy
     @suivi_infic.destroy
-    redirect_to suivi_infics_url, notice: 'Suivi infic was successfully destroyed.'
+    redirect_to suivi_infics_url, notice: 'Donnée supprimée avec succès.'
   end
 
   private

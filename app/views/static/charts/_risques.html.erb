@@ -20,6 +20,9 @@ chartOptions = {
     },
     elements: { line: { tension: 0 }, point: { radius: 0 }},
     legend: { display: true },
+    onAnimationComplete: setTimeout( function() {
+        $('#risques_base64').val(risques.toBase64Image());
+        },10),
     tooltips: { display: false },
     title: { display: true, text: 'Risques d\'approvisionnement', fontSize: 30 },
     plugins: {

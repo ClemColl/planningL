@@ -22,6 +22,9 @@ chartOptions = {
     legend: { display: true },
     tooltips: { display: false },
     title: { display: true, text: 'Contrôle en attente', fontSize: 30 },
+    onAnimationComplete: setTimeout( function() {
+            $('#ctrl_base64').val(ctrl.toBase64Image());
+            },10),
     plugins: {
         datalabels: {
             align: 'top',

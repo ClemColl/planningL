@@ -56,7 +56,7 @@ var backlog = new Chart(ctx, {
         onAnimationComplete: setTimeout( function() {
             var dataURL = backlog.toBase64Image();
             $('#backlog_base64').val(dataURL);
-            },1000),
+            },10),
         scales: {
             yAxes: [{
                 id: 'A',
@@ -108,7 +108,7 @@ options: {
     onAnimationComplete: setTimeout( function() {
         var dataURL = ytd.toBase64Image();
         $('#ytd_base64').val(dataURL);
-        },1000),
+        },10),
     scales: {
         yAxes: [{
             type: 'linear',

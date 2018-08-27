@@ -44,7 +44,7 @@
         onAnimationComplete: setTimeout( function() {
             var dataURL = stock.toBase64Image();
             $('#stock_base64').val(dataURL);
-            },1000),
+            },10),
         scales: {
             yAxes: [{
                 ticks: { beginAtZero: true, stepSize: 5 }

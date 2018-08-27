@@ -21,7 +21,7 @@ Chart.defaults.global.plugins.datalabels = {
     <div class="col-md-4">
         <% @machines.each do |m| %>
             <div class="btn-group", style="width:100%;">
-                <%= link_to "#{m.name} - S#{m.last_week}", new_machine_rapport_path(m.id), class:"btn btn-default", style: "width:70%;" %>
+                <%= link_to "#{m.name} - S#{m.last_week}", new_machine_rapport_path(m.id), class:"btn btn-default", style: "width:90%;" %>
                 <%= link_to "X", machine_path(m), class:"btn btn-danger", method: :delete, confirm: "Êtes vous sûr?", style:"width:10%;"%>
             </div>
         <% end %>
@@ -33,14 +33,12 @@ Chart.defaults.global.plugins.datalabels = {
     <div class="col-md-4">
         <div class="btn-group", style="width:100%;">
             <%= link_to "Etat du stock - #{@stock_last_week}", new_stock_path, class:"btn btn-default", style:"width:80%;" %>
-            <%= link_to "Modifier", edit_stock_path(Stock.last.id), class:"btn btn-default", style:"width:20%;" if Stock.exists? %>
         </div>
     </div>
 
     <div class="col-md-4">
         <div class="btn-group", style="width:100%;">
             <%= link_to "Consommables et pièces - #{@backlog_last_week}", new_backlog_path, class:"btn btn-default", style:"width:80%;" %>
-            <%= link_to "Modifier", edit_backlog_path(Backlog.last.id), class:"btn btn-default", style:"width:20%;" if Backlog.exists? %>
         </div>
     </div>
 
@@ -48,18 +46,18 @@ Chart.defaults.global.plugins.datalabels = {
 
 <div class="row">
     <div class="col-md-4" style='margin-top:50px;'>
-        <%= link_to 'Risques d\'approvisionnement', new_appro_path, class: 'btn btn-default', style: 'width:80%;' %>
-        <%= link_to 'Projection gains achats de production', new_projection_path, class: 'btn btn-default', style: 'width:80%;' %>
+        <%= link_to 'Risques d\'approvisionnement', new_appro_path, class: 'btn btn-default', style: 'width:100%;' %>
+        <%= link_to 'Projection gains achats de production', new_projection_path, class: 'btn btn-default', style: 'width:100%;' %>
     </div>
 
     <div class="col-md-4" style='margin-top:50px;'>
-        <%= link_to 'Contrôle en attente', new_suivi_perf_path, class: 'btn btn-default', style: 'width:80%;' %>
-        <%= link_to 'Temps Fab résolution de problème (heures)', new_temps_fab_path, class: 'btn btn-default', style: 'width:80%;' %>
-        <%= link_to 'Nombre de garanties', new_nb_garanty_path, class: 'btn btn-default', style: 'width:80%;' %>
+        <%= link_to 'Contrôle en attente', new_suivi_perf_path, class: 'btn btn-default', style: 'width:100%;' %>
+        <%= link_to 'Temps Fab résolution de problème (heures)', new_temps_fab_path, class: 'btn btn-default', style: 'width:100%;' %>
+        <%= link_to 'Nombre de garanties', new_nb_garanty_path, class: 'btn btn-default', style: 'width:100%;' %>
     </div>
 
     <div class="col-md-4" style='margin-top:50px;'>
-        <%= link_to 'Suivi des indicateurs', new_suivi_infic_path, class: 'btn btn-default', style: 'width:80%;' %>
+        <%= link_to 'Suivi des indicateurs', new_suivi_infic_path, class: 'btn btn-default', style: 'width:100%;' %>
     </div>
 </div>
 
@@ -75,12 +73,19 @@ Chart.defaults.global.plugins.datalabels = {
     </div>
 
     <% @machines.each do |m| %>
-        <%= hidden_field_tag "#{m.underscore_id}_base64".to_sym %>
+        <%= text_field_tag "#{m.underscore_id}_base64".to_sym %>
     <% end %>    
-    <%= hidden_field_tag "stock_base64".to_sym %>
-    <%= hidden_field_tag "backlog_base64".to_sym %>
-    <%= hidden_field_tag "ytd_base64".to_sym %>
-    <%# text_field_tag %>
+    <%= text_field_tag "stock_base64".to_sym %>
+    <%= text_field_tag "backlog_base64".to_sym %>
+    <%= text_field_tag "ytd_base64".to_sym %>
+    <%= text_field_tag "prod_base64".to_sym %>
+    <%= text_field_tag "risques_base64".to_sym %>
+    <%= text_field_tag "achat_base64".to_sym %>
+    <%= text_field_tag "ctrl_base64".to_sym %>
+    <%= text_field_tag "res_prob_base64".to_sym %>
+    <%= text_field_tag "nb_garanti_base64".to_sym %>
+    <%= text_field_tag "indics_base64".to_sym %>
+
 <% end %>
 
 <% @machines.each do |m| %>

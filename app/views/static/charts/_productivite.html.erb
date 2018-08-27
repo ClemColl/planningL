@@ -23,6 +23,9 @@ chartOptions = {
     },
     elements: { line: { tension: 0 }, point: { radius: 0 }},
     legend: { display: false },
+    onAnimationComplete: setTimeout( function() {
+        $('#prod_base64').val(prod.toBase64Image());
+        },10),
     tooltips: { display: false },
     title: { display: true, text: 'Productivité service Fabrication', fontSize: 30 },
     plugins: {

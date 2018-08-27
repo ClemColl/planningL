@@ -20,6 +20,9 @@ chartOptions = {
     },
     elements: { line: { tension: 0 }, point: { radius: 0 }},
     legend: { display: true },
+    onAnimationComplete: setTimeout( function() {
+        $('#indics_base64').val(indics.toBase64Image());
+        },10),
     tooltips: { display: false },
     title: { display: true, text: 'Suivi des indicateurs', fontSize: 30 },
     plugins: {

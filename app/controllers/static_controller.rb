@@ -73,6 +73,14 @@ class StaticController < ApplicationController
         @backlog = params['backlog_base64'.to_sym]
         @ytd = params['ytd_base64'.to_sym]
 
+        @productivite = params['prod_base64'.to_sym]
+        @risques = params['risques_base64'.to_sym]
+        @achat = params['achat_base64'.to_sym]
+        @ctrl = params['ctrl_base64'.to_sym]
+        @res_prob = params['res_prob_base64'.to_sym]
+        @nb_garanti = params['nb_garanti_base64'.to_sym]
+        @indics = params['indics_base64'.to_sym]
+
         render pdf: "Suivi_activité_S#{Date.today.cweek - 1}",
                layout: 'pdf.html',
                disposition: 'inline',

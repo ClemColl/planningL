@@ -11,7 +11,7 @@ class ApprosController < ApplicationController
     @appro = Appro.new(appro_params)
 
     if @appro.save
-      redirect_to suivi_path, notice: 'Appro was successfully created.'
+      redirect_to suivi_path, notice: 'Donnée créée avec succès.'
     else
       render :new
     end
@@ -19,7 +19,7 @@ class ApprosController < ApplicationController
 
   def update
     if @appro.update(appro_params)
-      redirect_to @appro, notice: 'Appro was successfully updated.'
+      redirect_to suivi_bugfix_path, notice: 'Donnée modifiée avec succès.'
     else
       render :edit
     end
@@ -27,7 +27,7 @@ class ApprosController < ApplicationController
 
   def destroy
     @appro.destroy
-    redirect_to appros_url, notice: 'Appro was successfully destroyed.'
+    redirect_to appros_url, notice: 'Donnée supprimée avec succès.'
   end
 
   private
