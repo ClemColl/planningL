@@ -20,7 +20,7 @@ class IndicateursController < ApplicationController
     ]
 
     ## Productivité
-    analyzes = Equipe.first.analyzes.where(duree: 'mois').last(13)
+    analyzes = Equipe.first.analyzes.where(duree: 'mois').last(8)
 
     productivite = []
     productivite_objectif = []

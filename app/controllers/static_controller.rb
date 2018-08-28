@@ -16,6 +16,11 @@ class StaticController < ApplicationController
       "S#{(Date.today + 4.week).cweek}"
     ]
 
+    @prod_date = Equipe.first.analyzes
+                       .where(duree: 'jour')
+                       .last(5)
+                       .pluck(:created_at).map { |a| (a-1.day).strftime('%d/%m') }
+
     @month_range = [
       (Date.today - 8.month).strftime('%b').first,
       (Date.today - 7.month).strftime('%b').first,

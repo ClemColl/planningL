@@ -41,7 +41,7 @@ chartOptions = {
 var ctx = document.getElementById('prod').getContext('2d');
 var prod = new Chart(ctx, {
     data: {
-        labels: <%= raw @date_range %>,
+        labels: <%= raw @prod_date %>,
         datasets: [{
             type: 'line',
             fill: false,
