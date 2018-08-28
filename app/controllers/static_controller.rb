@@ -32,8 +32,6 @@ class StaticController < ApplicationController
       (Date.today - 1.month).strftime('%b').first,
       Date.today.strftime('%b').first,
       (Date.today + 1.month).strftime('%b').first,
-      (Date.today + 2.month).strftime('%b').first,
-      (Date.today + 3.month).strftime('%b').first
     ]
     # dates = Date.commercial(Date.today.year, (Date.today.beginning_of_quarter+7.days).cweek, 3).cweek..Date.today.end_of_quarter.cweek
     # dates.each { |s| @date_range << "S#{s}" }

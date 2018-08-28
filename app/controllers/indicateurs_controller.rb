@@ -15,8 +15,6 @@ class IndicateursController < ApplicationController
       (Date.today - 1.month).strftime('%b').first,
       Date.today.strftime('%b').first,
       (Date.today + 1.month).strftime('%b').first,
-      (Date.today + 2.month).strftime('%b').first,
-      (Date.today + 3.month).strftime('%b').first
     ]
 
     ## Productivité
