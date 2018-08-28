@@ -53,12 +53,12 @@ class StaticController < ApplicationController
 
         @stock = Stock.where(quart: quart, created_at: range)
         @backlog = Backlog.where(quart: quart, created_at: range)
-        @risques = Appro.last(12)
-        @projections = Projection.last(4)
-        @ctrl = SuiviPerf.last(13)
-        @tmps_fab = TempsFab.last(13)
-        @nb_garanti = NbGarantie.last(13)
-        @suivi_indic = SuiviInfic.last(13)
+        @risques = Appro.last(8)
+        @projections = Projection.all
+        @ctrl = SuiviPerf.last(8)
+        @tmps_fab = TempsFab.last(8)
+        @nb_garanti = NbGarantie.last(8)
+        @suivi_indic = SuiviInfic.last(8)
 
       end
 
@@ -91,13 +91,13 @@ class StaticController < ApplicationController
 
   def bugfix
     @rapports = Rapport.all.order(:machine_id).last(Machine.all.count * 6)
-    @stocks = Stock.last(3)
-    @backlogs = Backlog.last(3)
-    @risques = Appro.last(3)
+    @stocks = Stock.last(8)
+    @backlogs = Backlog.last(8)
+    @risques = Appro.last(8)
     @projections = Projection.last(4)
-    @ctrl = SuiviPerf.last(3)
-    @tmps_fab = TempsFab.last(3)
-    @nb_garanti = NbGarantie.last(3)
-    @suivi_indic = SuiviInfic.last(3)
+    @ctrl = SuiviPerf.last(8)
+    @tmps_fab = TempsFab.last(8)
+    @nb_garanti = NbGarantie.last(8)
+    @suivi_indic = SuiviInfic.last(8)
   end
 end
