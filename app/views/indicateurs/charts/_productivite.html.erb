@@ -41,7 +41,7 @@ var prod = new Chart(ctx, {
         datasets: [{
             type: 'line',
             fill: false,
-            data: <%= raw @prod_obj %>,
+            data: <%= @prod_obj %>,
             borderColor: 'black',
             backgroundColor: 'black',
             datalabels: {
