@@ -86,13 +86,24 @@ class IndicateursController < ApplicationController
           objectifs = Objectif.all
 
           @equipes.each_with_index do |eq, index|
-            eq.analyzes.create!(
-              duree: @duree_eff,
-              efficacite: eff_data.values[index]*100,
-              eff_obj: objectifs.first.value,
-              utilisation: util_data.values[index]*100,
-              util_obj: objectifs.second.value
-            )
+            if @duree_util == 'jour'
+              eq.analyzes.create!(
+                duree: @duree_eff,
+                efficacite: eff_data.values[index]*100,
+                eff_obj: objectifs.first.value,
+                utilisation: util_data.values[index]*100,
+                util_obj: objectifs.second.value,
+                created_at: @jour
+              )
+            else
+              eq.analyzes.create!(
+                duree: @duree_eff,
+                efficacite: eff_data.values[index]*100,
+                eff_obj: objectifs.first.value,
+                utilisation: util_data.values[index]*100,
+                util_obj: objectifs.second.value
+              )
+            end
           end
 
         else
@@ -361,6 +372,7 @@ class IndicateursController < ApplicationController
 
     if dates.count == 1
       @duree_util = 'jour'
+      @jour = dates[0]
     elsif dates.count < 7
       @duree_util = 'semaine'
     else
@@ -372,6 +384,8 @@ class IndicateursController < ApplicationController
       util_data[eq.id] = (equipes[eq.id][:prod] / (equipes[eq.id][:prod] + equipes[eq.id][:indi] + equipes[eq.id][:di])).round(2)
 
     end
+
+    
 
     return util_data
   end

@@ -45,13 +45,10 @@ var prod = new Chart(ctx, {
         datasets: [{
             type: 'line',
             fill: false,
-            data: <%#= raw @prod_obj %>[98,98,98,98,98,98,98,98,98,98,98,98,98],
+            data: <%= @prod_obj %>,
             borderColor: 'black',
             backgroundColor: 'black',
             datalabels: {
-                // align: 'bottom',
-                // offset: 10,
-                // color: 'black',
                 display: function(context, value) {
                     return 0
                 }
@@ -59,7 +56,7 @@ var prod = new Chart(ctx, {
         },
         {
             type: 'bar',
-            data: <%#= raw @prod %>[97,97,97,97,97,97,97,97,97,97,97,97,97],
+            data: <%= @prod %>,
             backgroundColor: ['green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green'],
             datalabels: {
                 rotation: 270,
@@ -72,7 +69,7 @@ var prod = new Chart(ctx, {
     options: chartOptions
 })
 
-var colorChangeValue = <%#= @prod_obj.first %>98
+var colorChangeValue = <%= @prod_obj.last || 88 %>
 var dataset = prod.data.datasets[1]
 for (var i = 0; i < dataset.data.length; i++) {
     if (dataset.data[i] < colorChangeValue) {

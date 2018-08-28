@@ -16,11 +16,6 @@ class StaticController < ApplicationController
       "S#{(Date.today + 4.week).cweek}"
     ]
 
-    @prod_date = Equipe.first.analyzes
-                       .where(duree: 'jour')
-                       .last(5)
-                       .pluck(:created_at).map { |a| (a-1.day).strftime('%d/%m') }
-
     @month_range = [
       (Date.today - 8.month).strftime('%b').first,
       (Date.today - 7.month).strftime('%b').first,
@@ -33,8 +28,6 @@ class StaticController < ApplicationController
       Date.today.strftime('%b').first,
       (Date.today + 1.month).strftime('%b').first,
     ]
-    # dates = Date.commercial(Date.today.year, (Date.today.beginning_of_quarter+7.days).cweek, 3).cweek..Date.today.end_of_quarter.cweek
-    # dates.each { |s| @date_range << "S#{s}" }
 
     respond_to do |format|
       format.html do
@@ -54,6 +47,19 @@ class StaticController < ApplicationController
           @rapports << raps unless raps.empty?
         end
 
+        productivite = []
+        productivite_objectif = []
+        analyzes = Equipe.first.analyzes.where(duree: 'jour').last(5)
+
+        analyzes.count.times do |i|
+          productivite[i] = ((analyzes.pluck(:efficacite)[i] * analyzes.pluck(:utilisation)[i]) / 100).round(2)
+          productivite_objectif[i] = ((analyzes.pluck(:eff_obj)[i] * analyzes.pluck(:util_obj)[i]) / 100).round(2)
+        end
+
+        @prod_date = analyzes.pluck(:created_at).map { |a| a.strftime('%d/%m') }
+        @prod = productivite
+        @prod_obj = productivite_objectif
+
         @stock = Stock.where(quart: quart, created_at: range)
         @backlog = Backlog.where(quart: quart, created_at: range)
         @risques = Appro.last(8)
@@ -62,7 +68,6 @@ class StaticController < ApplicationController
         @tmps_fab = TempsFab.last(8)
         @nb_garanti = NbGarantie.last(8)
         @suivi_indic = SuiviInfic.last(8)
-
       end
 
       format.pdf do
