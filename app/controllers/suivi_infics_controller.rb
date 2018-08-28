@@ -19,7 +19,7 @@ class SuiviInficsController < ApplicationController
 
   def update
     if @suivi_infic.update(suivi_infic_params)
-      redirect_to @suivi_infic, notice: 'Donnée modifiée avec succès.'
+      redirect_to suivi_bugfix_path, notice: 'Donnée modifiée avec succès.'
     else
       render :edit
     end
@@ -27,7 +27,7 @@ class SuiviInficsController < ApplicationController
 
   def destroy
     @suivi_infic.destroy
-    redirect_to suivi_infics_url, notice: 'Donnée supprimée avec succès.'
+    redirect_to suivi_bugfix_path, notice: 'Donnée supprimée avec succès.'
   end
 
   private

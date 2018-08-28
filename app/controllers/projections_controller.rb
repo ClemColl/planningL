@@ -23,7 +23,7 @@ class ProjectionsController < ApplicationController
 
   def update
     if @projection.update(projection_params)
-      redirect_to @projection, notice: 'Donnée modifiée avec succès.'
+      redirect_to projections_path, notice: 'Donnée modifiée avec succès.'
     else
       render :edit
     end
@@ -31,7 +31,7 @@ class ProjectionsController < ApplicationController
 
   def destroy
     @projection.destroy
-    redirect_to projections_url, notice: 'Donnée supprimée avec succès.'
+    redirect_to projections_path, notice: 'Donnée supprimée avec succès.'
   end
 
   private

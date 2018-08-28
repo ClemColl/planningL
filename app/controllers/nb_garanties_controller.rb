@@ -19,7 +19,7 @@ class NbGarantiesController < ApplicationController
 
   def update
     if @nb_garanty.update(nb_garanty_params)
-      redirect_to @nb_garanty, notice: 'Donnée modifiée avec succès.'
+      redirect_to suivi_bugfix_path, notice: 'Donnée modifiée avec succès.'
     else
       render :edit
     end
@@ -27,7 +27,7 @@ class NbGarantiesController < ApplicationController
 
   def destroy
     @nb_garanty.destroy
-    redirect_to nb_garanties_url, notice: 'Donnée supprimée avec succès.'
+    redirect_to suivi_bugfix_path, notice: 'Donnée supprimée avec succès.'
   end
 
   private

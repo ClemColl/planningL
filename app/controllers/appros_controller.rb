@@ -27,7 +27,7 @@ class ApprosController < ApplicationController
 
   def destroy
     @appro.destroy
-    redirect_to appros_url, notice: 'Donnée supprimée avec succès.'
+    redirect_to suivi_bugfix_path, notice: 'Donnée supprimée avec succès.'
   end
 
   private

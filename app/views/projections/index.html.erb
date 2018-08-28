@@ -1,4 +1,13 @@
-<p id="notice"><%= notice %></p>
+<style>
+th {
+  padding:5px;
+}
+
+td {
+  padding-bottom:5px;
+  padding-right:5px;
+}
+</style>
 
 <h1>Projection gains achats de production</h1>
 
@@ -7,8 +16,8 @@
     <tr>
       <th>Mois</th>
       <th>Objectif</th>
-      <th>Projection actualisée</th>
       <th>Projection Janvier</th>
+      <th>Projection actualisée</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -18,8 +27,8 @@
       <tr>
         <td><%= projection.week %></td>
         <td><%= projection.obj %></td>
-        <td><%= projection.prof_act %></td>
         <td><%= projection.proj %></td>
+        <td><%= projection.prof_act %></td>
         <td><%= link_to 'Modifier', edit_projection_path(projection), class: 'btn btn-default' %></td>
         <td><%= link_to 'Supprimer', projection, method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: 'btn btn-danger' %></td>
       </tr>
@@ -27,6 +36,4 @@
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New projection', new_projection_path %>
+<%= link_to 'Retour', suivi_path, class: 'btn btn-default'%>

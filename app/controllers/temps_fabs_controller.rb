@@ -19,7 +19,7 @@ class TempsFabsController < ApplicationController
 
   def update
     if @temps_fab.update(temps_fab_params)
-      redirect_to @temps_fab, notice: 'Donnée modifiée avec succès.'
+      redirect_to suivi_bugfix_path, notice: 'Donnée modifiée avec succès.'
     else
       render :edit
     end
@@ -27,7 +27,7 @@ class TempsFabsController < ApplicationController
 
   def destroy
     @temps_fab.destroy
-    redirect_to temps_fabs_url, notice: 'Donnée supprimée avec succès.'
+    redirect_to suivi_bugfix_path, notice: 'Donnée supprimée avec succès.'
   end
 
   private
