@@ -4,9 +4,6 @@ class IndicateursController < ApplicationController
 
   def production
     ## ALL
-    # @date_range = []
-    # dates = Date.commercial(Date.today.year, (Date.today.beginning_of_quarter+7.days).cweek, 3).cweek..Date.today.end_of_quarter.cweek
-    # dates.each { |s| @date_range << "S#{s}" }
     @date_range = [
       (Date.today - 8.month).strftime('%b').first,
       (Date.today - 7.month).strftime('%b').first,
