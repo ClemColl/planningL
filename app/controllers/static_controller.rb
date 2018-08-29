@@ -99,13 +99,13 @@ class StaticController < ApplicationController
 
   def bugfix
     @rapports = Rapport.all.order(:machine_id).last(Machine.all.count * 6)
-    @stocks = Stock.last(8)
-    @backlogs = Backlog.last(8)
-    @risques = Appro.last(8)
+    @stocks = Stock.order('created_at DESC').last(8)
+    @backlogs = Backlog.order('created_at DESC').last(8)
+    @risques = Appro.order('created_at DESC').last(8)
     @projections = Projection.last(4)
-    @ctrl = SuiviPerf.last(8)
-    @tmps_fab = TempsFab.last(8)
-    @nb_garanti = NbGarantie.last(8)
-    @suivi_indic = SuiviInfic.last(8)
+    @ctrl = SuiviPerf.order('created_at DESC').last(8)
+    @tmps_fab = TempsFab.order('created_at DESC').last(8)
+    @nb_garanti = NbGarantie.order('created_at DESC').last(8)
+    @suivi_indic = SuiviInfic.order('created_at DESC').last(8)
   end
 end

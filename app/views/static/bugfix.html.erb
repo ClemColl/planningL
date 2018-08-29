@@ -28,7 +28,7 @@ td {
   </thead>
 
   <tbody>
-    <% Rapport.order("week ASC, machine_id ASC").last(5*3).each do |rapport| %>
+    <% Rapport.order("week DESC, machine_id ASC").last(5*3).each do |rapport| %>
       <tr>
         <td><%= rapport.week %></td>
         <td><%= rapport.cas %></td>
@@ -61,7 +61,7 @@ td {
   </thead>
 
   <tbody>
-    <% @stocks.sort_by(&:created_at).each do |stock| %>
+    <% @stocks.each do |stock| %>
       <tr>
         <td><%= stock.week %></td>
         <td><%= stock.smc %></td>
@@ -104,6 +104,96 @@ td {
         <td><%= backlog.ytd %></td>
         <td><%= backlog.ytdl %></td>
         <td><%= link_to 'Modifier', edit_backlog_path(backlog), class: 'btn btn-default', style: 'padding:5px;' %></td>
+        <td><%= link_to 'Supprimer', backlog, method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: 'btn btn-danger', style: 'padding:5px;' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h1>Données FAB par jour</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date (exacte)</th>
+      <th>Efficacite</th>
+      <th>Objectif<br>Efficacite</th>
+      <th>Utilisation</th>
+      <th>Objectif<br>Utilisation</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% Equipe.first.analyzes.where(duree: 'jour').order('created_at DESC').last(5).each do |backlog| %>
+      <tr>
+        <td><%= backlog.created_at.strftime('%d/%m/%y') %></td>
+        <td><%= backlog.efficacite %></td>
+        <td><%= backlog.eff_obj %></td>
+        <td><%= backlog.utilisation %></td>
+        <td><%= backlog.util_obj %></td>
+        <td><%= link_to 'Supprimer', backlog, method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: 'btn btn-danger', style: 'padding:5px;' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h1>Données FAB par semaine</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Efficacite</th>
+      <th>Objectif<br>Efficacite</th>
+      <th>Utilisation</th>
+      <th>Objectif<br>Utilisation</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% Equipe.first.analyzes.where(duree: 'semaine').order('created_at DESC').last(5).each do |backlog| %>
+      <tr>
+        <td><%= backlog.created_at.strftime('%d/%m/%y') %></td>
+        <td><%= backlog.efficacite %></td>
+        <td><%= backlog.eff_obj %></td>
+        <td><%= backlog.utilisation %></td>
+        <td><%= backlog.util_obj %></td>
+        <td><%= link_to 'Supprimer', backlog, method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: 'btn btn-danger', style: 'padding:5px;' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h1>Données FAB par mois</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Efficacite</th>
+      <th>Objectif<br>Efficacite</th>
+      <th>Utilisation</th>
+      <th>Objectif<br>Utilisation</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% Equipe.first.analyzes.where(duree: 'mois').order('created_at DESC').last(5).each do |backlog| %>
+      <tr>
+        <td><%= backlog.created_at.strftime('%d/%m/%y') %></td>
+        <td><%= backlog.efficacite %></td>
+        <td><%= backlog.eff_obj %></td>
+        <td><%= backlog.utilisation %></td>
+        <td><%= backlog.util_obj %></td>
         <td><%= link_to 'Supprimer', backlog, method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: 'btn btn-danger', style: 'padding:5px;' %></td>
       </tr>
     <% end %>
@@ -257,7 +347,7 @@ td {
 
 <br>
 
-<h1>Backlogs</h1>
+<h1>Suivi des indicateurs</h1>
 
 <table>
   <thead>

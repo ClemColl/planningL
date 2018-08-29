@@ -80,7 +80,7 @@ var ctrl = new Chart(ctx, {
     options: chartOptions
 })
 
-var colorChangeValue = <%#= @prod_obj.first %>100
+var colorChangeValue = <%= @ctrl.pluck(:obj).map(&:to_i).last %>
 var dataset = ctrl.data.datasets[1]
 for (var i = 0; i < dataset.data.length; i++) {
     if (dataset.data[i] > colorChangeValue) {
