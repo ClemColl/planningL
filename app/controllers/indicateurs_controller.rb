@@ -292,12 +292,12 @@ class IndicateursController < ApplicationController
     end
 
     eff_data = {
-      fab: (quantite_utilisee / quantite_requise).round(2),
-      t1: (qu1 / qr1).round(2),
-      t2: (qu2 / qr2).round(2),
-      t3: (qu3 / qr3).round(2),
-      t4: (qu4 / qr4).round(2),
-      t5: (qu5 / qr5).round(2)
+      fab: (quantite_utilisee / (quantite_requise.nonzero? || 1)).round(2),
+      t1: (qu1 / (qr1.nonzero? || 1)).round(2),
+      t2: (qu2 / (qr2.nonzero? || 1)).round(2),
+      t3: (qu3 / (qr3.nonzero? || 1)).round(2),
+      t4: (qu4 / (qr4.nonzero? || 1)).round(2),
+      t5: (qu5 / (qr5.nonzero? || 1)).round(2)
     }
 
     if dates.count == 1
