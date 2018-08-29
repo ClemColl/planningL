@@ -46,10 +46,8 @@ Rails.application.routes.draw do
     resources :personnes
   end
 
-  
-  resources :analyses
+  resources :analyzes
   resources :objectifs
-
 
   root 'static#home'
 end
