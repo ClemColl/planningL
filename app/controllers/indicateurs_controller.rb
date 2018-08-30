@@ -5,6 +5,10 @@ class IndicateursController < ApplicationController
   def production
     ## ALL
     @date_range = [
+      (Date.today - 12.month).strftime('%b').first,
+      (Date.today - 11.month).strftime('%b').first,
+      (Date.today - 10.month).strftime('%b').first,
+      (Date.today - 9.month).strftime('%b').first,
       (Date.today - 8.month).strftime('%b').first,
       (Date.today - 7.month).strftime('%b').first,
       (Date.today - 6.month).strftime('%b').first,
@@ -13,12 +17,11 @@ class IndicateursController < ApplicationController
       (Date.today - 3.month).strftime('%b').first,
       (Date.today - 2.month).strftime('%b').first,
       (Date.today - 1.month).strftime('%b').first,
-      Date.today.strftime('%b').first,
-      (Date.today + 1.month).strftime('%b').first,
+      Date.today.strftime('%b').first
     ]
 
     ## Productivité
-    analyzes = Equipe.first.analyzes.where(duree: 'mois').last(8)
+    analyzes = Equipe.first.analyzes.where(duree: 'mois').last(13)
 
     productivite = []
     productivite_objectif = []
@@ -32,40 +35,40 @@ class IndicateursController < ApplicationController
     @prod_obj = productivite_objectif
 
     ## Rotation des stocks
-    data = RotationStock.last(8)
+    data = RotationStock.last(13)
+
     @rotations = data.pluck(:rotation).map(&:to_f)
     @rotations_obj = data.pluck(:objectif).map(&:to_f)
 
     ## Analyse temps passés
-
-    data = AnalyseTempsProbleme.last(8)
+    data = AnalyseTempsProbleme.last(13)
 
     @analyses = data.pluck(:tmpdef).map(&:to_f)
     @analyses_obj = data.pluck(:obj).map(&:to_f)
     @analyses_hdirect = data.pluck(:hdirect).map(&:to_i)
 
     ## Taux d’expédition Equipements
-    data = TauxExpe.last(8)
+    data = TauxExpe.last(13)
 
     @equip = data.pluck(:taux).map(&:to_f)
     @equip_obj = data.pluck(:obj).map(&:to_f)
 
     ## Taux d’expédition FA
-    data = TauxExpefa.last(8)
+    data = TauxExpefa.last(13)
 
     @expefa = data.pluck(:taux).map(&:to_f)
     @expefa_obj = data.pluck(:obj).map(&:to_f)
     @expefa_nb = data.pluck(:nbligne).map(&:to_i)
 
     ## Taux d’expédition CC
-    data = TauxExpecc.last(8)
+    data = TauxExpecc.last(13)
 
     @expecc_cmd = data.pluck(:cmd).map(&:to_f)
     @expecc_obj = data.pluck(:obj).map(&:to_f)
     @expecc_total = data.pluck(:total).map(&:to_f)
 
     ## Ecart stock
-    data = EcartStock.last(8)
+    data = EcartStock.last(13)
 
     @ecart = data.pluck(:ecart).map(&:to_f)
     @ecart_obj = data.pluck(:obj).map(&:to_f)
