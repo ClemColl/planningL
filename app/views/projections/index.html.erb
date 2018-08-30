@@ -18,7 +18,7 @@ td {
       <th>Objectif</th>
       <th>Projection Janvier</th>
       <th>Projection actualisée</th>
-      <th colspan="2"></th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
@@ -30,7 +30,6 @@ td {
         <td><%= projection.proj %></td>
         <td><%= projection.prof_act %></td>
         <td><%= link_to 'Modifier', edit_projection_path(projection), class: 'btn btn-default' %></td>
-        <td><%= link_to 'Supprimer', projection, method: :delete, data: { confirm: 'Êtes vous sûr?' }, class: 'btn btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>

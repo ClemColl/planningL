@@ -1,10 +1,10 @@
 class RotationStock < ApplicationRecord
-    before_validation :setup_commas
+  before_validation :setup_commas
 
-    private
+  private
 
-    def setup_commas
-      self.rotation = self.rotation.tr(',', '.')
-      self.objectif = self.objectif.tr(',', '.')
-    end
+  def setup_commas
+    self.rotation = self.rotation.tr(',', '.')
+    self.objectif = self.objectif.tr(',', '.')
+  end
 end
