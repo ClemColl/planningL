@@ -16,12 +16,11 @@ class IndicateursController < ApplicationController
       (Date.today - 4.month).strftime('%b').first,
       (Date.today - 3.month).strftime('%b').first,
       (Date.today - 2.month).strftime('%b').first,
-      (Date.today - 1.month).strftime('%b').first,
-      Date.today.strftime('%b').first
+      (Date.today - 1.month).strftime('%b').first
     ]
 
     ## Productivité
-    analyzes = Equipe.first.analyzes.where(duree: 'mois').last(13)
+    analyzes = Equipe.first.analyzes.where(duree: 'mois').last(12)
 
     productivite = []
     productivite_objectif = []
@@ -35,40 +34,40 @@ class IndicateursController < ApplicationController
     @prod_obj = productivite_objectif
 
     ## Rotation des stocks
-    data = RotationStock.last(13)
+    data = RotationStock.last(12)
 
     @rotations = data.pluck(:rotation).map(&:to_f)
     @rotations_obj = data.pluck(:objectif).map(&:to_f)
 
     ## Analyse temps passés
-    data = AnalyseTempsProbleme.last(13)
+    data = AnalyseTempsProbleme.last(12)
 
     @analyses = data.pluck(:tmpdef).map(&:to_f)
     @analyses_obj = data.pluck(:obj).map(&:to_f)
     @analyses_hdirect = data.pluck(:hdirect).map(&:to_i)
 
     ## Taux d’expédition Equipements
-    data = TauxExpe.last(13)
+    data = TauxExpe.last(12)
 
     @equip = data.pluck(:taux).map(&:to_f)
     @equip_obj = data.pluck(:obj).map(&:to_f)
 
     ## Taux d’expédition FA
-    data = TauxExpefa.last(13)
+    data = TauxExpefa.last(12)
 
     @expefa = data.pluck(:taux).map(&:to_f)
     @expefa_obj = data.pluck(:obj).map(&:to_f)
     @expefa_nb = data.pluck(:nbligne).map(&:to_i)
 
     ## Taux d’expédition CC
-    data = TauxExpecc.last(13)
+    data = TauxExpecc.last(12)
 
     @expecc_cmd = data.pluck(:cmd).map(&:to_f)
     @expecc_obj = data.pluck(:obj).map(&:to_f)
     @expecc_total = data.pluck(:total).map(&:to_f)
 
     ## Ecart stock
-    data = EcartStock.last(13)
+    data = EcartStock.last(12)
 
     @ecart = data.pluck(:ecart).map(&:to_f)
     @ecart_obj = data.pluck(:obj).map(&:to_f)
@@ -123,12 +122,12 @@ class IndicateursController < ApplicationController
   def fichiers; end
 
   def data
-    @rotation = RotationStock.last(8)
-    @analyse_temps = AnalyseTempsProbleme.last(8)
-    @ecart_stock = EcartStock.last(8)
-    @taux_equip = TauxExpe.last(8)
-    @taux_fa = TauxExpefa.last(8)
-    @taux_client = TauxExpecc.last(8)
+    @rotation = RotationStock.last(12)
+    @analyse_temps = AnalyseTempsProbleme.last(12)
+    @ecart_stock = EcartStock.last(12)
+    @taux_equip = TauxExpe.last(12)
+    @taux_fa = TauxExpefa.last(12)
+    @taux_client = TauxExpecc.last(12)
   end
 
   private
